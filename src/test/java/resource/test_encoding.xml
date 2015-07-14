@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LOG>
+<ITEM>
+  <OPER_TIME>2014-5-8.9.39. 31. 0</OPER_TIME>
+  <SID>1399513394080ae675fbe7328aa084358685b8612546c0.2688757175263742</SID>
+  <OPER_ACCT>AIG</OPER_ACCT>
+  <USER_NAME>nlwudong</USER_NAME>
+  <ROUND_AUDIT>N</ROUND_AUDIT>
+  <SRC_IP>10.238.5.22</SRC_IP>
+  <DEST_PORT>50000</DEST_PORT>
+  <OPER_TYPE>SYS_OPER_MANAGE</OPER_TYPE>
+  <OPER_SUB_TYPE>SYS_CONFIG_MANAGE</OPER_SUB_TYPE>
+  <OPER>select a.*,b.description from utap.DONE_TASK a     left join  utap.task_template b on a.task_template_id = b.task_template_id  --where result_code &lt;&gt; 0 and result_code &lt;&gt; 2008  --where a.task_id like &apos;220%&apos;  where b.TASK_TEMPLATE_ID in(1800697) --and b.description not like &apos;%CUB%&apos; --AND b.description  like &apos;%分析%&apos; --and  b.description  not like &apos;%营销管理%&apos;  --and substr(a.task_id,8,8) = &apos;20140508&apos; -- and result_code &lt;&gt; 2008  --and result_code = 0 order by a.TASK_RUN_END_TIME desc  fetch first  300 rows only    with ur</OPER>
+  <OPER_DESC>select a.*,b.description from utap.DONE_TASK a     left join  utap.task_template b on a.task_template_id = b.task_template_id  --where result_code &lt;&gt; 0 and result_code &lt;&gt; 2008  --where a.task_id like &apos;220%&apos;  where b.TASK_TEMPLATE_ID in(1800697) --and b.description not like &apos;%CUB%&apos; --AND b.description  like &apos;%分析%&apos; --and  b.description  not like &apos;%营销管理%&apos;  --and substr(a.task_id,8,8) = &apos;20140508&apos; -- and result_code &lt;&gt; 2008  --and result_code = 0 order by a.TASK_RUN_END_TIME desc  fetch first  300 rows only    with ur</OPER_DESC>
+  <OPER_RESULT>0</OPER_RESULT>
+  <FROM_SYS>DB</FROM_SYS>
+</ITEM>
+<ITEM>
+  <OPER_TIME>2014-5-8.9.51. 7. 0</OPER_TIME>
+  <SID>1399514199487902582fcd187973b28de94f50eee79720.9420964143708941</SID>
+  <OPER_ACCT>UCR_DCP</OPER_ACCT>
+  <USER_NAME>dwlipan</USER_NAME>
+  <ROUND_AUDIT>N</ROUND_AUDIT>
+  <SRC_IP>10.238.240.176</SRC_IP>
+  <DEST_IP>10.238.235.145</DEST_IP>
+  <DEST_PORT>1521</DEST_PORT>
+  <OPER_TYPE>SYS_OPER_MANAGE</OPER_TYPE>
+  <OPER_SUB_TYPE>SYS_CONFIG_MANAGE</OPER_SUB_TYPE>
+  <OPER>---备份今天数据 CREATE TABLE UCR_DCP.TD_SP_INFO_SYNC_20140508 TABLESPACE TBS_DCP_DATA AS SELECT * FROM UCR_PARAM.TD_SP_INFO_SYNC@DBLNK_NGACT1</OPER>
+  <OPER_DESC>---备份今天数据 CREATE TABLE UCR_DCP.TD_SP_INFO_SYNC_20140508 TABLESPACE TBS_DCP_DATA AS SELECT * FROM UCR_PARAM.TD_SP_INFO_SYNC@DBLNK_NGACT1</OPER_DESC>
+  <OPER_RESULT>0</OPER_RESULT>
+  <FROM_SYS>DB</FROM_SYS>
+</ITEM>
+<ITEM>
+  <OPER_TIME>2014-5-8.9.51. 39. 0</OPER_TIME>
+  <SID>1399514119446e1356c3bbdfb2708cbd647e7506fc6370.5436832038220208</SID>
+  <OPER_ACCT>ZHANGHG</OPER_ACCT>
+  <USER_NAME>nlgujuan</USER_NAME>
+  <ROUND_AUDIT>N</ROUND_AUDIT>
+  <SRC_IP>10.238.5.37</SRC_IP>
+  <DEST_PORT>50000</DEST_PORT>
+  <OPER_TYPE>SENSITIVE_OPER</OPER_TYPE>
+  <OPER_SUB_TYPE>SENSITIVE_OPER</OPER_SUB_TYPE>
+  <OPER>select * from ADHOC.CFG_AD_CHECK_MMS_SEND_VIP_MSISDN   WHERE IS_TEST_FLAG=&apos;0&apos;AND MMS_KIND=&apos;1&apos;  AND MMS5_ID=&apos;1&apos;   ---wlan9点   with ur</OPER>
+  <OPER_DESC>select * from ADHOC.CFG_AD_CHECK_MMS_SEND_VIP_MSISDN   WHERE IS_TEST_FLAG=&apos;0&apos;AND MMS_KIND=&apos;1&apos;  AND MMS5_ID=&apos;1&apos;   ---wlan9点   with ur</OPER_DESC>
+  <OPER_RESULT>0</OPER_RESULT>
+  <FROM_SYS>DB</FROM_SYS>
+</ITEM>
+</LOG >
