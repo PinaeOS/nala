@@ -1,7 +1,9 @@
 package org.pinae.nala.xb.util;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +22,26 @@ import org.pinae.nala.xb.exception.UnmarshalException;
  * 
  */
 public class ResourceReader {
+	
+	/**
+	 * 逐行读取文件内容
+	 * 
+	 * @param filename 文件名
+	 * @return 文件内容
+	 * 
+	 * @throws IOException
+	 */
+	public StringBuffer readFile(String filename) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		StringBuffer xml = new StringBuffer();
+		String line = null;
+        while((line = reader.readLine()) != null){
+            xml.append(line);
+        }
+		reader.close();
+		return xml;
+	}
+	
 	/**
 	 * 将文件读出为输出流
 	 * 
@@ -75,9 +97,8 @@ public class ResourceReader {
 		} catch (MalformedURLException e) {
 			throw new NoSuchPathException(e);
 		}
-		if (url != null) {
-			return url.openStream();
-		}
-		return null;
+
+		return url.openStream();
+		
 	}
 }

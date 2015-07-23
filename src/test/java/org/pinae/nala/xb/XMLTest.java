@@ -29,7 +29,7 @@ public class XMLTest extends TestCase{
 	@Test
 	public void testParseXMLToMap() {
 		try {
-			StringBuffer xml = new ResourceReader().read(NalaTestConstant.TEST_XMLFILE3);
+			StringBuffer xml = new ResourceReader().readFile(NalaTestConstant.TEST_XMLFILE3);
 			Map map = XML.parseXMLToMap(xml.toString(), "utf8");
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
@@ -49,7 +49,7 @@ public class XMLTest extends TestCase{
 	@Test
 	public void testParseXML() {
 		try {
-			StringBuffer xml = new ResourceReader().read(NalaTestConstant.TEST_XMLFILE3);
+			StringBuffer xml = new ResourceReader().readFile(NalaTestConstant.TEST_XMLFILE3);
 			Map map = (Map)XML.parseXML(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
