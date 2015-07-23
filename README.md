@@ -27,15 +27,11 @@ demo for nala:
 	public class DemoTestManager {
 		public static void main(String arg[]) throws Exception {
 			try {
-				BufferedReader reader = new BufferedReader(new FileReader("Test.xml"));
-				StringBuffer xml = new StringBuffer();
-				String line = null;
-	            while((line = reader.readLine()) != null){
-	                xml.append(line);
-	            }
-				reader.close();
+				StringBuffer xml = new ResourceReader().readFile("test.xml");
+
+				//Parse XML to Object
 				Map map = XML.parseXMLToMap(xml.toString(), "utf8");
-				
+				//convert Object to XML 
 				String xml = XML.toXMLString(map, "utf8", true);
 			} catch (IOException e) {
 				
