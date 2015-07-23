@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='gb2312'?>
-<people xmlns:tns="http://www.pinae.com" xmlns:tns2="http://www.pinae.org">
+<people xmlns:tns2="http://www.pinae.org" xmlns:tns="http://www.pinae.com">
 	<tns:person>
 		<id>1</id>
 		<age>23</age>
-		<birthday>Fri Jun 26 12:58:02 CST 2015</birthday>
+		<birthday>Thu Jul 23 19:55:35 CST 2015</birthday>
 		<pc><Model>Acer 4750G</Model></pc>
 		<name>
 			<firstname>Tom</firstname>
@@ -27,7 +27,7 @@
 		<id>2</id>
 		<class>Business</class>
 		<age>22</age>
-		<birthday>Fri Jun 26 12:58:02 CST 2015</birthday>
+		<birthday>Thu Jul 23 19:55:35 CST 2015</birthday>
 		<name>
 			<firstname>Ken</firstname>
 			<lastname>Li</lastname>
@@ -46,7 +46,7 @@
 	<person>
 		<id>3</id>
 		<age>26</age>
-		<birthday>Fri Jun 26 12:58:02 CST 2015</birthday>
+		<birthday>Thu Jul 23 19:55:35 CST 2015</birthday>
 		<name>
 			<firstname>Babo</firstname>
 			<lastname>Wang</lastname>

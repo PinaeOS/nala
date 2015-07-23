@@ -2,11 +2,6 @@ package org.pinae.nala.xb;
 
 import java.util.Enumeration;
 
-import junit.framework.Test;
-import junit.framework.TestFailure;
-import junit.framework.TestResult;
-import junit.framework.TestSuite;
-
 import org.apache.log4j.Logger;
 import org.pinae.nala.xb.marshaller.AnnotationXMLMarshallerTest;
 import org.pinae.nala.xb.marshaller.ListXMLMarshallerTest;
@@ -16,6 +11,11 @@ import org.pinae.nala.xb.unmarshaller.AnnotationXMLUnmarshaller;
 import org.pinae.nala.xb.unmarshaller.MapUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.XMLUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.XPathUnmarshallerTest;
+
+import junit.framework.Test;
+import junit.framework.TestFailure;
+import junit.framework.TestResult;
+import junit.framework.TestSuite;
 
 
 /**
@@ -32,7 +32,10 @@ public class NalaTestSutie{
 	 *
 	 */
 	public static Test suite(){
-		TestSuite suite = new TestSuite("Test Nala");
+		TestSuite suite = new TestSuite("Nala-Test");
+		
+		//测试XML工具
+		suite.addTestSuite(XMLTest.class);
 		//测试注释形式的对象生成XML
 		suite.addTestSuite(AnnotationXMLMarshallerTest.class);
 		//测试Map生成XML

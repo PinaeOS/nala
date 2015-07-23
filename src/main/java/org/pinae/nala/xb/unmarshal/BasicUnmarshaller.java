@@ -48,7 +48,8 @@ public abstract class BasicUnmarshaller implements Unmarshaller {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Object creteObject(NodeConfig config) throws SecurityException, UnmarshalException{
 		Object targetObject = null;
-		if(rootClass.getName().equals(Map.class.getName())){
+		
+		if(rootClass.equals(Map.class)){
 			targetObject = (new MapCreator()).getMap(config);
 		}else{
 			Class targetClass = rootClass;

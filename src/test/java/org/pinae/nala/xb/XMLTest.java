@@ -1,45 +1,35 @@
 package org.pinae.nala.xb;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
-import org.pinae.nala.xb.XML;
-import org.pinae.nala.xb.marshaller.XMLMarshallerTest;
 import org.pinae.nala.xb.resource.bean.People;
 import org.pinae.nala.xb.resource.bean.Person;
 import org.pinae.nala.xb.resource.bean.PersonOne;
 import org.pinae.nala.xb.resource.bean.PersonThree;
 import org.pinae.nala.xb.resource.bean.PersonTwo;
+import org.pinae.nala.xb.util.ResourceReader;
 
-public class XMLTest {
+import junit.framework.TestCase;
+
+public class XMLTest extends TestCase{
 	
 	private static final Logger log = Logger.getLogger(XMLTest.class);
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseFileToMap() {
 		Map map = XML.parseFileToMap(NalaTestConstant.TEST_XMLFILE3, "utf8");
 		assertEquals(map.size(), 5);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseXMLToMap() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(NalaTestConstant.TEST_XMLFILE3));
-			StringBuffer xml = new StringBuffer();
-			String line = null;
-            while((line = reader.readLine()) != null){
-                xml.append(line);
-            }
-			reader.close();
+			StringBuffer xml = new ResourceReader().read(NalaTestConstant.TEST_XMLFILE3);
 			Map map = XML.parseXMLToMap(xml.toString(), "utf8");
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
@@ -48,22 +38,18 @@ public class XMLTest {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseFile() {
 		Map map = (Map)XML.parseFile(NalaTestConstant.TEST_XMLFILE3, "utf8", Map.class);
 		assertEquals(map.size(), 5);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseXML() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(NalaTestConstant.TEST_XMLFILE3));
-			StringBuffer xml = new StringBuffer();
-			String line = null;
-            while((line = reader.readLine()) != null){
-                xml.append(line);
-            }
-			reader.close();
+			StringBuffer xml = new ResourceReader().read(NalaTestConstant.TEST_XMLFILE3);
 			Map map = (Map)XML.parseXML(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
