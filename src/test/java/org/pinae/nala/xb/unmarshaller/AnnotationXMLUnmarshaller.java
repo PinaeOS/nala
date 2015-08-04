@@ -36,7 +36,6 @@ public class AnnotationXMLUnmarshaller  extends TestCase {
 		try {
 			people = (People) bind.unmarshal();
 		} catch (UnmarshalException e) {
-			e.printStackTrace();
 			fail(e.getMessage());
 		}
 		assertEquals(people.getPerson().size(), 2);
