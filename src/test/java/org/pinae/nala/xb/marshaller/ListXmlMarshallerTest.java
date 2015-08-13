@@ -11,11 +11,11 @@ import org.pinae.nala.xb.NalaTestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.ResourceWriter;
 
-public class ListXMLMarshallerTest extends TestCase{
-	private static final Logger log = Logger.getLogger(ListXMLMarshallerTest.class);
+public class ListXmlMarshallerTest extends TestCase{
+	private static final Logger log = Logger.getLogger(ListXmlMarshallerTest.class);
 	
 	/**
 	 * 测试从List对象生成XML文件(编组)
@@ -26,7 +26,7 @@ public class ListXMLMarshallerTest extends TestCase{
 		people.add(org.pinae.nala.xb.resource.map.PersonOne.getObject());
 		people.add(org.pinae.nala.xb.resource.map.PersonTwo.getObject());
 		
-		Marshaller marshaller = new XMLMarshaller(people);
+		Marshaller marshaller = new XmlMarshaller(people);
 		marshaller.setNodeTag("people");
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		
@@ -51,7 +51,7 @@ public class ListXMLMarshallerTest extends TestCase{
 		people.add(org.pinae.nala.xb.resource.bean.PersonOne.getObject());
 		people.add(org.pinae.nala.xb.resource.bean.PersonTwo.getObject());
 		
-		Marshaller marshaller = new XMLMarshaller(people);
+		Marshaller marshaller = new XmlMarshaller(people);
 		marshaller.setNodeTag("people");
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		
@@ -74,7 +74,7 @@ public class ListXMLMarshallerTest extends TestCase{
 	public void testMarshal3() {
 		List people = new ArrayList();
 		
-		Marshaller marshaller = new XMLMarshaller(people);
+		Marshaller marshaller = new XmlMarshaller(people);
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		
 		try {
@@ -99,7 +99,7 @@ public class ListXMLMarshallerTest extends TestCase{
 		list.add("Item2");
 		list.add("Item3");
 		
-		Marshaller marshaller = new XMLMarshaller(list);
+		Marshaller marshaller = new XmlMarshaller(list);
 		marshaller.setNodeTag("list");
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		

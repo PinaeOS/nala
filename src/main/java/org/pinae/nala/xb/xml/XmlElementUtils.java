@@ -8,7 +8,7 @@ package org.pinae.nala.xb.xml;
  * @author Huiyugeng
  *
  */
-public class XMLElementUtils {
+public class XmlElementUtils {
 	/*
 	 * 构建关键字映射, 例如XML描述class映射到Java属性为kwClass
 	 */

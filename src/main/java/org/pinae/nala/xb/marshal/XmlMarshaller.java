@@ -12,9 +12,9 @@ import org.pinae.nala.xb.marshal.parser.ObjectParser;
 import org.pinae.nala.xb.resource.AttributeConfig;
 import org.pinae.nala.xb.resource.Namespace;
 import org.pinae.nala.xb.resource.NodeConfig;
-import org.pinae.nala.xb.xml.CDATAObject;
-import org.pinae.nala.xb.xml.XMLObject;
-import org.pinae.nala.xb.xml.XMLElementUtils;
+import org.pinae.nala.xb.xml.CdataObject;
+import org.pinae.nala.xb.xml.XmlObject;
+import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
  * XMLMarshaller提供实现Marshaller接口中的方法
@@ -22,7 +22,7 @@ import org.pinae.nala.xb.xml.XMLElementUtils;
  * @author Huiyugeng
  * 
  */
-public class XMLMarshaller extends BasicMarshal implements Marshaller {
+public class XmlMarshaller extends BasicMarshal implements Marshaller {
 	private Object rootObject;
 
 	private NodeConfig config;
@@ -33,7 +33,7 @@ public class XMLMarshaller extends BasicMarshal implements Marshaller {
 	 * @param object 需要解析的Java对象
 	 * @throws MarshalException 编组异常
 	 */
-	public XMLMarshaller(Object rootObject) {
+	public XmlMarshaller(Object rootObject) {
 		this.rootObject = rootObject;
 	}
 
@@ -42,7 +42,7 @@ public class XMLMarshaller extends BasicMarshal implements Marshaller {
 	 * 
 	 * @param config 节点配置
 	 */
-	protected XMLMarshaller(NodeConfig config) {
+	protected XmlMarshaller(NodeConfig config) {
 		this.config = config;
 	}
 
@@ -135,12 +135,12 @@ public class XMLMarshaller extends BasicMarshal implements Marshaller {
 		if (tagValue == null){
 			tagValue = "";
 		}
-		if (tagValue instanceof CDATAObject) {
-			tagValue = String.format("<![CDATA[%s]]>", ((CDATAObject) tagValue).getData());
-		} else if (tagValue instanceof XMLObject) {
-			tagValue = ((XMLObject) tagValue).getXml();
+		if (tagValue instanceof CdataObject) {
+			tagValue = String.format("<![CDATA[%s]]>", ((CdataObject) tagValue).getData());
+		} else if (tagValue instanceof XmlObject) {
+			tagValue = ((XmlObject) tagValue).getXml();
 		} else if (cdata == true){
-			if (XMLElementUtils.containXMLEscapeChar(tagValue.toString())){
+			if (XmlElementUtils.containXMLEscapeChar(tagValue.toString())){
 				tagValue = String.format("<![CDATA[%s]]>", tagValue.toString());
 			}
 		}

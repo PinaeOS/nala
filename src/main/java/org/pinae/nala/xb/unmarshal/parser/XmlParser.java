@@ -16,7 +16,7 @@ import org.jdom.xpath.XPath;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.AttributeConfig;
 import org.pinae.nala.xb.resource.NodeConfig;
-import org.pinae.nala.xb.xml.XMLElementUtils;
+import org.pinae.nala.xb.xml.XmlElementUtils;
 
 
 /**
@@ -25,7 +25,7 @@ import org.pinae.nala.xb.xml.XMLElementUtils;
  * @author Huiyugeng
  *
  */
-public class XMLParser {
+public class XmlParser {
 	protected static final Logger log = Logger.getLogger("XMLParser");
 	/*
 	 * 解析XML结点
@@ -33,7 +33,7 @@ public class XMLParser {
 	@SuppressWarnings("rawtypes")
 	private NodeConfig parserNode(Element element){
 		NodeConfig config = new NodeConfig();
-		config.setName(XMLElementUtils.mapXMLToObject(element.getName()));
+		config.setName(XmlElementUtils.mapXMLToObject(element.getName()));
 		config.setNamespace(element.getNamespacePrefix(), element.getNamespaceURI());
 		List childrenNode = element.getChildren();
 		if(childrenNode!=null && childrenNode.size()>0){
@@ -64,7 +64,7 @@ public class XMLParser {
 			for (Iterator iter = attributes.iterator(); iter.hasNext();) {
 				AttributeConfig attributeConfig = new AttributeConfig();
 				Attribute attribute = (Attribute)iter.next();
-				attributeConfig.setName(XMLElementUtils.mapXMLToObject(attribute.getName()));
+				attributeConfig.setName(XmlElementUtils.mapXMLToObject(attribute.getName()));
 				attributeConfig.setValue(attribute.getValue());
 				attributeItems.add(attributeConfig);
 			}

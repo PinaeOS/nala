@@ -3,7 +3,7 @@ package org.pinae.nala.xb.resource.bean;
 import java.util.Date;
 
 import org.pinae.nala.xb.resource.Namespace;
-import org.pinae.nala.xb.xml.CDATAObject;
+import org.pinae.nala.xb.xml.CdataObject;
 
 public class PersonOne {
 
@@ -56,7 +56,7 @@ public class PersonOne {
 		person.setSex(sex);
 		person.setTelephone(telephone);
 		
-		person.setOther(new CDATAObject("<XML>Tearcher</XML>"));
+		person.setOther(new CdataObject("<XML>Tearcher</XML>"));
 		person.setPc("<Model>Acer 4750G</Model>");
 		
 		return person;

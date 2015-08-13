@@ -9,7 +9,7 @@ import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.bean.People;
 import org.pinae.nala.xb.resource.bean.PeopleInXml;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 
@@ -19,8 +19,8 @@ import org.pinae.nala.xb.util.ResourceReader;
  * @author Huiyugeng
  * 
  */
-public class XMLUnmarshallerTest extends TestCase {
-	private static final Logger log = Logger.getLogger(XMLUnmarshallerTest.class);
+public class XmlUnmarshallerTest extends TestCase {
+	private static final Logger log = Logger.getLogger(XmlUnmarshallerTest.class);
 
 	/**
 	 * 测试绑定整个XML
@@ -29,7 +29,7 @@ public class XMLUnmarshallerTest extends TestCase {
 		People people = new People();
 		
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ResourceReader()
+			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader()
 					.getFileStream(NalaTestConstant.TEST_XMLFILE1));
 			
 			bind.setRootClass(People.class);
@@ -51,7 +51,7 @@ public class XMLUnmarshallerTest extends TestCase {
 		PeopleInXml people = new PeopleInXml();
 		
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ResourceReader()
+			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader()
 					.getFileStream(NalaTestConstant.TEST_XMLFILE1));
 			
 			bind.setRootClass(PeopleInXml.class);

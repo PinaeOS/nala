@@ -13,7 +13,7 @@ import org.pinae.nala.xb.NalaTestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.resource.map.PersonOne;
 import org.pinae.nala.xb.util.ResourceWriter;
 /**
@@ -22,8 +22,8 @@ import org.pinae.nala.xb.util.ResourceWriter;
  * @author Huiyugeng
  */
 
-public class MapXMLMarshallerTest  extends TestCase {
-	private static final Logger log = Logger.getLogger(MapXMLMarshallerTest.class);
+public class MapXmlMarshallerTest  extends TestCase {
+	private static final Logger log = Logger.getLogger(MapXmlMarshallerTest.class);
 	@SuppressWarnings("rawtypes")
 	Map people = new HashMap();
 	
@@ -39,7 +39,7 @@ public class MapXMLMarshallerTest  extends TestCase {
 	 * 测试从Map对象生成XML文件(编组)
 	 */
 	public void testMarshal() {
-		Marshaller marshaller = new XMLMarshaller(people);
+		Marshaller marshaller = new XmlMarshaller(people);
 
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		try {

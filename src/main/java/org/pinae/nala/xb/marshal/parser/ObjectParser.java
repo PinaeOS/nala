@@ -8,8 +8,8 @@ import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.resource.AttributeConfig;
 import org.pinae.nala.xb.resource.NodeConfig;
 import org.pinae.nala.xb.util.TypeConver;
-import org.pinae.nala.xb.xml.CDATAObject;
-import org.pinae.nala.xb.xml.XMLObject;
+import org.pinae.nala.xb.xml.CdataObject;
+import org.pinae.nala.xb.xml.XmlObject;
 
 /**
  * 对象解析
@@ -38,9 +38,9 @@ public class ObjectParser {
 			return new ListParser().parse(key, (List) rootObject);
 		} else if (rootObject instanceof Map) {
 			return new MapParser().parse(key, (Map) rootObject);
-		} else if (rootObject instanceof XMLObject) {
+		} else if (rootObject instanceof XmlObject) {
 			return new NodeConfig(key, rootObject);
-		} else if (rootObject instanceof CDATAObject){
+		} else if (rootObject instanceof CdataObject){
 			return new NodeConfig(key, rootObject);
 		}else {
 			if (rootClass.isAnnotationPresent(Root.class)) {

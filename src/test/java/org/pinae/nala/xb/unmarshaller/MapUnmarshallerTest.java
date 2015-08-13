@@ -10,7 +10,7 @@ import org.pinae.nala.xb.NalaTestConstant;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 
@@ -30,7 +30,7 @@ public class MapUnmarshallerTest extends TestCase {
 	public void testBindMap1(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XMLUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE3));
+			bind = new XmlUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE3));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (UnmarshalException e) {
@@ -53,7 +53,7 @@ public class MapUnmarshallerTest extends TestCase {
 	public void testBindMap2(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XMLUnmarshaller(new ResourceReader()
+			bind = new XmlUnmarshaller(new ResourceReader()
 					.getFileStream(NalaTestConstant.TEST_XMLFILE2));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
@@ -77,7 +77,7 @@ public class MapUnmarshallerTest extends TestCase {
 	public void testBindMap3(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XMLUnmarshaller(new ResourceReader()
+			bind = new XmlUnmarshaller(new ResourceReader()
 					.getFileStream(NalaTestConstant.TEST_ENCODING, "GBK"));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
@@ -101,7 +101,7 @@ public class MapUnmarshallerTest extends TestCase {
 	public void testBindMap4(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XMLUnmarshaller(new ResourceReader()
+			bind = new XmlUnmarshaller(new ResourceReader()
 					.getFileStream(NalaTestConstant.TEST_CDATA, "GBK"));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());

@@ -14,7 +14,7 @@ import org.pinae.nala.xb.resource.Namespace;
 import org.pinae.nala.xb.resource.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
-import org.pinae.nala.xb.xml.XMLElementUtils;
+import org.pinae.nala.xb.xml.XmlElementUtils;
 
 
 /**
@@ -50,7 +50,7 @@ public class DefaultObjectParser extends ObjectParser{
 		List<NodeConfig> nodeList = new ArrayList<NodeConfig>();
 		
 		Class cls = rootObject.getClass();
-		String nodeName = XMLElementUtils.mapObjectToXML(cls.getSimpleName());
+		String nodeName = XmlElementUtils.mapObjectToXML(cls.getSimpleName());
 		
 		try {
 			
@@ -61,7 +61,7 @@ public class DefaultObjectParser extends ObjectParser{
 					String methodReturnType = method.getReturnType().getName();
 					String methodName = method.getName();
 					
-					methodName = XMLElementUtils.mapObjectToXML(methodName.substring(3));
+					methodName = XmlElementUtils.mapObjectToXML(methodName.substring(3));
 					
 					//如果返回值为字符串类型
 					if(TypeConver.isBasicType(methodReturnType)){

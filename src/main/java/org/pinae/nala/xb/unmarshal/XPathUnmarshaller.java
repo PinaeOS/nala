@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.NodeConfig;
-import org.pinae.nala.xb.unmarshal.parser.XMLParser;
+import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 
 /**
@@ -22,7 +22,7 @@ import org.pinae.nala.xb.unmarshal.parser.XMLParser;
  *
  */
 public class XPathUnmarshaller extends BasicUnmarshaller {
-	private XMLParser xmlParser = new XMLParser();
+	private XmlParser xmlParser = new XmlParser();
 	private List<?> lstNodeConfig = null;
 	
 	/**

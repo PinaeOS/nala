@@ -3,15 +3,15 @@ package org.pinae.nala.xb.resource.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.pinae.nala.xb.xml.XMLObject;
+import org.pinae.nala.xb.xml.XmlObject;
 
 
 public class PeopleInXml {
-	private List<XMLObject> person = new ArrayList<XMLObject>();
-	public void setPerson(XMLObject person){
+	private List<XmlObject> person = new ArrayList<XmlObject>();
+	public void setPerson(XmlObject person){
 		this.person.add(person);
 	}
-	public List<XMLObject> getPerson(){
+	public List<XmlObject> getPerson(){
 		return person;
 	}
 }

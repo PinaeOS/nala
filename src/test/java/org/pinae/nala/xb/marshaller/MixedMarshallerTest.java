@@ -13,7 +13,7 @@ import org.pinae.nala.xb.NalaTestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.ResourceWriter;
 
 
@@ -56,7 +56,7 @@ public class MixedMarshallerTest extends TestCase {
 	 * 测试从对象生成XML文件(编组)
 	 */
 	public void testMarshal() {
-		Marshaller marshaller = new XMLMarshaller(people);
+		Marshaller marshaller = new XmlMarshaller(people);
 
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		marshaller.enableNodeMode(true);

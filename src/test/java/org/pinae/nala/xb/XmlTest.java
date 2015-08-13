@@ -14,9 +14,9 @@ import org.pinae.nala.xb.util.ResourceReader;
 
 import junit.framework.TestCase;
 
-public class XMLTest extends TestCase{
+public class XmlTest extends TestCase{
 	
-	private static final Logger log = Logger.getLogger(XMLTest.class);
+	private static final Logger log = Logger.getLogger(XmlTest.class);
 	
 	@SuppressWarnings("rawtypes")
 	@Test

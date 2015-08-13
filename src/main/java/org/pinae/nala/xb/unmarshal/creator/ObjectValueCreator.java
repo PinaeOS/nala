@@ -1,11 +1,11 @@
 package org.pinae.nala.xb.unmarshal.creator;
 
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.resource.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
-import org.pinae.nala.xb.xml.XMLObject;
+import org.pinae.nala.xb.xml.XmlObject;
 
 /**
  * 构建对象值
@@ -25,7 +25,7 @@ public class ObjectValueCreator {
 	public Object getValue(String fieldType, NodeConfig nodeConfig){
 		Object value = null;
 		if(fieldType.equals(Constant.XML_CLASS)){ 
-			value = new XMLObject(createXML(nodeConfig));
+			value = new XmlObject(createXML(nodeConfig));
 		}else{
 			if(TypeConver.isBasicType(fieldType)){
 				value = TypeConver.converValue(fieldType, nodeConfig.getValue().toString());
@@ -38,7 +38,7 @@ public class ObjectValueCreator {
 	 * 根据构造体在对象中填入XML
 	 */
 	private String createXML(NodeConfig node){
-		class XMLCreator extends XMLMarshaller{
+		class XMLCreator extends XmlMarshaller{
 			public XMLCreator(NodeConfig node){
 				super(node);
 			}	

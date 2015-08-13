@@ -15,21 +15,21 @@ package org.pinae.nala.xb.xml;
  * @author Huiyugeng
  *
  */
-public class XMLObject {
+public class XmlObject {
 	private String xml; //XML值
 	/**
 	 * 构造函数
 	 * 
 	 * @param xml XML值
 	 */
-	public XMLObject(String xml){
+	public XmlObject(String xml){
 		this.xml = xml;
 	}
 	
 	/**
 	 * 构造函数
 	 */
-	public XMLObject(){
+	public XmlObject(){
 		
 	}
 	

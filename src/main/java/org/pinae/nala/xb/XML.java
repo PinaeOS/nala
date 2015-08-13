@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pinae.nala.xb.marshal.Marshaller;
-import org.pinae.nala.xb.marshal.XMLMarshaller;
+import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 /**
@@ -41,7 +41,7 @@ public class XML {
 	public static Map<?, ?> parseXMLToMap(String xml, String encoding) {
 		Map<?, ?> map = new HashMap();
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
+			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
 			bind.setRootClass(Map.class);
 			map = (Map<?, ?>)bind.unmarshal();
 		} catch (Exception e) {
@@ -63,7 +63,7 @@ public class XML {
 	public static Object parseFile(String filename, String encoding, Class cls) {
 		Object object = null;
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ResourceReader().getFileStream(filename, encoding));
+			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader().getFileStream(filename, encoding));
 			bind.setRootClass(cls);
 			object = bind.unmarshal();
 		} catch (Exception e) {
@@ -85,7 +85,7 @@ public class XML {
 	public static Object parseXML(String xml, String encoding, Class cls) {
 		Object object = null;
 		try {
-			Unmarshaller bind = new XMLUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
+			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
 			bind.setRootClass(cls);
 			object = bind.unmarshal();
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class XML {
 	 */
 	public static String toXMLString(Object object, String encoding, boolean nodeMode) {
 		try {
-			Marshaller marshaller = new XMLMarshaller(object);
+			Marshaller marshaller = new XmlMarshaller(object);
 			
 			marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
 			marshaller.enableLowCase(true);

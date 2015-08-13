@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.NodeConfig;
-import org.pinae.nala.xb.unmarshal.parser.XMLParser;
+import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 
 /**
@@ -14,8 +14,8 @@ import org.pinae.nala.xb.unmarshal.parser.XMLParser;
  * @author Huiyugeng
  *
  */
-public class XMLUnmarshaller extends BasicUnmarshaller {
-	private XMLParser xmlParser = new XMLParser();
+public class XmlUnmarshaller extends BasicUnmarshaller {
+	private XmlParser xmlParser = new XmlParser();
 	private NodeConfig config;
 	
 	/**
@@ -24,7 +24,7 @@ public class XMLUnmarshaller extends BasicUnmarshaller {
 	 * @param xml 需要绑定的xml输入流
 	 * @throws UnmarshalException 解组异常
 	 */
-	public XMLUnmarshaller(InputStreamReader xml) throws UnmarshalException{
+	public XmlUnmarshaller(InputStreamReader xml) throws UnmarshalException{
 		config = xmlParser.parser(xml);
 	}
 	
@@ -34,7 +34,7 @@ public class XMLUnmarshaller extends BasicUnmarshaller {
 	 * @param xml 需要绑定的xml输入流
 	 * @throws UnmarshalException 解组异常
 	 */
-	public XMLUnmarshaller(InputStream xml) throws UnmarshalException{
+	public XmlUnmarshaller(InputStream xml) throws UnmarshalException{
 		config = xmlParser.parser(new InputStreamReader(xml));
 	}
 	

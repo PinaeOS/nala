@@ -3,13 +3,13 @@ package org.pinae.nala.xb;
 import java.util.Enumeration;
 
 import org.apache.log4j.Logger;
-import org.pinae.nala.xb.marshaller.AnnotationXMLMarshallerTest;
-import org.pinae.nala.xb.marshaller.ListXMLMarshallerTest;
-import org.pinae.nala.xb.marshaller.MapXMLMarshallerTest;
-import org.pinae.nala.xb.marshaller.XMLMarshallerTest;
-import org.pinae.nala.xb.unmarshaller.AnnotationXMLUnmarshaller;
+import org.pinae.nala.xb.marshaller.AnnotationXmlMarshallerTest;
+import org.pinae.nala.xb.marshaller.ListXmlMarshallerTest;
+import org.pinae.nala.xb.marshaller.MapXmlMarshallerTest;
+import org.pinae.nala.xb.marshaller.XmlMarshallerTest;
+import org.pinae.nala.xb.unmarshaller.AnnotationXmlUnmarshaller;
 import org.pinae.nala.xb.unmarshaller.MapUnmarshallerTest;
-import org.pinae.nala.xb.unmarshaller.XMLUnmarshallerTest;
+import org.pinae.nala.xb.unmarshaller.XmlUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.XPathUnmarshallerTest;
 
 import junit.framework.Test;
@@ -35,22 +35,22 @@ public class NalaTestSutie{
 		TestSuite suite = new TestSuite("Nala-Test");
 		
 		//测试XML工具
-		suite.addTestSuite(XMLTest.class);
+		suite.addTestSuite(XmlTest.class);
 		//测试注释形式的对象生成XML
-		suite.addTestSuite(AnnotationXMLMarshallerTest.class);
+		suite.addTestSuite(AnnotationXmlMarshallerTest.class);
 		//测试Map生成XML
-		suite.addTestSuite(MapXMLMarshallerTest.class);
+		suite.addTestSuite(MapXmlMarshallerTest.class);
 		//测试List生成XML
-		suite.addTestSuite(ListXMLMarshallerTest.class);
+		suite.addTestSuite(ListXmlMarshallerTest.class);
 		//测试对象生成XML
-		suite.addTestSuite(XMLMarshallerTest.class);
+		suite.addTestSuite(XmlMarshallerTest.class);
 		
 		//测试XML映射注释形式的对象
-		suite.addTestSuite(AnnotationXMLUnmarshaller.class);
+		suite.addTestSuite(AnnotationXmlUnmarshaller.class);
 		//测试XML映射Map
 		suite.addTestSuite(MapUnmarshallerTest.class);
 		//测试XML映射对象
-		suite.addTestSuite(XMLUnmarshallerTest.class);
+		suite.addTestSuite(XmlUnmarshallerTest.class);
 		//测试采用XPath映射对象
 		suite.addTestSuite(XPathUnmarshallerTest.class);
 		

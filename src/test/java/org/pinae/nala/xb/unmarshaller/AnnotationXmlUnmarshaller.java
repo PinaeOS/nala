@@ -8,7 +8,7 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.annotation.People;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 /**
  * org.pinae.nala.xb.unmarshaller测试
@@ -16,8 +16,8 @@ import org.pinae.nala.xb.util.ResourceReader;
  * @author Huiyugeng
  * 
  */
-public class AnnotationXMLUnmarshaller  extends TestCase {
-	private static final Logger log = Logger.getLogger(AnnotationXMLUnmarshaller.class);
+public class AnnotationXmlUnmarshaller  extends TestCase {
+	private static final Logger log = Logger.getLogger(AnnotationXmlUnmarshaller.class);
 	
 	/**
 	 * 带注释的对象绑定XML文本
@@ -25,7 +25,7 @@ public class AnnotationXMLUnmarshaller  extends TestCase {
 	public void testBindAnnotationObject(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XMLUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE1));
+			bind = new XmlUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE1));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (UnmarshalException e) {

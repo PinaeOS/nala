@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pinae.nala.xb.xml.CDATAObject;
+import org.pinae.nala.xb.xml.CdataObject;
 
 public class PersonOne {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -32,7 +32,7 @@ public class PersonOne {
 		
 		person.put("website", website);
 		
-		person.put("other", new CDATAObject("<Job>Teacher</Job>"));
+		person.put("other", new CdataObject("<Job>Teacher</Job>"));
 		
 		return person;
 	}

@@ -6,7 +6,7 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.resource.bean.People;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
-import org.pinae.nala.xb.unmarshal.XMLUnmarshaller;
+import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 
@@ -38,7 +38,7 @@ public class UnmarshallerThreadTest implements Runnable {
 		while(true){
 			Unmarshaller bind = null;
 			try {
-				bind = new XMLUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE1));
+				bind = new XmlUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE1));
 			} catch (NoSuchPathException e) {
 				log.debug(e.getMessage());
 			} catch (UnmarshalException e) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.pinae.nala.xb.xml.CDATAObject;
+import org.pinae.nala.xb.xml.CdataObject;
 
 public class Person extends org.pinae.nala.xb.NalaObject {
 	private Sex sex;
@@ -17,7 +17,7 @@ public class Person extends org.pinae.nala.xb.NalaObject {
 	private String kwClass;
 	private Date birthday;
 	private BigDecimal cost;
-	private CDATAObject other;
+	private CdataObject other;
 	private String pc;
 	
 	public long getId() {
@@ -74,10 +74,10 @@ public class Person extends org.pinae.nala.xb.NalaObject {
 	public void setCost(BigDecimal cost) {
 		this.cost = cost;
 	}
-	public CDATAObject getOther() {
+	public CdataObject getOther() {
 		return other;
 	}
-	public void setOther(CDATAObject other) {
+	public void setOther(CdataObject other) {
 		this.other = other;
 	}
 	public String getPc() {
