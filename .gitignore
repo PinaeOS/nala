@@ -14,3 +14,5 @@ hs_err_pid*
 /.classpath
 /.project
 /target/
+
+src/test/java/resource/output_test.xml
