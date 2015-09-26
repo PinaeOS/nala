@@ -30,8 +30,8 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 	/**
 	 * 构造函数
 	 * 
-	 * @param object 需要解析的Java对象
-	 * @throws MarshalException 编组异常
+	 * @param rootObject 需要解析的Java对象
+	 * 
 	 */
 	public XmlMarshaller(Object rootObject) {
 		this.rootObject = rootObject;

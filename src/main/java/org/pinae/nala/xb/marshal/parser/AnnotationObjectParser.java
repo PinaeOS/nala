@@ -41,7 +41,9 @@ public class AnnotationObjectParser extends ObjectParser{
 	/**
 	 * 将带注释的Object进行解析
 	 * 
-	 * @param stream 需要解析的Object
+	 * @param nodeName 根节点名称
+	 * @param rootObject 需要解析的Object
+	 * 
 	 * @return 将Object解析的NodeConfig
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })

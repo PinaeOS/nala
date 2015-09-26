@@ -13,6 +13,8 @@ public interface Marshaller {
 	 * 将NodeConfig编写为XML输出
 	 * 
 	 * @return XML输出
+	 * 
+	 * @throws MarshalException 编组异常
 	 */
 	public StringBuffer marshal() throws MarshalException;
 	
@@ -34,7 +36,7 @@ public interface Marshaller {
 	/**
 	 * 是否启用结点模式
 	 * 
-	 * @param prettyPrint 启用结点模式 true 启用 false 关闭
+	 * @param nodeMode 启用结点模式 true 启用 false 关闭
 	 */
 	public void enableNodeMode(boolean nodeMode);
 	

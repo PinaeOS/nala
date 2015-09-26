@@ -21,6 +21,7 @@ public class ObjectParser {
 	/**
 	 * 将对象解析为NodeConfig中间格式
 	 * 
+	 * @param nodeName 节点名称
 	 * @param rootObject 需要解析的对象
 	 * 
 	 * @return 解析后的中间格式
@@ -28,23 +29,23 @@ public class ObjectParser {
 	 * @throws MarshalException 解析异常
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public NodeConfig parse(String key, Object rootObject)
+	public NodeConfig parse(String nodeName, Object rootObject)
 			throws MarshalException {
 		Class rootClass = rootObject.getClass();
 
 		if (TypeConver.isBesicType(rootClass)) {
-			return new NodeConfig(key, rootObject.toString());
+			return new NodeConfig(nodeName, rootObject.toString());
 		} else if (rootObject instanceof List) {
-			return new ListParser().parse(key, (List) rootObject);
+			return new ListParser().parse(nodeName, (List) rootObject);
 		} else if (rootObject instanceof Map) {
-			return new MapParser().parse(key, (Map) rootObject);
+			return new MapParser().parse(nodeName, (Map) rootObject);
 		} else if (rootObject instanceof XmlObject) {
-			return new NodeConfig(key, rootObject);
+			return new NodeConfig(nodeName, rootObject);
 		} else if (rootObject instanceof CdataObject){
-			return new NodeConfig(key, rootObject);
+			return new NodeConfig(nodeName, rootObject);
 		}else {
 			if (rootClass.isAnnotationPresent(Root.class)) {
-				return new AnnotationObjectParser().parse(key, rootObject);
+				return new AnnotationObjectParser().parse(nodeName, rootObject);
 			} else {
 				return new DefaultObjectParser().parse(rootObject);
 			}

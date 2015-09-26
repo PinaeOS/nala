@@ -11,7 +11,7 @@ public class CdataObject {
 	/**
 	 * 构造函数
 	 * 
-	 * @param xml XML值
+	 * @param data CDATA值
 	 */
 	public CdataObject(String data){
 		this.data = data;
@@ -25,16 +25,18 @@ public class CdataObject {
 	}
 	
 	/**
-	 * 返回XML值
-	 * @return XML值
+	 * 返回CDATA值
+	 * 
+	 * @return CDATA值
 	 */
 	public String getData() {
 		return data;
 	}
 
 	/**
-	 * 设置XML值
-	 * @param xml XML值
+	 * 设置CDATA值
+	 * 
+	 * @param data CDATA值
 	 */
 	public void setData(String data) {
 		this.data = data;

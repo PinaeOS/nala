@@ -1,7 +1,5 @@
 package org.pinae.nala.xb.xml;
 
-
-
 /**
  * XML元素处理函数库
  * 
@@ -31,26 +29,28 @@ public class XmlElementUtils {
 	 * XML中Element Name/Attribute Name与Class Name/Method Name中名称映射
 	 * 
 	 * @param xml XML Element Name/Attribute Name
-	 * @return
+	 * 
+	 * @return 映射后的名称, 例如class映射后为kwClass
 	 */
-	public static String mapXMLToObject(String xml){
-		for(int i=0; i<keyWordMapping.length; i++){
-			if(keyWordMapping[i][0].equalsIgnoreCase(xml)){
+	public static String mapXMLToObject(String xml) {
+		for (int i = 0; i < keyWordMapping.length; i++) {
+			if (keyWordMapping[i][0].equalsIgnoreCase(xml)) {
 				return keyWordMapping[i][1];
 			}
 		}
 		return xml;
 	}
-	
+
 	/**
 	 * XML中Element Name/Attribute Name与Class中Class Name/Method Name中名称映射
 	 * 
 	 * @param clazz Class Name/Method Name
-	 * @return
+	 * 
+	 * @return 映射后的名称, 例如class映射后为kwClass
 	 */
-	public static String mapObjectToXML(String clazz){
-		for(int i=0; i<keyWordMapping.length; i++){
-			if(keyWordMapping[i][1].equalsIgnoreCase(clazz)){
+	public static String mapObjectToXML(String clazz) {
+		for (int i = 0; i < keyWordMapping.length; i++) {
+			if (keyWordMapping[i][1].equalsIgnoreCase(clazz)) {
 				return keyWordMapping[i][0];
 			}
 		}
@@ -61,13 +61,14 @@ public class XmlElementUtils {
 	 * 判断字符串中是否含有XML的转义符
 	 * 
 	 * @param xml 需要判断的字符串
+	 * 
 	 * @return 转义符
 	 */
-	public static boolean containXMLEscapeChar(String xml){
-		String escapes[] = {"<", ">", "&", "\'", "\""};
-		
+	public static boolean containXMLEscapeChar(String xml) {
+		String escapes[] = { "<", ">", "&", "\'", "\"" };
+
 		for (String escape : escapes) {
-			if (xml.contains(escape)){
+			if (xml.contains(escape)) {
 				return true;
 			}
 		}

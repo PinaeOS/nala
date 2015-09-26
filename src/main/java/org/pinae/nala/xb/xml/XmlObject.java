@@ -2,15 +2,9 @@ package org.pinae.nala.xb.xml;
 
 /**
  * XML对象
- * Nala绑定时, 如果指定变量类型为XML, 则不会对相应的XML进行解析和映射
  * 
- * 例如
- * 定义private Xml data;
- * 则XML描述
- * <data>
- * 	<text>Hello</text>
- * </data>
- * 在data的映射值<text>Hello</text>
+ * 绑定时, 如果指定变量类型为XML, 则不会对相应的XML进行解析和映射
+ * 在XML对象中将保持原有的XML文本信息
  * 
  * @author Huiyugeng
  *
@@ -34,16 +28,18 @@ public class XmlObject {
 	}
 	
 	/**
-	 * 返回XML值
-	 * @return XML值
+	 * 返回Xml文本
+	 * 
+	 * @return Xml文本
 	 */
 	public String getXml() {
 		return xml;
 	}
 
 	/**
-	 * 设置XML值
-	 * @param xml XML值
+	 * 设置Xml文本
+	 * 
+	 * @param xml Xml文本
 	 */
 	public void setXml(String xml) {
 		this.xml = xml;

@@ -64,6 +64,7 @@ public class TypeConver {
 	 * 
 	 * @param type 字段类型
 	 * @param value 需要转换值
+	 * 
 	 * @return 转换后的值
 	 */
 	public static Object converValue(String type, String value){
@@ -115,8 +116,10 @@ public class TypeConver {
 	 * 根据类型描述获取对应的Class
 	 * 
 	 * @param type 类型描述
+	 * 
 	 * @return 对应的Class
-	 * @throws ClassNotFoundException
+	 * 
+	 * @throws ClassNotFoundException 无法找到对应的类
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Class getTypeClass(String type) throws ClassNotFoundException{

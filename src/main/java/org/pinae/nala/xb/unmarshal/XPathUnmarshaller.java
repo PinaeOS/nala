@@ -13,11 +13,8 @@ import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 /**
  * 通过指定的XPath, 绑定指定的对象
- * 例如：
- * <one>
- * 	<two>123</two>
- * </one>
- * 则//one/two绑定two对象
+ * 支持标准XPath路径描述
+ * 
  * @author Huiyugeng
  *
  */
@@ -30,6 +27,7 @@ public class XPathUnmarshaller extends BasicUnmarshaller {
 	 * 
 	 * @param xml 输入的XML流
 	 * @param xpath 指定的XPath路径
+	 * 
 	 * @throws UnmarshalException 解组的异常
 	 */
 	public XPathUnmarshaller(InputStreamReader xml, String xpath) throws UnmarshalException {

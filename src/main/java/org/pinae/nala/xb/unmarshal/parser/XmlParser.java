@@ -18,7 +18,6 @@ import org.pinae.nala.xb.resource.AttributeConfig;
 import org.pinae.nala.xb.resource.NodeConfig;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
-
 /**
  * 将XML解析为结构体
  * 
@@ -27,43 +26,44 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  */
 public class XmlParser {
 	protected static final Logger log = Logger.getLogger("XMLParser");
+
 	/*
 	 * 解析XML结点
 	 */
 	@SuppressWarnings("rawtypes")
-	private NodeConfig parserNode(Element element){
+	private NodeConfig parserNode(Element element) {
 		NodeConfig config = new NodeConfig();
 		config.setName(XmlElementUtils.mapXMLToObject(element.getName()));
 		config.setNamespace(element.getNamespacePrefix(), element.getNamespaceURI());
 		List childrenNode = element.getChildren();
-		if(childrenNode!=null && childrenNode.size()>0){
+		if (childrenNode != null && childrenNode.size() > 0) {
 			List<NodeConfig> nodeItems = new ArrayList<NodeConfig>();
 			for (Iterator iter = childrenNode.iterator(); iter.hasNext();) {
 				nodeItems.add(parserNode((Element) iter.next()));
 			}
 			config.setChildrenNodes(nodeItems);
 		}
-		
+
 		String value = element.getText();
-		if (value != null && ! value.trim().equals("")){
+		if (value != null && !value.trim().equals("")) {
 			config.setValue(value.trim());
 		}
 		config.setAttribute(parserAttribute(element));
 		return config;
 	}
-	
+
 	/*
 	 * 解析XML属性
 	 */
 	@SuppressWarnings("rawtypes")
-	private List<AttributeConfig> parserAttribute(Element element){
+	private List<AttributeConfig> parserAttribute(Element element) {
 		List attributes = element.getAttributes();
 		List<AttributeConfig> attributeItems = null;
-		if(attributes!=null && attributes.size()>0){
+		if (attributes != null && attributes.size() > 0) {
 			attributeItems = new ArrayList<AttributeConfig>();
 			for (Iterator iter = attributes.iterator(); iter.hasNext();) {
 				AttributeConfig attributeConfig = new AttributeConfig();
-				Attribute attribute = (Attribute)iter.next();
+				Attribute attribute = (Attribute) iter.next();
 				attributeConfig.setName(XmlElementUtils.mapXMLToObject(attribute.getName()));
 				attributeConfig.setValue(attribute.getValue());
 				attributeItems.add(attributeConfig);
@@ -71,21 +71,24 @@ public class XmlParser {
 		}
 		return attributeItems;
 	}
-	
+
 	/**
 	 * 将XML流进行解析
 	 * 
-	 * @param stream 需要解析的XML
+	 * @param xml 需要解析的XML
+	 * 
 	 * @return 将输入XML流解析的NodeConfig
+	 * 
+	 * @throws UnmarshalException 解组异常
 	 */
-	public NodeConfig parser(InputStreamReader xml) throws UnmarshalException{
+	public NodeConfig parser(InputStreamReader xml) throws UnmarshalException {
 		NodeConfig config = new NodeConfig();
 		SAXBuilder builder = new SAXBuilder(false);
 		Document doc = null;
 		try {
-			doc =builder.build(xml);
+			doc = builder.build(xml);
 			config = parserNode(doc.getRootElement());
-			
+
 			xml.close();
 			return config;
 		} catch (JDOMException e) {
@@ -94,25 +97,29 @@ public class XmlParser {
 			throw new UnmarshalException(e);
 		}
 	}
-	
+
 	/**
 	 * 根据XPath对XML流进行解析
 	 * 
-	 * @param stream 需要解析的XML
-	 * @return 将输入XML流解析的NodeConfig
+	 * @param xml 需要解析的XML
+	 * @param xpath XPath路径
+	 * 
+	 * @return 将输入XML解析的NodeConfig (XPath路径支持)
+	 * 
+	 * @throws UnmarshalException 解组异常
 	 */
 	@SuppressWarnings("rawtypes")
-	public List<NodeConfig> parserByXpath(InputStreamReader xml, String xpath) throws UnmarshalException{
+	public List<NodeConfig> parserByXpath(InputStreamReader xml, String xpath) throws UnmarshalException {
 		List<NodeConfig> lstNodeConfig = new ArrayList<NodeConfig>();
 		SAXBuilder builder = new SAXBuilder(false);
 		Document doc = null;
 		try {
-			doc =builder.build(xml);
+			doc = builder.build(xml);
 			Element root = doc.getRootElement();
-			if(xpath != null && !xpath.equals("")){
+			if (xpath != null && !xpath.equals("")) {
 				List node = XPath.selectNodes(root, xpath);
-				for(Iterator iterNode = node.iterator();iterNode.hasNext();){
-					lstNodeConfig.add(parserNode((Element)iterNode.next()));
+				for (Iterator iterNode = node.iterator(); iterNode.hasNext();) {
+					lstNodeConfig.add(parserNode((Element) iterNode.next()));
 				}
 			}
 			return lstNodeConfig;
@@ -120,7 +127,7 @@ public class XmlParser {
 			throw new UnmarshalException(e);
 		} catch (IOException e) {
 			throw new UnmarshalException(e);
-		} 
-		
+		}
+
 	}
 }

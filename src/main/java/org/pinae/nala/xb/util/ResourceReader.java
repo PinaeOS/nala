@@ -27,9 +27,10 @@ public class ResourceReader {
 	 * 逐行读取文件内容
 	 * 
 	 * @param filename 文件名
+	 * 
 	 * @return 文件内容
 	 * 
-	 * @throws IOException
+	 * @throws IOException 文件读取异常
 	 */
 	public StringBuffer readFile(String filename) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -48,8 +49,9 @@ public class ResourceReader {
 	 * @param filename 需要读取的文件名称
 	 * 
 	 * @return 文件内容输出流
-	 * @throws NoSuchPathException 搜索文件时, 无法发现路径引发的异常
-	 * @throws FileNotFoundException 搜索文件时, 无法发现文件的异常
+	 * 
+	 * @throws NoSuchPathException 无法找到对应的文件或者路径
+	 * 
 	 */
 	public InputStreamReader getFileStream(String filename)
 			throws NoSuchPathException{
@@ -67,8 +69,10 @@ public class ResourceReader {
 	 * @param encoding 文件编码
 	 * 
 	 * @return 文件内容输出流
-	 * @throws NoSuchPathException 搜索文件时, 无法发现路径引发的异常
-	 * @throws FileNotFoundException 搜索文件时, 无法发现文件的异常
+	 * 
+	 * @throws NoSuchPathException 无法找到对应的文件或者路径
+	 * @throws UnmarshalException 解组失败(通常由于编码问题引起)
+	 * 
 	 */
 	public InputStreamReader getFileStream(String filename, String encoding)
 			throws NoSuchPathException, UnmarshalException{
@@ -85,12 +89,13 @@ public class ResourceReader {
 	 * 将URL资源读出为输出流
 	 * 
 	 * @param path URL资源
+	 * 
 	 * @return 资源内容输出流
+	 * 
 	 * @throws NoSuchPathException 搜索URL等资源时, 无法发现路径引发的异常
-	 * @throws IOException 读写URL资源引发的异常
+	 * @throws IOException IO异常 (通常出现在读写过程中的异常连接)
 	 */
-	public InputStream getURLStream(String path) throws NoSuchPathException,
-			IOException {
+	public InputStream getURLStream(String path) throws NoSuchPathException, IOException {
 		URL url = null;
 		try {
 			url = new URL(path);
