@@ -14,7 +14,7 @@ public abstract class BasicMarshal {
 	protected String documentStart = ""; // XML文档头
 	protected String documentEnd = ""; // XML文档尾
 	protected boolean prettyPrint = true; // 是否启用缩进格式
-	protected boolean nodeMode = false; // XML注入是否启用结点模式, 如果启用结点模式, 则将属性写为结点
+	protected boolean nodeMode = false; // XML注入是否启用节点模式, 如果启用节点模式, 则将属性写为节点
 	protected String nodeTag = ""; // XML默认节点描述
 	protected boolean isLowCase = true; // 是否采用首字母小写
 	protected String namespaces = "";
@@ -30,9 +30,9 @@ public abstract class BasicMarshal {
 	}
 
 	/**
-	 * 是否启用结点模式
+	 * 是否启用节点模式
 	 * 
-	 * @param nodeMode 启用结点模式 true 启用 false 关闭
+	 * @param nodeMode 启用节点模式 true 启用 false 关闭
 	 */
 	public void enableNodeMode(boolean nodeMode) {
 		this.nodeMode = nodeMode;

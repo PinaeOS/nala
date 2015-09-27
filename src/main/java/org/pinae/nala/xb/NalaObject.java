@@ -16,10 +16,18 @@ public abstract class NalaObject {
 	private List<Namespace> namespaces = new ArrayList<Namespace>();
 	private String value;
 	
+	/**
+	 * 构造函数
+	 */
 	public NalaObject(){
 		
 	}
 	
+	/**
+	 * 构造函数
+	 * 
+	 * @param value XML节点值
+	 */
 	public NalaObject(String value){
 		this.value = value;
 	}
@@ -43,18 +51,18 @@ public abstract class NalaObject {
 	}
 
 	/**
-	 * 获取XML结点值
+	 * 获取XML节点值
 	 * 
-	 * @return XML结点值
+	 * @return XML节点值
 	 */
 	public String getValue() {
 		return value;
 	}
 
 	/**
-	 * 设置XML结点值
+	 * 设置XML节点值
 	 * 
-	 * @param value XML结点值
+	 * @param value XML节点值
 	 */
 	public void setValue(String value) {
 		this.value = value;

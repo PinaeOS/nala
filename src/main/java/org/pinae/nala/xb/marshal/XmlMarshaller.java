@@ -23,6 +23,11 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  * 
  */
 public class XmlMarshaller extends BasicMarshal implements Marshaller {
+
+	private static final String ROOT_TAG = "root";
+	
+	private static final String XML_TAG = "xml";
+
 	private Object rootObject;
 
 	private NodeConfig config;
@@ -62,7 +67,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		if (StringUtils.isEmpty(tag)) {
 			if (rootObject instanceof Map) {
 				tag = (String) ((Map) rootObject).get("nodeTag");
-				tag = tag == null ? "root" : tag;
+				tag = tag == null ? ROOT_TAG : tag;
 			} else if (rootObject instanceof List) {
 				tag = "list";
 			} else if (rootClass.isAnnotationPresent(Root.class)) {
@@ -72,7 +77,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		}
 
 		if (StringUtils.isEmpty(tag)) {
-			tag = "root";
+			tag = ROOT_TAG;
 		}
 		return new ObjectParser().parse(tag, rootObject);
 	}
@@ -91,7 +96,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		StringBuffer xmlBuffer = new StringBuffer();
 
 		if (documentStart != null && !documentStart.equals(""))
-			xmlBuffer.append(documentStart + "\n");
+			xmlBuffer.append(documentStart + endOfLine);
 
 		Map mapNamespaces = DefaultObjectParser.getNamespaces();
 		for (Iterator iterPrefix = mapNamespaces.keySet().iterator(); iterPrefix.hasNext();) {
@@ -108,7 +113,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		xmlBuffer.append(getNodeXML(this.config, 0));
 
 		if (documentEnd != null && !documentEnd.equals(""))
-			xmlBuffer.append(documentEnd + "\n");
+			xmlBuffer.append(documentEnd + endOfLine);
 		return xmlBuffer;
 	}
 
@@ -119,11 +124,11 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 	private StringBuffer getNodeXML(NodeConfig config, int deep) {
 		StringBuffer tempBuffer = new StringBuffer();
 		String tagName = config.getName();
-		
+
 		if (isLowCase == true) {
 			tagName = StringUtils.uncapitalize(config.getName());
 		}
-		
+
 		if (config.getNamespace() != null && config.getNamespace().size() > 0) {
 			Namespace namespace = (Namespace) config.getNamespace().get(0);
 			if (!namespace.getPrefix().equals("")) {
@@ -132,15 +137,15 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		}
 
 		Object tagValue = config.getValue();
-		if (tagValue == null){
+		if (tagValue == null) {
 			tagValue = "";
 		}
 		if (tagValue instanceof CdataObject) {
 			tagValue = String.format("<![CDATA[%s]]>", ((CdataObject) tagValue).getData());
 		} else if (tagValue instanceof XmlObject) {
 			tagValue = ((XmlObject) tagValue).getXml();
-		} else if (cdata == true){
-			if (XmlElementUtils.containXMLEscapeChar(tagValue.toString())){
+		} else if (cdata == true) {
+			if (XmlElementUtils.containXMLEscapeChar(tagValue.toString())) {
 				tagValue = String.format("<![CDATA[%s]]>", tagValue.toString());
 			}
 		}
@@ -166,13 +171,13 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 				}
 			}
 		}
-		
+
 		boolean isDeep = true;
-		
+
 		if (config.getChildrenNodes() != null && config.getChildrenNodes().size() > 0) {
 			for (Iterator iterNode = config.getChildrenNodes().iterator(); iterNode.hasNext();) {
 				NodeConfig node = (NodeConfig) iterNode.next();
-				
+
 				StringBuffer nodeXML = null;
 				if (node.getName().equals(tagName)) {
 					nodeXML = getNodeXML(node, deep);
@@ -183,18 +188,18 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 				nodeBuffer.append(nodeXML);
 			}
 		}
-		
+
 		if (isDeep == false) {
 			return nodeBuffer;
 		}
-		
+
 		String tab = "";
 		if (prettyPrint) {
 			for (int i = 0; i < deep; i++) {
 				tab += indent;
 			}
 		}
-		if (!tagName.equals("xml")) {
+		if (!tagName.equals(XML_TAG)) {
 			if (deep == 0) {
 				tempBuffer.append(tab + "<" + tagName + namespaces);
 			} else {
@@ -204,10 +209,10 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 
 		if (attributeBuffer != null && attributeBuffer.length() > 0) {
 			tempBuffer.append(" " + attributeBuffer.toString().trim());
-			
+
 		}
-		
-		if (!tagName.equals("xml")) {
+
+		if (!tagName.equals(XML_TAG)) {
 			if (nodeBuffer.length() > 0) {
 				tempBuffer.append(">");
 			} else {
@@ -219,13 +224,12 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 			}
 		}
 
-
 		if (nodeBuffer.length() > 0) {
-			tempBuffer.append("\n" + nodeBuffer);
+			tempBuffer.append(endOfLine + nodeBuffer);
 			tempBuffer.append(tab + "</" + tagName + ">" + endOfLine);
 		} else {
 			if (tagValue != null) {
-				if (!tagName.equals("xml")) {
+				if (!tagName.equals(XML_TAG)) {
 					tempBuffer.append(tagValue.toString());
 					tempBuffer.append("</" + tagName + ">" + endOfLine);
 				} else {

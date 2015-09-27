@@ -21,7 +21,7 @@ import org.pinae.nala.xb.util.Constant;
 
 
 /**
- * 将带注释的Object解析为中间格式
+ * 将带注释的Object解析为NodeConfig格式
  * 
  * @author Huiyugeng
  *
@@ -38,13 +38,16 @@ public class AnnotationObjectParser extends ObjectParser{
 	public static Map getNamespaces(){
 		return mapNamespaces;
 	}
+	
 	/**
-	 * 将带注释的Object进行解析
+	 * 将带注释的Object解析为NodeConfig格式
 	 * 
 	 * @param nodeName 根节点名称
 	 * @param rootObject 需要解析的Object
 	 * 
-	 * @return 将Object解析的NodeConfig
+	 * @return Object解析后的NodeConfig格式
+	 * 
+	 * @throws MarshalException 编组异常
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public NodeConfig parse(String nodeName, Object rootObject) throws MarshalException{

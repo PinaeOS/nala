@@ -10,16 +10,26 @@ import java.util.List;
  *
  */
 public class NodeConfig {
+	
 	private String name;
 	private Object value;
 	private List<AttributeConfig> attribute;
 	private List<NodeConfig> childrenNodes;
 	private List<Namespace> namespace = new ArrayList<Namespace>();
 	
+	/**
+	 * 构造函数
+	 */
 	public NodeConfig(){
 		
 	}
 	
+	/**
+	 * 构造函数
+	 * 
+	 * @param name XML节点名称
+	 * @param value XML节点值
+	 */
 	public NodeConfig(String name, Object value){
 		this.name = name;
 		this.value = value;
@@ -80,7 +90,7 @@ public class NodeConfig {
 		this.attribute = attribute;
 	}
 	/**
-	 * 返回该节点的节点值
+	 * 返回XML的节点值
 	 * 
 	 * @return 节点值
 	 */
@@ -88,7 +98,7 @@ public class NodeConfig {
 		return value;
 	}
 	/**
-	 * 设置该节点的节点值
+	 * 设置XML的节点值
 	 * 
 	 * @param value 节点值
 	 */
@@ -96,7 +106,7 @@ public class NodeConfig {
 		this.value = value;
 	}
 	/**
-	 * 返回该节点的节点名称
+	 * 返回XML的节点名称
 	 * 
 	 * @return 节点名称
 	 */
@@ -104,7 +114,7 @@ public class NodeConfig {
 		return name;
 	}
 	/**
-	 * 返回该节点的节点名称
+	 * 返回XML的节点名称
 	 * 
 	 * @param name 节点名称
 	 */

@@ -17,7 +17,7 @@ import org.pinae.nala.xb.util.TypeConver;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
- * 将Object解析为中间格式
+ * 将Object解析为NodeConfig格式
  * 
  * @author Huiyugeng
  *
@@ -36,11 +36,11 @@ public class DefaultObjectParser extends ObjectParser {
 	}
 
 	/**
-	 * 将Object进行解析
+	 * 将Object进行解析为NodeConfig格式
 	 * 
 	 * @param rootObject 需要解析的Object
 	 * 
-	 * @return 将Object解析的NodeConfig
+	 * @return 将Object解析后的NodeConfig格式
 	 * 
 	 * @throws MarshalException 编组异常
 	 */

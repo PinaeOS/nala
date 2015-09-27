@@ -11,7 +11,7 @@ import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 /**
- * XML工具集
+ * XML工具
  * 
  * @author Huiyugeng
  *
@@ -22,7 +22,7 @@ public class XML {
 	 * 将XML文件绑定为Map对象
 	 * 
 	 * @param filename XML文件路径
-	 * @param encoding XML文件编码
+	 * @param encoding XML文件编码, 例如UTF-8, GBK
 	 * 
 	 * @return Map对象
 	 */
@@ -34,7 +34,7 @@ public class XML {
 	 * 将XML字符串绑定为Map对象
 	 * 
 	 * @param xml XML字符串
-	 * @param encoding XML字符串编码
+	 * @param encoding XML字符串编码, 例如UTF-8, GBK
 	 * 
 	 * @return Map对象
 	 */
@@ -55,12 +55,12 @@ public class XML {
 	 * 将XML文件绑定为对象
 	 * 
 	 * @param filename XML文件路径
-	 * @param encoding XML文件编码
-	 * @param cls 对象类型
+	 * @param encoding XML文件编码, 例如UTF-8, GBK
+	 * @param cls 绑定目标类
 	 * 
 	 * @return 绑定后的对象
 	 */
-	public static Object parseFile(String filename, String encoding, Class cls) {
+	public static Object parseFile(String filename, String encoding, Class<Map> cls) {
 		Object object = null;
 		try {
 			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader().getFileStream(filename, encoding));
@@ -77,12 +77,12 @@ public class XML {
 	 * 将XML文件绑定为对象
 	 * 
 	 * @param xml XML字符串
-	 * @param encoding XML字符串编码
-	 * @param cls 对象类型
+	 * @param encoding XML文件编码, 例如UTF-8, GBK
+	 * @param cls 绑定目标类
 	 * 
 	 * @return 绑定后的对象
 	 */
-	public static Object parseXML(String xml, String encoding, Class cls) {
+	public static Object parseXML(String xml, String encoding, Class<Map> cls) {
 		Object object = null;
 		try {
 			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
@@ -98,8 +98,8 @@ public class XML {
 	/**
 	 * 将对象生成XML文本
 	 * 
-	 * @param object 对象
-	 * @param encoding XML编码
+	 * @param object 需要生成XML的对象
+	 * @param encoding XML文本编码, 例如UTF-8, GBK
 	 * @param nodeMode 是否采用节点模式, 如果采用节点模式将不生成XML属性
 	 * 
 	 * @return XML文本

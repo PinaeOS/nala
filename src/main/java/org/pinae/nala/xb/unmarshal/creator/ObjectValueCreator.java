@@ -14,11 +14,12 @@ import org.pinae.nala.xb.xml.XmlObject;
  *
  */
 public class ObjectValueCreator {
+	
 	/**
 	 * 构建对象
 	 * 
 	 * @param fieldType 字段类型
-	 * @param nodeConfig 结点配置
+	 * @param nodeConfig 节点配置
 	 * 
 	 * @return 构建的对象值
 	 */

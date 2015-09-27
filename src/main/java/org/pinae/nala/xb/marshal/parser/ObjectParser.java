@@ -19,12 +19,12 @@ import org.pinae.nala.xb.xml.XmlObject;
  */
 public class ObjectParser {
 	/**
-	 * 将对象解析为NodeConfig中间格式
+	 * 将对象解析为NodeConfig格式
 	 * 
 	 * @param nodeName 节点名称
 	 * @param rootObject 需要解析的对象
 	 * 
-	 * @return 解析后的中间格式
+	 * @return 解析后的NodeConfig格式
 	 * 
 	 * @throws MarshalException 解析异常
 	 */
@@ -53,13 +53,13 @@ public class ObjectParser {
 	}
 
 	/**
-	 * 根据字段类型解析对象值并构造结点
+	 * 根据字段类型解析对象值并构造节点
 	 * 
 	 * @param fieldType 字段类型
-	 * @param name 结点配置名称
-	 * @param value 结点配置值
+	 * @param name 节点配置名称
+	 * @param value 节点配置值
 	 * 
-	 * @return 结点配置信息
+	 * @return 节点配置信息
 	 */
 	public NodeConfig parseNodeConfigValue(String fieldType, String name,
 			Object value) {
@@ -98,7 +98,6 @@ public class ObjectParser {
 	 * 根据字段类型获取对象值并转化为String
 	 * 
 	 * @param fieldType 字段类型
-	 * 
 	 * @param value 对象值
 	 * 
 	 * @return 对象之转化为String

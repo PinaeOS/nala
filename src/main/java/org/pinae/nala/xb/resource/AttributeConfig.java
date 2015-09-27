@@ -1,7 +1,7 @@
 package org.pinae.nala.xb.resource;
 
 /**
- * XML结点属性配置类
+ * XML节点属性配置类
  * 
  * @author Huiyugeng
  *
@@ -11,7 +11,7 @@ public class AttributeConfig {
 	private String value;
 	
 	/**
-	 * 返回XML结点的属性名称
+	 * 返回XML节点的属性名称
 	 * 
 	 * @return 返回属性名称
 	 */
@@ -19,7 +19,7 @@ public class AttributeConfig {
 		return name;
 	}
 	/**
-	 * 设置XML结点的属性名称
+	 * 设置XML节点的属性名称
 	 * 
 	 * @param name 设置的属性名称
 	 */
@@ -27,17 +27,17 @@ public class AttributeConfig {
 		this.name = name;
 	}
 	/**
-	 * 返回XML结点的属性值
+	 * 返回XML节点的属性值
 	 * 
-	 * @return 返回XML结点的属性值
+	 * @return 返回XML节点的属性值
 	 */
 	public String getValue() {
 		return value;
 	}
 	/**
-	 * 设置XML结点的属性值
+	 * 设置XML节点的属性值
 	 * 
-	 * @param value 设置XML结点的属性值
+	 * @param value 设置XML节点的属性值
 	 */
 	public void setValue(String value) {
 		this.value = value;
@@ -53,7 +53,7 @@ public class AttributeConfig {
 	}
 	
 	/**
-	 * 将此对象与指定对象进行比较。当且仅当该参数不是 null, 且 AttributeConfig 对象与此对象包含相同的name,value, 子结点, 属性值时, 结果才为 true
+	 * 将此对象与指定对象进行比较。当且仅当该参数不是 null, 且 AttributeConfig 对象与此对象包含相同的name,value, 子节点, 属性值时, 结果才为 true
 	 * 
 	 * @return 要与之进行比较的对象
 	 */

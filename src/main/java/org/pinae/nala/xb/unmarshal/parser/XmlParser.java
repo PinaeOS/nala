@@ -28,7 +28,7 @@ public class XmlParser {
 	protected static final Logger log = Logger.getLogger("XMLParser");
 
 	/*
-	 * 解析XML结点
+	 * 解析XML节点
 	 */
 	@SuppressWarnings("rawtypes")
 	private NodeConfig parserNode(Element element) {

@@ -34,9 +34,9 @@ public interface Marshaller {
 	public void enablePrettyPrint(boolean prettyPrint);
 	
 	/**
-	 * 是否启用结点模式
+	 * 是否启用节点模式
 	 * 
-	 * @param nodeMode 启用结点模式 true 启用 false 关闭
+	 * @param nodeMode 启用节点模式 true 启用 false 关闭
 	 */
 	public void enableNodeMode(boolean nodeMode);
 	

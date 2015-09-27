@@ -20,13 +20,10 @@ import org.pinae.nala.xb.util.TypeConver;
 /**
  * 根据注释信息构建Java对象
  * 
- * 
  * @author Huiyugeng
  *
  */
 public class AnnotationObjectCreator extends DefaultObjectCreator{
-	//是否启动属性和方法验证, 如果启动验证, 当出现NoSuchField或NoSuchMethod时, 抛出UnmarshalException
-	private boolean validation = false; 
 	
 	/**
 	 * 构造函数
@@ -37,8 +34,14 @@ public class AnnotationObjectCreator extends DefaultObjectCreator{
 		super(validation);
 	}
 	
-	/*
-	 * 根据结构体生成对象
+	/**
+	 * 根据NodeConfig结构和带有注释的类生成对象
+	 * 
+	 * @param rootNode NodeConfig结构
+	 * @param rootClass 需要生成对象的类
+	 * @param rootObject 如果类为内部类, 则需要对象来生成内部类
+	 * 
+	 * @return NodeConfig生成的对象
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getObject(NodeConfig rootNode, Class rootClass, Object rootObject) 

@@ -16,8 +16,12 @@ import org.pinae.nala.xb.resource.NodeConfig;
  */
 public class MapCreator {
 	
-	/*
+	/**
 	 * 根据结构体生成Map
+	 * 
+	 * @param nodeConfig NodeConfig结构
+	 * 
+	 * @return NodeConfig生成的Map对象
 	 * 
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })

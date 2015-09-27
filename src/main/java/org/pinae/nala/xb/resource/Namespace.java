@@ -7,6 +7,7 @@ package org.pinae.nala.xb.resource;
  *
  */
 public class Namespace {
+	
 	private String prefix;
 	private String uri;
 	
