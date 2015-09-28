@@ -1,4 +1,4 @@
-package org.pinae.nala.xb.resource.annotation;
+package org.pinae.nala.xb.data.annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.pinae.nala.xb.annotation.Element;
 import org.pinae.nala.xb.annotation.Root;
 
 @Root(name="people")
-public class People extends org.pinae.nala.xb.NalaObject {
+public class People extends org.pinae.nala.xb.XmlObject {
 	
 	@Element(name="person")
 	private List<Person> person = new ArrayList<Person>();

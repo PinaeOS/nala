@@ -1,9 +1,10 @@
-package org.pinae.nala.xb.resource.annotation;
+package org.pinae.nala.xb.data.annotation;
 
 import org.pinae.nala.xb.annotation.Attribute;
 import org.pinae.nala.xb.annotation.Element;
 
-public class Name extends org.pinae.nala.xb.NalaObject {
+public class Name extends org.pinae.nala.xb.XmlObject {
+	
 	@Element(name="lastname")
 	private String lastname;
 	

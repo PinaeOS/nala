@@ -18,7 +18,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
 
 
 /**
- * org.pinae.nala.xb.marshal.XMLMarshaller测试
+ * XmlMarshaller混合单元测试
  * 
  * @author Huiyugeng
  *
@@ -32,15 +32,15 @@ public class MixedMarshallerTest extends TestCase {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setUp(){
 		List mapGroup = new ArrayList();
-		mapGroup.add(org.pinae.nala.xb.resource.map.PersonOne.getObject());
-		mapGroup.add(org.pinae.nala.xb.resource.map.PersonTwo.getObject());
+		mapGroup.add(org.pinae.nala.xb.data.map.PersonOne.getObject());
+		mapGroup.add(org.pinae.nala.xb.data.map.PersonTwo.getObject());
 		
 		List beanGroup = new ArrayList();
-		beanGroup.add(org.pinae.nala.xb.resource.bean.PersonOne.getObject());
-		beanGroup.add(org.pinae.nala.xb.resource.bean.PersonTwo.getObject());
+		beanGroup.add(org.pinae.nala.xb.data.bean.PersonOne.getObject());
+		beanGroup.add(org.pinae.nala.xb.data.bean.PersonTwo.getObject());
 		
 		List annotationGroup = new ArrayList();
-		annotationGroup.add(org.pinae.nala.xb.resource.annotation.PersonOne.getObject());
+		annotationGroup.add(org.pinae.nala.xb.data.annotation.PersonOne.getObject());
 		
 		people.put("mapGroup", mapGroup);
 		people.put("beanGroup", beanGroup);

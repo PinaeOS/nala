@@ -2,21 +2,22 @@ package org.pinae.nala.xb.unmarshaller;
 
 import org.apache.log4j.Logger;
 import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.data.bean.People;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.bean.People;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
 
 /**
- * org.pinae.nala.xb.unmarshal.Unmarshaller多线程测试
+ * Unmarshaller多线程测试
  * 
  * @author Huiyugeng
  *
  */
 public class UnmarshallerThreadTest implements Runnable {
+	
 	private static final Logger log = Logger.getLogger(UnmarshallerThreadTest.class);
 	private String thread_id;
 	

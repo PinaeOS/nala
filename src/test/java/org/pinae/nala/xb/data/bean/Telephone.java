@@ -1,9 +1,12 @@
-package org.pinae.nala.xb.resource.bean;
-public class Telephone extends org.pinae.nala.xb.NalaObject {
+package org.pinae.nala.xb.data.bean;
+
+public class Telephone extends org.pinae.nala.xb.XmlObject {
+	
 	private Mobile mobile;
 	private Office office;
 	private String id;
 	private Home home;
+	
 	public void setMobile(Mobile mobile){
 		this.mobile = mobile;
 	}
@@ -29,11 +32,11 @@ public class Telephone extends org.pinae.nala.xb.NalaObject {
 		return home;
 	}
 	
-	public class Home extends org.pinae.nala.xb.NalaObject {
+	public class Home extends org.pinae.nala.xb.XmlObject {
 
 	}
 	
-	public class Mobile extends org.pinae.nala.xb.NalaObject {
+	public class Mobile extends org.pinae.nala.xb.XmlObject {
 		private String net;
 		public String getNet() {
 			return net;
@@ -43,7 +46,7 @@ public class Telephone extends org.pinae.nala.xb.NalaObject {
 		}
 	}
 	
-	public class Office extends org.pinae.nala.xb.NalaObject {
+	public class Office extends org.pinae.nala.xb.XmlObject {
 
 	}
 }

@@ -7,7 +7,7 @@ import org.pinae.nala.xb.marshaller.AnnotationXmlMarshallerTest;
 import org.pinae.nala.xb.marshaller.ListXmlMarshallerTest;
 import org.pinae.nala.xb.marshaller.MapXmlMarshallerTest;
 import org.pinae.nala.xb.marshaller.XmlMarshallerTest;
-import org.pinae.nala.xb.unmarshaller.AnnotationXmlUnmarshaller;
+import org.pinae.nala.xb.unmarshaller.AnnotationXmlUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.MapUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.XmlUnmarshallerTest;
 import org.pinae.nala.xb.unmarshaller.XPathUnmarshallerTest;
@@ -46,7 +46,7 @@ public class NalaTestSutie{
 		suite.addTestSuite(XmlMarshallerTest.class);
 		
 		//测试XML映射注释形式的对象
-		suite.addTestSuite(AnnotationXmlUnmarshaller.class);
+		suite.addTestSuite(AnnotationXmlUnmarshallerTest.class);
 		//测试XML映射Map
 		suite.addTestSuite(MapUnmarshallerTest.class);
 		//测试XML映射对象

@@ -1,10 +1,11 @@
-package org.pinae.nala.xb.resource.annotation;
+package org.pinae.nala.xb.data.annotation;
 
 import org.pinae.nala.xb.annotation.Attribute;
 import org.pinae.nala.xb.annotation.Element;
 import org.pinae.nala.xb.annotation.ElementValue;
 
-public class Telephone extends org.pinae.nala.xb.NalaObject {
+public class Telephone extends org.pinae.nala.xb.XmlObject {
+	
 	@Element(name="mobile")
 	private Mobile mobile;
 	
@@ -52,7 +53,7 @@ public class Telephone extends org.pinae.nala.xb.NalaObject {
 		this.home = home;
 	}
 
-	public class Mobile extends org.pinae.nala.xb.NalaObject {
+	public class Mobile extends org.pinae.nala.xb.XmlObject {
 		@Attribute(name="net")
 		private String net;
 		

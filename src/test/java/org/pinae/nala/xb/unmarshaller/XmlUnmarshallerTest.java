@@ -1,26 +1,23 @@
 package org.pinae.nala.xb.unmarshaller;
 
-import junit.framework.TestCase;
-
-import org.apache.log4j.Logger;
 import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.data.bean.People;
+import org.pinae.nala.xb.data.bean.PeopleInXml;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.bean.People;
-import org.pinae.nala.xb.resource.bean.PeopleInXml;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
+import junit.framework.TestCase;
 
 /**
- * org.pinae.nala.xb.unmarshaller测试
+ * XmlUnmarshaller单元测试
  * 
  * @author Huiyugeng
  * 
  */
 public class XmlUnmarshallerTest extends TestCase {
-	private static final Logger log = Logger.getLogger(XmlUnmarshallerTest.class);
 
 	/**
 	 * 测试绑定整个XML

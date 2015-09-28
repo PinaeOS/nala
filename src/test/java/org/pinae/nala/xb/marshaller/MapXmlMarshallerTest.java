@@ -10,18 +10,18 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.data.map.PersonOne;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
-import org.pinae.nala.xb.resource.map.PersonOne;
 import org.pinae.nala.xb.util.ResourceWriter;
+
 /**
- * org.pinae.nala.xb.marshal.XMLMarshaller测试
+ * MapMarshaller单元测试
  * 
  * @author Huiyugeng
  */
-
 public class MapXmlMarshallerTest  extends TestCase {
 	private static final Logger log = Logger.getLogger(MapXmlMarshallerTest.class);
 	@SuppressWarnings("rawtypes")

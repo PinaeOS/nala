@@ -3,9 +3,6 @@ package org.pinae.nala.xb.unmarshaller;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
-import org.apache.log4j.Logger;
 import org.pinae.nala.xb.NalaTestConstant;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
@@ -13,15 +10,15 @@ import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
+import junit.framework.TestCase;
 
 /**
- * org.pinae.nala.xb.unmarshaller测试
+ * MapUnmarshaller单元测试
  * 
  * @author Huiyugeng
  * 
  */
 public class MapUnmarshallerTest extends TestCase {
-	private static final Logger log = Logger.getLogger(MapUnmarshallerTest.class);
 
 	/**
 	 * 将XML绑定为Map

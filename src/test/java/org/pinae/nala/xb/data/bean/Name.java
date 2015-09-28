@@ -1,8 +1,11 @@
-package org.pinae.nala.xb.resource.bean;
-public class Name extends org.pinae.nala.xb.NalaObject {
+package org.pinae.nala.xb.data.bean;
+
+public class Name extends org.pinae.nala.xb.XmlObject {
+	
 	private Lastname lastname;
 	private Firstname firstname;
 	private String id;
+	
 	public void setLastname(Lastname lastname){
 		this.lastname = lastname;
 	}
@@ -22,11 +25,11 @@ public class Name extends org.pinae.nala.xb.NalaObject {
 		return id;
 	}
 	
-	public class Firstname extends org.pinae.nala.xb.NalaObject {
+	public class Firstname extends org.pinae.nala.xb.XmlObject {
 
 	}
 	
-	public class Lastname extends org.pinae.nala.xb.NalaObject {
+	public class Lastname extends org.pinae.nala.xb.XmlObject {
 
 	}
 }

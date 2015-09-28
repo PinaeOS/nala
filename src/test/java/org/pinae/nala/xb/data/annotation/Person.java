@@ -1,29 +1,45 @@
-package org.pinae.nala.xb.resource.bean;
-
+package org.pinae.nala.xb.data.annotation;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.pinae.nala.xb.xml.CdataObject;
+import org.pinae.nala.xb.annotation.Attribute;
+import org.pinae.nala.xb.annotation.Element;
 
-public class Person extends org.pinae.nala.xb.NalaObject {
-	private Sex sex;
-	private int age;
-	private Telephone telephone;
-	private Name name;
-	private List<Website> website = new ArrayList<Website>();
-	private long id;
-	private String kwClass;
-	private Date birthday;
-	private BigDecimal cost;
-	private CdataObject other;
-	private String pc;
+public class Person extends org.pinae.nala.xb.XmlObject {
 	
-	public long getId() {
+	@Element(name="sex")
+	private Sex sex;
+	
+	@Element(name="age")
+	private int age;
+	
+	@Element(name="telephone")
+	private Telephone telephone;
+	
+	@Element(name="name")
+	private Name name;
+	
+	@Element(name="website")
+	private List<String> website = new ArrayList<String>();
+	
+	@Attribute(name="id")
+	private int id;
+	
+	@Element(name="class")
+	private String kwClass;
+	
+	@Element(name="birthday")
+	private Date birthday;
+	
+	@Element(name="cost")
+	private BigDecimal cost;
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getKwClass() {
@@ -56,17 +72,17 @@ public class Person extends org.pinae.nala.xb.NalaObject {
 	public Name getName(){
 		return name;
 	}
-	public void setWebsite(Website website){
-		this.website.add(website);
+	public void setWebsite(List<String> website){
+		this.website = website;
 	}
-	public List<Website> getWebsite(){
+	public List<String> getWebsite(){
 		return website;
 	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(Date birthday){
 		this.birthday = birthday;
+	}
+	public Date getBirthday(){
+		return birthday;
 	}
 	public BigDecimal getCost() {
 		return cost;
@@ -74,23 +90,11 @@ public class Person extends org.pinae.nala.xb.NalaObject {
 	public void setCost(BigDecimal cost) {
 		this.cost = cost;
 	}
-	public CdataObject getOther() {
-		return other;
-	}
-	public void setOther(CdataObject other) {
-		this.other = other;
-	}
-	public String getPc() {
-		return pc;
-	}
-	public void setPc(String pc) {
-		this.pc = pc;
-	}
 
-
-
-	public class Sex extends org.pinae.nala.xb.NalaObject {
+	public class Sex extends org.pinae.nala.xb.XmlObject {
+		@Attribute(name="key")
 		private String key;
+		
 		public String getKey() {
 			return key;
 		}

@@ -6,16 +6,16 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.data.annotation.People;
+import org.pinae.nala.xb.data.annotation.PersonOne;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
-import org.pinae.nala.xb.resource.annotation.People;
-import org.pinae.nala.xb.resource.annotation.PersonOne;
 import org.pinae.nala.xb.util.ResourceWriter;
 
 /**
- * org.pinae.nala.xb.marshal.XMLMarshaller测试
+ * AnnotationMarshaller单元测试
  * 
  * @author Huiyugeng
  */
