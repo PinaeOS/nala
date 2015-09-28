@@ -9,21 +9,21 @@ package org.pinae.nala.xb.xml;
  * @author Huiyugeng
  *
  */
-public class XmlObject {
+public class XmlText {
 	private String xml; //XML值
 	/**
 	 * 构造函数
 	 * 
 	 * @param xml XML值
 	 */
-	public XmlObject(String xml){
+	public XmlText(String xml){
 		this.xml = xml;
 	}
 	
 	/**
 	 * 构造函数
 	 */
-	public XmlObject(){
+	public XmlText(){
 		
 	}
 	

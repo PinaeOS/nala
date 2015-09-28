@@ -6,21 +6,21 @@ package org.pinae.nala.xb.xml;
  * @author Huiyugeng
  *
  */
-public class CdataObject {
+public class CdataText {
 	private String data; //XML值
 	/**
 	 * 构造函数
 	 * 
 	 * @param data CDATA值
 	 */
-	public CdataObject(String data){
+	public CdataText(String data){
 		this.data = data;
 	}
 	
 	/**
 	 * 构造函数
 	 */
-	public CdataObject(){
+	public CdataText(){
 		
 	}
 	
