@@ -18,7 +18,7 @@ import org.pinae.nala.xb.unmarshal.parser.XmlParser;
  * @author Huiyugeng
  *
  */
-public class XPathUnmarshaller extends BasicUnmarshaller {
+public class XPathUnmarshaller extends AbstractUnmarshaller {
 	private XmlParser xmlParser = new XmlParser();
 	private List<?> lstNodeConfig = null;
 	

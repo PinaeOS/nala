@@ -8,7 +8,7 @@ package org.pinae.nala.xb.marshal;
  * @author Huiyugeng
  *
  */
-public abstract class BasicMarshal {
+public abstract class AbstractMarshal {
 	protected String endOfLine = "\n"; // 行结束符
 	protected String indent = "\t"; // 缩进
 	protected String documentStart = ""; // XML文档头

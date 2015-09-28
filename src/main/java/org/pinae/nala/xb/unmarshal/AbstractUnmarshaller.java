@@ -17,7 +17,8 @@ import org.pinae.nala.xb.unmarshal.creator.MapCreator;
  * @author Huiyugeng
  *
  */
-public abstract class BasicUnmarshaller implements Unmarshaller {
+public abstract class AbstractUnmarshaller implements Unmarshaller {
+	
 	@SuppressWarnings("rawtypes")
 	private Class rootClass;
 	private boolean validation = false;

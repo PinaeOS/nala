@@ -14,7 +14,7 @@ import org.pinae.nala.xb.unmarshal.parser.XmlParser;
  * @author Huiyugeng
  *
  */
-public class XmlUnmarshaller extends BasicUnmarshaller {
+public class XmlUnmarshaller extends AbstractUnmarshaller {
 	private XmlParser xmlParser = new XmlParser();
 	private NodeConfig config;
 	

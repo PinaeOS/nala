@@ -23,7 +23,7 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  * @author Huiyugeng
  * 
  */
-public class XmlMarshaller extends BasicMarshal implements Marshaller {
+public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 	private Object rootObject;
 
