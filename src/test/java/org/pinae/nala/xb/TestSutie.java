@@ -24,8 +24,8 @@ import junit.framework.TestSuite;
  * @author Huiyugeng
  *
  */
-public class NalaTestSutie{
-	private static final Logger logger = Logger.getLogger(NalaTestSutie.class);
+public class TestSutie{
+	private static final Logger logger = Logger.getLogger(TestSutie.class);
 	
 	/**
 	 * 测试所有用例

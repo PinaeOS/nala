@@ -2,7 +2,7 @@ package org.pinae.nala.xb.unmarshaller;
 
 import java.util.List;
 
-import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.bean.Person;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
@@ -28,7 +28,7 @@ public class XPathUnmarshallerTest extends TestCase {
 		XPathUnmarshaller bind = null;
 		try {
 			bind = new XPathUnmarshaller(new ResourceReader().getFileStream
-											(NalaTestConstant.TEST_XPATH), 
+											(TestConstant.TEST_XPATH), 
 										"//people/person");
 			bind.setRootClass(Person.class);
 			List lstSex = bind.unmarshal();

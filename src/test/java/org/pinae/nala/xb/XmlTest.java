@@ -21,7 +21,7 @@ public class XmlTest extends TestCase{
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseFileToMap() {
-		Map map = Xml.toMap(NalaTestConstant.TEST_XMLFILE3, "utf8");
+		Map map = Xml.toMap(TestConstant.TEST_XMLFILE3, "utf8");
 		assertEquals(map.size(), 5);
 	}
 	
@@ -29,7 +29,7 @@ public class XmlTest extends TestCase{
 	@Test
 	public void testParseXMLToMap() {
 		try {
-			StringBuffer xml = new ResourceReader().readFile(NalaTestConstant.TEST_XMLFILE3);
+			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
 			Map map = Xml.toMap(xml.toString(), "utf8");
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
@@ -41,7 +41,7 @@ public class XmlTest extends TestCase{
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testParseFile() {
-		Map map = (Map)Xml.toObject(NalaTestConstant.TEST_XMLFILE3, "utf8", Map.class);
+		Map map = (Map)Xml.toObject(TestConstant.TEST_XMLFILE3, "utf8", Map.class);
 		assertEquals(map.size(), 5);
 	}
 	
@@ -49,7 +49,7 @@ public class XmlTest extends TestCase{
 	@Test
 	public void testParseXML() {
 		try {
-			StringBuffer xml = new ResourceReader().readFile(NalaTestConstant.TEST_XMLFILE3);
+			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
 			Map map = (Map)Xml.toObject(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {

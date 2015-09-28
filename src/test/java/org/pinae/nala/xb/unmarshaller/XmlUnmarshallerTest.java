@@ -1,6 +1,6 @@
 package org.pinae.nala.xb.unmarshaller;
 
-import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.bean.People;
 import org.pinae.nala.xb.data.bean.PeopleInXml;
 import org.pinae.nala.xb.exception.NoSuchPathException;
@@ -27,7 +27,7 @@ public class XmlUnmarshallerTest extends TestCase {
 		
 		try {
 			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader()
-					.getFileStream(NalaTestConstant.TEST_XMLFILE1));
+					.getFileStream(TestConstant.TEST_XMLFILE1));
 			
 			bind.setRootClass(People.class);
 
@@ -49,7 +49,7 @@ public class XmlUnmarshallerTest extends TestCase {
 		
 		try {
 			Unmarshaller bind = new XmlUnmarshaller(new ResourceReader()
-					.getFileStream(NalaTestConstant.TEST_XMLFILE1));
+					.getFileStream(TestConstant.TEST_XMLFILE1));
 			
 			bind.setRootClass(PeopleInXml.class);
 			

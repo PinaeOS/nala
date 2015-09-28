@@ -5,7 +5,7 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.annotation.People;
 import org.pinae.nala.xb.data.annotation.PersonOne;
 import org.pinae.nala.xb.exception.MarshalException;
@@ -37,7 +37,7 @@ public class AnnotationXmlMarshallerTest extends TestCase {
 
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		try {
-			new ResourceWriter().writeToFile(marshaller.marshal(), NalaTestConstant.OUTPUT_XMLFILE);
+			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
 			log.debug(marshaller.marshal());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());

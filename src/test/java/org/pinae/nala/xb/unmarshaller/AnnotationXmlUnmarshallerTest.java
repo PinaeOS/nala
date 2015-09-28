@@ -1,6 +1,6 @@
 package org.pinae.nala.xb.unmarshaller;
 
-import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.annotation.People;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
@@ -23,7 +23,7 @@ public class AnnotationXmlUnmarshallerTest  extends TestCase {
 	public void testBindAnnotationObject(){
 		Unmarshaller bind = null;
 		try {
-			bind = new XmlUnmarshaller(new ResourceReader().getFileStream(NalaTestConstant.TEST_XMLFILE1));
+			bind = new XmlUnmarshaller(new ResourceReader().getFileStream(TestConstant.TEST_XMLFILE1));
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (UnmarshalException e) {

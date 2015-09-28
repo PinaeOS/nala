@@ -9,7 +9,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.pinae.nala.xb.NalaTestConstant;
+import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
@@ -64,7 +64,7 @@ public class MixedMarshallerTest extends TestCase {
 		marshaller.enableCDATA(true);
 		
 		try {
-			new ResourceWriter().writeToFile(marshaller.marshal(), NalaTestConstant.OUTPUT_XMLFILE);
+			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
 			log.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
