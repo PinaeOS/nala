@@ -8,11 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.pinae.nala.xb.NalaObject;
+import org.pinae.nala.xb.XmlObject;
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.Namespace;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.Namespace;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
 
@@ -62,7 +62,7 @@ public class DefaultObjectCreator {
 			throw new UnmarshalException(e);
 		}
 
-		boolean isNalaObject = targetObject instanceof NalaObject ? true : false;
+		boolean isNalaObject = targetObject instanceof XmlObject ? true : false;
 
 		if (rootNode.hasChildren()) {
 			List childrenNode = rootNode.getChildrenNodes();

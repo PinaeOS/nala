@@ -14,8 +14,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**

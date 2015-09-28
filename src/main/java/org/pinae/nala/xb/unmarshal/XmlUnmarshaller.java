@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 

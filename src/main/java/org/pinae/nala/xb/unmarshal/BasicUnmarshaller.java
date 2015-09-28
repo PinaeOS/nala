@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.unmarshal.creator.AnnotationObjectCreator;
 import org.pinae.nala.xb.unmarshal.creator.DefaultObjectCreator;
 import org.pinae.nala.xb.unmarshal.creator.MapCreator;

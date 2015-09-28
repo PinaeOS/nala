@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.pinae.nala.xb.exception.UnmarshalException;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 
