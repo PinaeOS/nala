@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.TypeConver;
 
 /**

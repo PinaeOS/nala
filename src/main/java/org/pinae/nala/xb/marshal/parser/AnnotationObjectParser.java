@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.pinae.nala.xb.NalaObject;
+import org.pinae.nala.xb.XmlObject;
 import org.pinae.nala.xb.annotation.Attribute;
 import org.pinae.nala.xb.annotation.Element;
 import org.pinae.nala.xb.annotation.ElementValue;
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.Namespace;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.Namespace;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 
 
@@ -51,7 +51,7 @@ public class AnnotationObjectParser extends ObjectParser{
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public NodeConfig parse(String nodeName, Object rootObject) throws MarshalException{
-		boolean isNalaObject = rootObject instanceof NalaObject ? true : false; //判读该类是否继承NalaObject
+		boolean isXmlObject = rootObject instanceof XmlObject ? true : false; //判读该类是否继承XmlObject
 		
 		NodeConfig rootNode = new NodeConfig();
 		List<AttributeConfig> attributeConfigList = new ArrayList<AttributeConfig>();
@@ -117,7 +117,7 @@ public class AnnotationObjectParser extends ObjectParser{
 
 			
 			//如果是NalaObject的派生类, 则设置命名空间
-			if(isNalaObject){
+			if(isXmlObject){
 				Method methodNamespace = rootClass.getMethod(Constant.GET_NAMESPACE, null);
 				List namespaces = (List)methodNamespace.invoke(rootObject, null);
 				if(namespaces != null && namespaces.size()>0){

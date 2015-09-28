@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.TypeConver;
-import org.pinae.nala.xb.xml.CdataObject;
-import org.pinae.nala.xb.xml.XmlObject;
+import org.pinae.nala.xb.xml.CdataText;
+import org.pinae.nala.xb.xml.XmlText;
 
 /**
  * 对象解析
@@ -39,9 +39,9 @@ public class ObjectParser {
 			return new ListParser().parse(nodeName, (List) rootObject);
 		} else if (rootObject instanceof Map) {
 			return new MapParser().parse(nodeName, (Map) rootObject);
-		} else if (rootObject instanceof XmlObject) {
+		} else if (rootObject instanceof XmlText) {
 			return new NodeConfig(nodeName, rootObject);
-		} else if (rootObject instanceof CdataObject){
+		} else if (rootObject instanceof CdataText){
 			return new NodeConfig(nodeName, rootObject);
 		}else {
 			if (rootClass.isAnnotationPresent(Root.class)) {
@@ -95,12 +95,12 @@ public class ObjectParser {
 	}
 
 	/*
-	 * 根据字段类型获取对象值并转化为String
+	 * 根据字段类型获取对象值并转化为字符串
 	 * 
 	 * @param fieldType 字段类型
 	 * @param value 对象值
 	 * 
-	 * @return 对象之转化为String
+	 * @return 对象后的字符串
 	 */
 	private String parseValue(String fieldType, Object value) {
 		if (TypeConver.isBasicType(fieldType)) {

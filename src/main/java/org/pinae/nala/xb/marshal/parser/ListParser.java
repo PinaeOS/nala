@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.NodeConfig;
 
 /**
  * 将List解析为NodeConfig格式

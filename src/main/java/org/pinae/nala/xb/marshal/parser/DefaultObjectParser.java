@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pinae.nala.xb.NalaObject;
+import org.pinae.nala.xb.XmlObject;
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.Namespace;
-import org.pinae.nala.xb.resource.NodeConfig;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.Namespace;
+import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
 import org.pinae.nala.xb.xml.XmlElementUtils;
@@ -109,7 +109,7 @@ public class DefaultObjectParser extends ObjectParser {
 			}
 
 			// 如果是NalaObject的派生类, 则设置命名空间
-			boolean isNalaObject = rootObject instanceof NalaObject ? true : false; // 判读该类是否继承NalaObject
+			boolean isNalaObject = rootObject instanceof XmlObject ? true : false; // 判读该类是否继承NalaObject
 			if (isNalaObject) {
 				Method methodNamespace = cls.getMethod(Constant.GET_NAMESPACE, null);
 				List namespaces = (List) methodNamespace.invoke(rootObject, null);
