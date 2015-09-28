@@ -1,4 +1,4 @@
-package org.pinae.nala.xb.resource;
+package org.pinae.nala.xb.node;
 
 /**
  * XML节点属性配置类

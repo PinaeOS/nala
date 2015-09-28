@@ -1,4 +1,4 @@
-package org.pinae.nala.xb.resource;
+package org.pinae.nala.xb.node;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.pinae.nala.xb.resource;
+package org.pinae.nala.xb.node;
 
 /**
  * XML命名空间配置
