@@ -20,14 +20,14 @@ public class XmlTest extends TestCase{
 	
 	@SuppressWarnings("rawtypes")
 	@Test
-	public void testParseFileToMap() {
-		Map map = Xml.toMap(TestConstant.TEST_XMLFILE3, "utf8");
+	public void testFileToMap() {
+		Map map = XmlFile.toMap(TestConstant.TEST_XMLFILE3, "utf8");
 		assertEquals(map.size(), 5);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@Test
-	public void testParseXMLToMap() {
+	public void testToMap() {
 		try {
 			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
 			Map map = Xml.toMap(xml.toString(), "utf8");
@@ -40,14 +40,14 @@ public class XmlTest extends TestCase{
 	
 	@SuppressWarnings("rawtypes")
 	@Test
-	public void testParseFile() {
-		Map map = (Map)Xml.toObject(TestConstant.TEST_XMLFILE3, "utf8", Map.class);
+	public void testFileToObject() {
+		Map map = (Map)XmlFile.toObject(TestConstant.TEST_XMLFILE3, "utf8", Map.class);
 		assertEquals(map.size(), 5);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@Test
-	public void testParseXML() {
+	public void testToObject() {
 		try {
 			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
 			Map map = (Map)Xml.toObject(xml.toString(), "utf8", Map.class);
