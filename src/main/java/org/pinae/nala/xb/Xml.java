@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
@@ -18,7 +19,7 @@ import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
  */
 public class Xml {
 	
-
+	private static Logger log = Logger.getLogger(Xml.class);
 
 	/**
 	 * 将XML字符串绑定为Map对象
@@ -35,7 +36,7 @@ public class Xml {
 			bind.setRootClass(Map.class);
 			map = (Map<?, ?>)bind.unmarshal();
 		} catch (Exception e) {
-			
+			log.error(String.format("toMap Exception : exception=%s", e.getMessage()));
 		}
 		
 		return map;
@@ -58,7 +59,7 @@ public class Xml {
 			bind.setRootClass(cls);
 			object = bind.unmarshal();
 		} catch (Exception e) {
-			
+			log.error(String.format("toObject Exception : exception=%s", e.getMessage()));
 		}
 		
 		return object;
@@ -85,32 +86,32 @@ public class Xml {
 			
 			return marshaller.marshal().toString();
 		} catch (Exception e) {
+			log.error(String.format("toXML Exception : exception=%s", e.getMessage()));
 			return null;
 		}
 	}
 	
 	/**
-	 * 将对象生成XML文本
+	 * <p>将对象生成XML文本</p>
 	 * 
-	 * <p>
-	 * 	配置属性主要包括:
-	 * 	<ul>
-	 * 	<li>node: 是否使用节点模式 (true:false)  </li>
-	 *  <li>lowcase: 是否使用全小写 (true:false) </li>
-	 *  <li>pretty: 是否格式化输出 (true:false) </li>
-	 *  <li>cdata 是否支持CDATA节点 (true:false) </li>
-	 *  <li>indent 文档缩进 (默认 \t) </li>
-	 *  <li>endofline 结尾换行符 (默认 \n) </li>
-	 *  <li>documentstart 插入文档开始部分 </li>
-	 *  <li>documentend 插入文档结束部分 </li>
-	 * 	</ul>
-	 * </p>
+	 * 配置属性主要包括:
+	 * <ul>
+	 * <li>node: 是否使用节点模式 (true:false)  </li>
+	 * <li>lowcase: 是否使用全小写 (true:false) </li>
+	 * <li>pretty: 是否格式化输出 (true:false) </li>
+	 * <li>cdata 是否支持CDATA节点 (true:false) </li>
+	 * <li>indent 文档缩进 (默认 \t) </li>
+	 * <li>endofline 结尾换行符 (默认 \n) </li>
+	 * <li>documentstart 插入文档开始部分 </li>
+	 * <li>documentend 插入文档结束部分 </li>
+	 * </ul>
 	 * 
 	 * @param object 需要生成XML的对象
 	 * @param encoding XML文本编码, 例如UTF-8, GBK
 	 * @param properties 配置属性 
 
 	 * @return XML文本
+	 * 
 	 */
 	public static String toXML(Object object, String encoding, Properties properties) {
 		try {
@@ -125,6 +126,7 @@ public class Xml {
 			
 			return marshaller.marshal().toString();
 		} catch (Exception e) {
+			log.error(String.format("toXML Exception : exception=%s", e.getMessage()));
 			return null;
 		}
 	}

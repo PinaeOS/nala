@@ -2,6 +2,7 @@ package org.pinae.nala.xb;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
@@ -13,6 +14,9 @@ import org.pinae.nala.xb.util.ResourceReader;
  *
  */
 public class XmlFile {
+	
+	private static Logger log = Logger.getLogger(XmlFile.class);
+	
 	/**
 	 * 将XML文件绑定为Map对象
 	 * 
@@ -41,7 +45,7 @@ public class XmlFile {
 			bind.setRootClass(cls);
 			object = bind.unmarshal();
 		} catch (Exception e) {
-
+			log.error(String.format("toObject Exception : exception=%s", e.getMessage()));
 		}
 
 		return object;
