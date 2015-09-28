@@ -30,9 +30,9 @@ demo for nala:
 				StringBuffer xml = new ResourceReader().readFile("test.xml");
 
 				//Parse XML to Object
-				Map map = XML.parseXMLToMap(xml.toString(), "utf8");
+				Map map = Xml.toMap(xml.toString(), "utf8");
 				//convert Object to XML 
-				String xml = XML.toXMLString(map, "utf8", true);
+				String xml = Xml.toXML(map, "utf8", true);
 			} catch (IOException e) {
 				
 			}
