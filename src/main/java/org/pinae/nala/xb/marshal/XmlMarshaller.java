@@ -9,11 +9,12 @@ import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.marshal.parser.DefaultObjectParser;
 import org.pinae.nala.xb.marshal.parser.ObjectParser;
-import org.pinae.nala.xb.resource.AttributeConfig;
-import org.pinae.nala.xb.resource.Namespace;
-import org.pinae.nala.xb.resource.NodeConfig;
-import org.pinae.nala.xb.xml.CdataObject;
-import org.pinae.nala.xb.xml.XmlObject;
+import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.Namespace;
+import org.pinae.nala.xb.node.NodeConfig;
+import org.pinae.nala.xb.util.Constant;
+import org.pinae.nala.xb.xml.CdataText;
+import org.pinae.nala.xb.xml.XmlText;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
@@ -23,10 +24,6 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  * 
  */
 public class XmlMarshaller extends BasicMarshal implements Marshaller {
-
-	private static final String ROOT_TAG = "root";
-	
-	private static final String XML_TAG = "xml";
 
 	private Object rootObject;
 
@@ -67,7 +64,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		if (StringUtils.isEmpty(tag)) {
 			if (rootObject instanceof Map) {
 				tag = (String) ((Map) rootObject).get("nodeTag");
-				tag = tag == null ? ROOT_TAG : tag;
+				tag = tag == null ? Constant.ROOT_TAG : tag;
 			} else if (rootObject instanceof List) {
 				tag = "list";
 			} else if (rootClass.isAnnotationPresent(Root.class)) {
@@ -77,7 +74,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		}
 
 		if (StringUtils.isEmpty(tag)) {
-			tag = ROOT_TAG;
+			tag = Constant.ROOT_TAG;
 		}
 		return new ObjectParser().parse(tag, rootObject);
 	}
@@ -140,10 +137,10 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 		if (tagValue == null) {
 			tagValue = "";
 		}
-		if (tagValue instanceof CdataObject) {
-			tagValue = String.format("<![CDATA[%s]]>", ((CdataObject) tagValue).getData());
-		} else if (tagValue instanceof XmlObject) {
-			tagValue = ((XmlObject) tagValue).getXml();
+		if (tagValue instanceof CdataText) {
+			tagValue = String.format("<![CDATA[%s]]>", ((CdataText) tagValue).getData());
+		} else if (tagValue instanceof XmlText) {
+			tagValue = ((XmlText) tagValue).getXml();
 		} else if (cdata == true) {
 			if (XmlElementUtils.containXMLEscapeChar(tagValue.toString())) {
 				tagValue = String.format("<![CDATA[%s]]>", tagValue.toString());
@@ -199,7 +196,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 				tab += indent;
 			}
 		}
-		if (!tagName.equals(XML_TAG)) {
+		if (!tagName.equals(Constant.XML_TAG)) {
 			if (deep == 0) {
 				tempBuffer.append(tab + "<" + tagName + namespaces);
 			} else {
@@ -212,7 +209,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 
 		}
 
-		if (!tagName.equals(XML_TAG)) {
+		if (!tagName.equals(Constant.XML_TAG)) {
 			if (nodeBuffer.length() > 0) {
 				tempBuffer.append(">");
 			} else {
@@ -229,7 +226,7 @@ public class XmlMarshaller extends BasicMarshal implements Marshaller {
 			tempBuffer.append(tab + "</" + tagName + ">" + endOfLine);
 		} else {
 			if (tagValue != null) {
-				if (!tagName.equals(XML_TAG)) {
+				if (!tagName.equals(Constant.XML_TAG)) {
 					tempBuffer.append(tagValue.toString());
 					tempBuffer.append("</" + tagName + ">" + endOfLine);
 				} else {
