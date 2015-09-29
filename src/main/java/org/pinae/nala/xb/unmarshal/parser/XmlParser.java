@@ -19,7 +19,7 @@ import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
- * 将XML解析为结构体
+ * 将XML解析为NodeConfig
  * 
  * @author Huiyugeng
  *

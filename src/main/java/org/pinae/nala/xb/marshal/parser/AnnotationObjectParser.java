@@ -99,6 +99,7 @@ public class AnnotationObjectParser extends ObjectParser{
 					}
 				}
 				
+				//属性解析
 				if(field.isAnnotationPresent(Attribute.class)){
 					Attribute attribute = (Attribute)field.getAnnotation(Attribute.class);
 					AttributeConfig attributeConfig = parseAttributeConfigValue(fieldType, 
@@ -109,6 +110,7 @@ public class AnnotationObjectParser extends ObjectParser{
 					}
 				}
 				
+				//节点值解析
 				if(field.isAnnotationPresent(ElementValue.class)){
 					rootNode.setValue(rootObject.toString());
 				}

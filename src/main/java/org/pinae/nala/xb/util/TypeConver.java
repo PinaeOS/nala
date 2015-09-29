@@ -21,17 +21,31 @@ public class TypeConver {
 	 * 构建基本数据类型
 	 */
 	private static final String[] basicTypeArray = {
-		"int", "boolean", "float", "double", "short", "char", "long", "byte",
-		"java.lang.String", "java.lang.Integer", "java.lang.Boolean",
-		"java.lang.Double", "java.lang.Short", "java.lang.Character",
-		"java.lang.Long", "java.lang.Byte", "java.math.BigDecimal", "java.math.BigInteger",
+		"int", 
+		"boolean", 
+		"float", 
+		"double", 
+		"short", 
+		"char", 
+		"long", 
+		"byte",
+		"java.lang.String", 
+		"java.lang.Integer", 
+		"java.lang.Boolean",
+		"java.lang.Double", 
+		"java.lang.Short", 
+		"java.lang.Character",
+		"java.lang.Long", 
+		"java.lang.Byte", 
+		"java.math.BigDecimal", 
+		"java.math.BigInteger",
 		"java.util.Date"
 	};
 	
 	/**
 	 * 判断类是否为基本数据类型
 	 * 
-	 * @param cls 类信息
+	 * @param cls 需要判定的类
 	 * 
 	 * @return 是否基本数据类型
 	 */

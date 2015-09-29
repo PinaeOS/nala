@@ -13,12 +13,14 @@ import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 /**
  * 通过指定的XPath, 绑定指定的对象
- * 支持标准XPath路径描述
+ * 
+ * 支持标准XPath路径描述, 例如: /root/node[1]/subnode
  * 
  * @author Huiyugeng
  *
  */
 public class XPathUnmarshaller extends AbstractUnmarshaller {
+	
 	private XmlParser xmlParser = new XmlParser();
 	private List<?> lstNodeConfig = null;
 	

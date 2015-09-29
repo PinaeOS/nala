@@ -13,25 +13,58 @@ import org.pinae.nala.xb.xml.XmlText;
  */
 public final class Constant {
 	
-	public static final String LIST_CLASS = List.class.getName(); //定义List的类型
+	/**
+	 * List的类型名称
+	 */
+	public static final String LIST_CLASS = List.class.getName();
 	
-	public static final String MAP_CLASS = Map.class.getName(); //定义Map的类型
+	/**
+	 * Map的类型名称
+	 */
+	public static final String MAP_CLASS = Map.class.getName(); //
 	
-	public static final String XML_CLASS = XmlText.class.getName();//定义XML的类型
+	/**
+	 * XML文本的类型名称
+	 */
+	public static final String XML_CLASS = XmlText.class.getName();//
 	
-	public static final String GET_PREFIX = "get"; //定义get方法前缀
+	/**
+	 * get方法前缀
+	 */
+	public static final String GET_PREFIX = "get";
 	
-	public static final String SET_PREFIX = "set"; //定义set方法前缀
+	/**
+	 * set方法前缀
+	 */
+	public static final String SET_PREFIX = "set";
 	
-	public static final String GET_NAMESPACE = "getNamespaces"; //定义获取XML命名空间方法名
+	/**
+	 * 获取XML命名空间方法名
+	 */
+	public static final String GET_NAMESPACE = "getNamespaces";
 	
-	public static final String SET_NAMESPACE = "setNamespaces"; //定义获取XML命名空间方法名
+	/**
+	 * 获取XML命名空间方法名
+	 */
+	public static final String SET_NAMESPACE = "setNamespaces";
 	
-	public static final String GET_VALUE = "getValue"; //定义getValue方法名
+	/**
+	 * getValue方法名
+	 */
+	public static final String GET_VALUE = "getValue";
 	
-	public static final String SET_VALUE = "setValue"; //定义setValue方法名
+	/**
+	 * setValue方法名
+	 */
+	public static final String SET_VALUE = "setValue";
 	
-	public static final String ROOT_TAG = "root"; //根节点默认名称
+	/**
+	 * 根节点默认名称
+	 */
+	public static final String ROOT_TAG = "root";
 	
-	public static final String XML_TAG = "xml"; //XML节点(绑定值XmlText)节点名称
+	/**
+	 * XML节点(绑定值XmlText)节点名称
+	 */
+	public static final String XML_TAG = "xml";
 }

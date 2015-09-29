@@ -18,7 +18,7 @@ import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
 
 /**
- * 根据注释信息构建Java对象
+ * 根据NodeConfig和类注释信息构建Java对象
  * 
  * @author Huiyugeng
  *

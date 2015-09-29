@@ -2,6 +2,7 @@ package org.pinae.nala.xb.exception;
 
 /**
  * 路径异常
+ * 
  * 搜索文件、URL等资源时, 无法发现路径引发的异常
  * 
  * @author Huiyugeng

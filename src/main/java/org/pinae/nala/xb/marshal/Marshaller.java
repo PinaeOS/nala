@@ -76,9 +76,9 @@ public interface Marshaller {
 	public void setIndent(String indent);
 	
 	/**
-	 * 是否使用自动CDATA适配
+	 * 是否使用CDATA适配
 	 * 
-	 * @param cdata 启用CDATA自动识别模式
+	 * @param cdata 启用CDATA识别模式
 	 */
 	public void enableCDATA(boolean cdata);
 	

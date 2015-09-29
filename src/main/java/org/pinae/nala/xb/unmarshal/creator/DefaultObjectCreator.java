@@ -17,12 +17,13 @@ import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
 
 /**
- * 根据结构体和默认规则构建Java对象
+ * 根据NodeConfig和类字段构建Java对象
  * 
  * @author Huiyugeng
  *
  */
 public class DefaultObjectCreator {
+	
 	// 是否启动属性和方法验证, 如果启动验证, 当出现NoSuchField或NoSuchMethod时, 抛出UnmarshalException
 	private boolean validation = false;
 

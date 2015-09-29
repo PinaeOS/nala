@@ -2,6 +2,7 @@ package org.pinae.nala.xb.exception;
 
 /**
  * 编组异常
+ * 
  * 由对象生成XML文件的时候, 发生的异常
  * 
  * @author Huiyugeng

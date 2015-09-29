@@ -16,7 +16,7 @@ import org.pinae.nala.xb.exception.UnmarshalException;
 
 
 /**
- * 读取资源内容
+ * 资源内容读取工具
  * 
  * @author Huiyugeng
  * 

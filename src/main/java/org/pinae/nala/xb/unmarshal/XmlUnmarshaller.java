@@ -9,7 +9,7 @@ import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
 
 /**
- * 实现XML与对象间的绑定, 主要针对XML的输入流
+ * 实现XML与对象间的绑定
  * 
  * @author Huiyugeng
  *
@@ -22,6 +22,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 	 * 构造函数
 	 * 
 	 * @param xml 需要绑定的xml输入流
+	 * 
 	 * @throws UnmarshalException 解组异常
 	 */
 	public XmlUnmarshaller(InputStreamReader xml) throws UnmarshalException{
@@ -32,6 +33,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 	 * 构造函数
 	 * 
 	 * @param xml 需要绑定的xml输入流
+	 * 
 	 * @throws UnmarshalException 解组异常
 	 */
 	public XmlUnmarshaller(InputStream xml) throws UnmarshalException{

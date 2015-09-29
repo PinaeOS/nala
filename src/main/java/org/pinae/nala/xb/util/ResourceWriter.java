@@ -10,12 +10,13 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 
 
 /**
- * 将XML内容写入目标
+ * XML内容写入工具
  * 
  * @author Huiyugeng
  *
  */
 public class ResourceWriter {
+	
 	/**
 	 * 将XML内容写入文件
 	 * 

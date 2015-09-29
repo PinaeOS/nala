@@ -9,7 +9,7 @@ import org.pinae.nala.xb.node.AttributeConfig;
 import org.pinae.nala.xb.node.NodeConfig;
 
 /**
- * 根据结构体构建Map对象
+ * 根据NodeConfig构建Map对象
  * 
  * @author Huiyugeng
  *

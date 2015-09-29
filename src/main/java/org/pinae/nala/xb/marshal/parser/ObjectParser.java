@@ -12,7 +12,7 @@ import org.pinae.nala.xb.xml.CdataText;
 import org.pinae.nala.xb.xml.XmlText;
 
 /**
- * 对象解析
+ * 将对象解析为NodeConfig格式
  * 
  * @author Huiyugeng
  * 
