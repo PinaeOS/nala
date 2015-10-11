@@ -18,7 +18,7 @@ public class XmlFile {
 	private static Logger log = Logger.getLogger(XmlFile.class);
 	
 	/**
-	 * 将XML文件绑定为Map对象
+	 * 将XML文件绑定为<code>Map</code>对象
 	 * 
 	 * @param filename XML文件路径
 	 * @param encoding XML文件编码, 例如UTF-8, GBK

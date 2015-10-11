@@ -1,9 +1,8 @@
 package org.pinae.nala.xb.marshal;
 
 /**
- * BaicMarshaller为Marshaller接口中的抽象类
- * 
- * 主要用于存放设置参数与被继承
+ * <code>AbstractMarshal</code>为<code>Marshaller</code>接口中的抽象类
+ * 主要用于存放预置的设置参数
  * 
  * @author Huiyugeng
  *

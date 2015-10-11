@@ -7,13 +7,13 @@ import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.node.NodeConfig;
 
 /**
- * 将List解析为NodeConfig格式
+ * 将List解析为<code>NodeConfig</code>格式
  * 
  * @author Huiyugeng
  *
  */
 public class ListParser extends ObjectParser {
-	
+
 	/**
 	 * 采用循环的方式, 通过List解析生成NodeConfig格式
 	 * 

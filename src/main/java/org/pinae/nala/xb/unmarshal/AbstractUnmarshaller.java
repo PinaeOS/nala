@@ -10,9 +10,8 @@ import org.pinae.nala.xb.unmarshal.creator.DefaultObjectCreator;
 import org.pinae.nala.xb.unmarshal.creator.MapCreator;
 
 /**
- * BaicUnmarshaller为Unmarshaller接口中的抽象类
- * 
- * 主要用于存放设置参数与被继承
+ * <code>AbstractUnmarshaller</code>为<code>Unmarshaller</code>接口中的抽象类
+ * 主要用于存放设置参数
  * 
  * @author Huiyugeng
  *

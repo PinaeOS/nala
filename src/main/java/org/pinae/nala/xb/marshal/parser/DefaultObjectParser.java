@@ -17,7 +17,7 @@ import org.pinae.nala.xb.util.TypeConver;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
- * 将Object解析为NodeConfig格式
+ * 将Object解析为<code>NodeConfig</code>格式
  * 
  * @author Huiyugeng
  *

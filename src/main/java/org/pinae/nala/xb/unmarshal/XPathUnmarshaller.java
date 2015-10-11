@@ -10,20 +10,18 @@ import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.unmarshal.parser.XmlParser;
 
-
 /**
- * 通过指定的XPath, 绑定指定的对象
- * 
- * 支持标准XPath路径描述, 例如: /root/node[1]/subnode
+ * 通过指定的XPath绑定指定的对象, 支持标准XPath路径描述, 
+ * 例如: <code>/root/node[1]/subnode</code>
  * 
  * @author Huiyugeng
  *
  */
 public class XPathUnmarshaller extends AbstractUnmarshaller {
-	
+
 	private XmlParser xmlParser = new XmlParser();
-	private List<?> lstNodeConfig = null;
-	
+	private List<?> nodeConfigList = null;
+
 	/**
 	 * 构造函数
 	 * 
@@ -33,41 +31,42 @@ public class XPathUnmarshaller extends AbstractUnmarshaller {
 	 * @throws UnmarshalException 解组的异常
 	 */
 	public XPathUnmarshaller(InputStreamReader xml, String xpath) throws UnmarshalException {
-		
-		if(xpath == null){
-			throw new UnmarshalException("Please use constructor XPathUnmarshaller(InputStreamReader xml, String xpath) to set xpath value");
+
+		if (xpath == null) {
+			throw new UnmarshalException("Please use constructor XPathUnmarshaller(InputStreamReader xml, String xpath) to set XPath");
 		}
-		
-		this.lstNodeConfig = xmlParser.parserByXpath(xml, xpath);
+
+		this.nodeConfigList = xmlParser.parserByXpath(xml, xpath);
 	}
-	
+
 	public XPathUnmarshaller(InputStream xml, String xpath) throws UnmarshalException {
-		if(xpath == null){
-			throw new UnmarshalException("Please use constructor XPathUnmarshaller(InputStream xml, String xpath) to set xpath value");
+		if (xpath == null) {
+			throw new UnmarshalException("Please use constructor XPathUnmarshaller(InputStream xml, String xpath) to set XPath");
 		}
-		
-		this.lstNodeConfig = xmlParser.parserByXpath(new InputStreamReader(xml), xpath);
+
+		this.nodeConfigList = xmlParser.parserByXpath(new InputStreamReader(xml), xpath);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public List unmarshal() throws UnmarshalException {
 		List<Object> lstObject = new ArrayList<Object>();
-		if(lstNodeConfig !=null && lstNodeConfig.size()>0){
-			for(Iterator iterNodeConfig = lstNodeConfig.iterator();iterNodeConfig.hasNext();){
-				NodeConfig config = (NodeConfig)iterNodeConfig.next();
-				if(config!=null){
-					Object targetObject = super.creteObject(config);
-					lstObject.add(targetObject);
-				}else{
-					throw new UnmarshalException("Couldn't get XML information");
+		if (nodeConfigList != null && nodeConfigList.size() > 0) {
+			for (Iterator iterNodeConfig = nodeConfigList.iterator(); iterNodeConfig.hasNext();) {
+				NodeConfig nodeConfig = (NodeConfig) iterNodeConfig.next();
+				if (nodeConfig != null) {
+					Object targetObject = super.creteObject(nodeConfig);
+					if (targetObject != null) {
+						lstObject.add(targetObject);
+					}
+				} else {
+					throw new UnmarshalException("Unmarshal Fail: Parse XML Error");
 				}
 			}
 			return lstObject;
-		}else{
-			throw new UnmarshalException("Couldn't get XML information by XPath");
+		} else {
+			throw new UnmarshalException("Unmarshal Fail: Parse XML Error");
 		}
-		
+
 	}
-	
 
 }

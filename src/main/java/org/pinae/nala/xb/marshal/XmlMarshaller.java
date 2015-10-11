@@ -18,7 +18,8 @@ import org.pinae.nala.xb.xml.XmlText;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
- * XMLMarshaller提供实现Marshaller接口中的方法
+ * <code>XMLMarshaller</code>提供实现<code>Marshaller</code>接口中的方法
+ * 主要用于将中间格式<code>NodeConfig</code>转换为XML文本
  * 
  * @author Huiyugeng
  * 
@@ -49,7 +50,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	}
 
 	/**
-	 * 解析对象成为中间格式
+	 * 解析对象成为中间格式<code>NodeConfig</code>
 	 * 
 	 * @param rootObject 需要解析的对象
 	 * 

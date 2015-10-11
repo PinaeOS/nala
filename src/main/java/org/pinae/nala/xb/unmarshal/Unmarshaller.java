@@ -3,9 +3,7 @@ package org.pinae.nala.xb.unmarshal;
 import org.pinae.nala.xb.exception.UnmarshalException;
 
 /**
- * 对象绑定类
- * 
- * 通过解析XML/JSON实现了XML/JSON元素与Java类之间的值映射
+ * 对象绑定类, 通过解析XML实现了XML元素与Java类之间的值映射
  * 
  * @author Huiyugeng
  *
@@ -13,7 +11,7 @@ import org.pinae.nala.xb.exception.UnmarshalException;
 public interface Unmarshaller {
 	
 	/**
-	 * 返回一个与XML/JSON绑定后的对象
+	 * 返回一个与XML绑定后的对象
 	 * 
 	 * @return 绑定的对象
 	 * @throws UnmarshalException 解组异常
@@ -22,20 +20,19 @@ public interface Unmarshaller {
 	
 	
 	/**
-	 * 设置XML/JSON根标签所对应的类
-	 * 例如：org.pinae.nala.Root
+	 * 设置XML根标签所对应的类
+	 * 例如：<code>org.pinae.nala.Root</code>
 	 * 
 	 * @param clazz 需要绑定的类
 	 */
-	@SuppressWarnings("rawtypes")
-	public void setRootClass(Class clazz);
+	public void setRootClass(Class<?> clazz);
 	
 	/**
-	 * 是否采用对XML-Object/JSON-Object进行验证
-	 * 当使用XML-Object/JSON-Object验证时, 当Object中没有XML/JSON对应字段时会抛出异常
+	 * 是否采用对XML-Object进行验证
+	 * 当使用XML-Object验证时, 当Object中没有XML对应字段时会抛出异常
 	 * 默认情况为false
 	 * 
-	 * @param validation 是否采用XML-Object/JSON-Object验证
+	 * @param validation 是否采用XML-Object验证
 	 */
 	public void validate(boolean validation);
 }

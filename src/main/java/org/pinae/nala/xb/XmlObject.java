@@ -7,7 +7,10 @@ import org.pinae.nala.xb.node.Namespace;
 
 
 /**
- * 每个绑定对象都可选继承的抽象类, 提供了XML命名空间的支持
+ * <p>当对象继承<code>XmlObject</code>时
+ * 可以提供XML命名空间和节点值的支持 </p>
+ * 
+ * <p>节点值是指 <code> <key>value</key> </code>中的value</p>
  * 
  * @author Huiyugeng
  *

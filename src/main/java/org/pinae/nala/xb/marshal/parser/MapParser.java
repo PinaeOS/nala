@@ -11,13 +11,13 @@ import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.TypeConver;
 
 /**
- * 将Map解析为NodeConfig格式
+ * 将Map解析为<code>NodeConfig</code>格式
  * 
  * @author Huiyugeng
  * 
  */
 public class MapParser extends ObjectParser {
-	
+
 	/**
 	 * 采用递归的方式, 通过Map解析生成XML结构配置
 	 * 
@@ -66,9 +66,11 @@ public class MapParser extends ObjectParser {
 				}
 			}
 		}
+		
 		nodeConfig.setName(nodeName);
 		nodeConfig.setChildrenNodes(nodeConfigList);
 		nodeConfig.setAttribute(attributeConfigList);
+		
 		return nodeConfig;
 	}
 }

@@ -12,25 +12,31 @@ import org.pinae.nala.xb.xml.CdataText;
 import org.pinae.nala.xb.xml.XmlText;
 
 /**
- * 将对象解析为NodeConfig格式
+ * 将目标解析为<code>NodeConfig</code>格式
+ * 
+ * 目标包括
+ * <ul>
+ * <li>解析的对象包括基本的对象(包括支持继承<code>XmlObject</code>的对象)</li>
+ * <li>含有注释信息的对象</li>
+ * <li><code>List</code></li>
+ * <li><code>Map</code></li>
  * 
  * @author Huiyugeng
  * 
  */
 public class ObjectParser {
 	/**
-	 * 将对象解析为NodeConfig格式
+	 * 将对象解析为<code>NodeConfig</code>格式
 	 * 
 	 * @param nodeName 节点名称
 	 * @param rootObject 需要解析的对象
 	 * 
-	 * @return 解析后的NodeConfig格式
+	 * @return 解析后的<code>NodeConfig</code>格式
 	 * 
 	 * @throws MarshalException 解析异常
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public NodeConfig parse(String nodeName, Object rootObject)
-			throws MarshalException {
+	public NodeConfig parse(String nodeName, Object rootObject) throws MarshalException {
 		Class rootClass = rootObject.getClass();
 
 		if (TypeConver.isBesicType(rootClass)) {
@@ -41,9 +47,9 @@ public class ObjectParser {
 			return new MapParser().parse(nodeName, (Map) rootObject);
 		} else if (rootObject instanceof XmlText) {
 			return new NodeConfig(nodeName, rootObject);
-		} else if (rootObject instanceof CdataText){
+		} else if (rootObject instanceof CdataText) {
 			return new NodeConfig(nodeName, rootObject);
-		}else {
+		} else {
 			if (rootClass.isAnnotationPresent(Root.class)) {
 				return new AnnotationObjectParser().parse(nodeName, rootObject);
 			} else {
@@ -61,8 +67,7 @@ public class ObjectParser {
 	 * 
 	 * @return 节点配置信息
 	 */
-	public NodeConfig parseNodeConfigValue(String fieldType, String name,
-			Object value) {
+	protected NodeConfig parseNodeValue(String fieldType, String name, Object value) {
 		value = parseValue(fieldType, value);
 		if (value != null) {
 			NodeConfig nodeConfig = new NodeConfig();
@@ -82,8 +87,7 @@ public class ObjectParser {
 	 * 
 	 * @return 属性配置信息
 	 */
-	public AttributeConfig parseAttributeConfigValue(String fieldType,
-			String name, Object value) {
+	protected AttributeConfig parseAttributeValue(String fieldType, String name, Object value) {
 		value = parseValue(fieldType, value);
 		if (value != null) {
 			AttributeConfig attributeConfig = new AttributeConfig();
@@ -98,6 +102,7 @@ public class ObjectParser {
 	 * 根据字段类型获取对象值并转化为字符串
 	 * 
 	 * @param fieldType 字段类型
+	 * 
 	 * @param value 对象值
 	 * 
 	 * @return 对象后的字符串
