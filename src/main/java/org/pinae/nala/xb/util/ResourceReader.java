@@ -1,6 +1,7 @@
 package org.pinae.nala.xb.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -78,6 +79,29 @@ public class ResourceReader {
 			throws NoSuchPathException, UnmarshalException{
 		try {
 			return new InputStreamReader(new FileInputStream(filename), encoding);
+		} catch (FileNotFoundException e) {
+			throw new NoSuchPathException(e);
+		} catch (UnsupportedEncodingException e){
+			throw new UnmarshalException(e);
+		}
+	}
+	
+	/**
+	 * 将文件读出为输出流
+	 * 
+	 * @param file 需要读取的文件
+	 * @param encoding 文件编码
+	 * 
+	 * @return 文件内容输出流
+	 * 
+	 * @throws NoSuchPathException 无法找到对应的文件或者路径
+	 * @throws UnmarshalException 解组失败(通常由于编码问题引起)
+	 * 
+	 */
+	public InputStreamReader getFileStream(File file, String encoding)
+			throws NoSuchPathException, UnmarshalException{
+		try {
+			return new InputStreamReader(new FileInputStream(file), encoding);
 		} catch (FileNotFoundException e) {
 			throw new NoSuchPathException(e);
 		} catch (UnsupportedEncodingException e){
