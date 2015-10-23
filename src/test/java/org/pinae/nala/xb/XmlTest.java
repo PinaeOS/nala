@@ -1,5 +1,6 @@
 package org.pinae.nala.xb;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -10,6 +11,9 @@ import org.pinae.nala.xb.data.bean.Person;
 import org.pinae.nala.xb.data.bean.PersonOne;
 import org.pinae.nala.xb.data.bean.PersonThree;
 import org.pinae.nala.xb.data.bean.PersonTwo;
+import org.pinae.nala.xb.exception.MarshalException;
+import org.pinae.nala.xb.exception.NoSuchPathException;
+import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.util.ResourceReader;
 
 import junit.framework.TestCase;
@@ -21,8 +25,15 @@ public class XmlTest extends TestCase{
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testFileToMap() {
-		Map map = XmlFile.toMap(TestConstant.TEST_XMLFILE3, "utf8");
-		assertEquals(map.size(), 5);
+		try {
+			Map map = Xml.toMap(new File(TestConstant.TEST_XMLFILE3), "utf8");
+			assertEquals(map.size(), 5);
+		} catch (UnmarshalException e) {
+			fail(e.getMessage());
+		} catch (NoSuchPathException e) {
+			fail(e.getMessage());
+		}
+		
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -34,6 +45,8 @@ public class XmlTest extends TestCase{
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
 			fail(e.getMessage());
+		} catch (UnmarshalException e) {
+			fail(e.getMessage());
 		}
 		
 	}
@@ -41,8 +54,15 @@ public class XmlTest extends TestCase{
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testFileToObject() {
-		Map map = (Map)XmlFile.toObject(TestConstant.TEST_XMLFILE3, "utf8", Map.class);
-		assertEquals(map.size(), 5);
+		try {
+			Map map = (Map)Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);
+			assertEquals(map.size(), 5);
+		} catch (UnmarshalException e) {
+			fail(e.getMessage());
+		} catch (NoSuchPathException e) {
+			fail(e.getMessage());
+		}
+		
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -53,6 +73,8 @@ public class XmlTest extends TestCase{
 			Map map = (Map)Xml.toObject(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
+			fail(e.getMessage());
+		} catch (UnmarshalException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -65,8 +87,13 @@ public class XmlTest extends TestCase{
 		people.setPerson((Person)PersonTwo.getObject());
 		people.setPerson((Person)PersonThree.getObject());
 		
-		String xml = Xml.toXML(people, "utf8", true);
+		try {
+			String xml = Xml.toXML(people, "utf8", true);
+			log.debug(xml);
+		} catch (MarshalException e) {
+			fail(e.getMessage());
+		}
 		
-		log.debug(xml);
+		
 	}
 }

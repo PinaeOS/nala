@@ -1,15 +1,21 @@
 package org.pinae.nala.xb;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.pinae.nala.xb.exception.MarshalException;
+import org.pinae.nala.xb.exception.NoSuchPathException;
+import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
+import org.pinae.nala.xb.util.ResourceReader;
 
 /**
  * XML文本编组/解组工具
@@ -28,17 +34,11 @@ public class Xml {
 	 * @param encoding XML字符串编码, 例如UTF-8, GBK
 	 * 
 	 * @return Map对象
+	 * 
+	 * @throws UnmarshalException 解组异常
 	 */
-	public static Map<?, ?> toMap(String xml, String encoding) {
-		Map<?, ?> map = new HashMap();
-		try {
-			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
-			bind.setRootClass(Map.class);
-			map = (Map<?, ?>)bind.unmarshal();
-		} catch (Exception e) {
-			log.error(String.format("toMap Exception : exception=%s", e.getMessage()));
-		}
-		
+	public static Map<?, ?> toMap(String xml, String encoding) throws UnmarshalException {
+		Map<?, ?> map = (Map<?, ?>)toObject(xml, encoding, Map.class);
 		return map;
 	}
 	
@@ -51,15 +51,23 @@ public class Xml {
 	 * @param cls 绑定目标类
 	 * 
 	 * @return 绑定后的对象
+	 * 
+	 * @throws UnmarshalException 解组异常
 	 */
-	public static Object toObject(String xml, String encoding, Class<Map> cls) {
+	public static Object toObject(String xml, String encoding, Class<?> cls) throws UnmarshalException {
 		Object object = null;
+		
+		Unmarshaller bind = null;
+		
 		try {
-			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
+			bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes(encoding)));
+		} catch (UnsupportedEncodingException e) {
+			throw new UnmarshalException(e);
+		}
+		
+		if (bind != null) {
 			bind.setRootClass(cls);
 			object = bind.unmarshal();
-		} catch (Exception e) {
-			log.error(String.format("toObject Exception : exception=%s", e.getMessage()));
 		}
 		
 		return object;
@@ -73,22 +81,23 @@ public class Xml {
 	 * @param nodeMode 是否采用节点模式, 如果采用节点模式将不生成XML属性
 	 * 
 	 * @return XML文本
+	 * 
+	 * @throws MarshalException 编组异常
 	 */
-	public static String toXML(Object object, String encoding, boolean nodeMode) {
-		try {
-			Marshaller marshaller = new XmlMarshaller(object);
+	public static String toXML(Object object, String encoding, boolean nodeMode) throws MarshalException {
+
+		Properties properties = new Properties();
+		properties.put("node", Boolean.toString(nodeMode));
+		properties.put("lowcase", "true");
+		properties.put("pretty", "true");
+		properties.put("cdata", "true");
+		properties.put("indent", "\t");
+		properties.put("endofline", "\n");
+		properties.put("document-start", String.format("<?xml version='1.0' encoding='%s'?>", encoding));
 			
-			marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
-			marshaller.enableLowCase(true);
-			marshaller.enablePrettyPrint(true);
-			marshaller.enableCDATA(true);
-			marshaller.enableNodeMode(nodeMode);
-			
-			return marshaller.marshal().toString();
-		} catch (Exception e) {
-			log.error(String.format("toXML Exception : exception=%s", e.getMessage()));
-			return null;
-		}
+		String xml = toXML(object, encoding, properties);
+		return xml;
+		
 	}
 	
 	/**
@@ -102,8 +111,8 @@ public class Xml {
 	 * <li>cdata 是否支持CDATA节点 (true:false) </li>
 	 * <li>indent 文档缩进 (默认 \t) </li>
 	 * <li>endofline 结尾换行符 (默认 \n) </li>
-	 * <li>documentstart 插入文档开始部分 </li>
-	 * <li>documentend 插入文档结束部分 </li>
+	 * <li>document-start 插入文档开始部分 </li>
+	 * <li>document-end 插入文档结束部分 </li>
 	 * </ul>
 	 * 
 	 * @param object 需要生成XML的对象
@@ -112,22 +121,67 @@ public class Xml {
 
 	 * @return XML文本
 	 * 
+	 * @throws MarshalException 编组异常
+	 * 
 	 */
-	public static String toXML(Object object, String encoding, Properties properties) {
-		try {
-			Marshaller marshaller = new XmlMarshaller(object);
-			
-			marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
-			
-			marshaller.enableLowCase(properties.contains("lowcase") ? Boolean.parseBoolean(properties.get("lowcase").toString()) : true);
-			marshaller.enablePrettyPrint(properties.contains("pretty") ? Boolean.parseBoolean(properties.get("pretty").toString()) : true);
-			marshaller.enableCDATA(properties.contains("cdata") ? Boolean.parseBoolean(properties.get("cdata").toString()) : true);
-			marshaller.enableNodeMode(properties.contains("node") ? Boolean.parseBoolean(properties.get("node").toString()) : true);
-			
-			return marshaller.marshal().toString();
-		} catch (Exception e) {
-			log.error(String.format("toXML Exception : exception=%s", e.getMessage()));
-			return null;
-		}
+	public static String toXML(Object object, String encoding, Properties properties) throws MarshalException {
+		Marshaller marshaller = new XmlMarshaller(object);
+		
+		marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
+		
+		marshaller.enableLowCase(properties.contains("lowcase") ? Boolean.parseBoolean(properties.get("lowcase").toString()) : true);
+		marshaller.enablePrettyPrint(properties.contains("pretty") ? Boolean.parseBoolean(properties.get("pretty").toString()) : true);
+		marshaller.enableCDATA(properties.contains("cdata") ? Boolean.parseBoolean(properties.get("cdata").toString()) : true);
+		marshaller.enableNodeMode(properties.contains("node") ? Boolean.parseBoolean(properties.get("node").toString()) : true);
+		
+		marshaller.setIndent(properties.contains("indent") ? (String)properties.get("indent") : "\t");
+		marshaller.setEndOfLine(properties.contains("endofline") ? (String)properties.get("endofline") : "\n");
+		
+		marshaller.setDocumentStart(properties.contains("document-start") ? 
+				(String)properties.get("document-start") : 
+				String.format("<?xml version='1.0' encoding='%s'?>", encoding));
+		marshaller.setDocumentEnd(properties.contains("document-end") ? 
+				(String)properties.get("document-end") : "");
+		
+		return marshaller.marshal().toString();
+	}
+	
+	/**
+	 * 将XML文件绑定为<code>Map</code>对象
+	 * 
+	 * @param file XML文件
+	 * @param encoding XML文件编码, 例如UTF-8, GBK
+	 * 
+	 * @return Map对象
+	 * 
+	 * @throws NoSuchPathException 路径异常
+	 * @throws UnmarshalException 解组异常
+	 */
+	public static Map<?, ?> toMap(File file, String encoding) throws UnmarshalException, NoSuchPathException {
+		return (Map<?, ?>) toObject(file, encoding, Map.class);
+	}
+	
+	/**
+	 * 将XML文件绑定为对象
+	 * 
+	 * @param file XML文件
+	 * @param encoding XML文件编码, 例如UTF-8, GBK
+	 * @param cls 绑定目标类
+	 * 
+	 * @return 绑定后的对象
+	 * 
+	 * @throws NoSuchPathException 路径异常
+	 * @throws UnmarshalException 解组异常
+	 */
+	@SuppressWarnings("rawtypes")
+	public static Object toObject(File file, String encoding, Class<Map> cls) throws UnmarshalException, NoSuchPathException {
+		Object object = null;
+		
+		Unmarshaller bind = new XmlUnmarshaller(new ResourceReader().getFileStream(file, encoding));
+		bind.setRootClass(cls);
+		object = bind.unmarshal();
+
+
+		return object;
 	}
 }
