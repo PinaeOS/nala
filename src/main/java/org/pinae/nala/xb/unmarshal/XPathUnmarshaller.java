@@ -50,7 +50,7 @@ public class XPathUnmarshaller extends AbstractUnmarshaller {
 	@SuppressWarnings("rawtypes")
 	public List unmarshal() throws UnmarshalException {
 		List<Object> lstObject = new ArrayList<Object>();
-		if (nodeConfigList != null && nodeConfigList.size() > 0) {
+		if (nodeConfigList != null) {
 			for (Iterator iterNodeConfig = nodeConfigList.iterator(); iterNodeConfig.hasNext();) {
 				NodeConfig nodeConfig = (NodeConfig) iterNodeConfig.next();
 				if (nodeConfig != null) {
@@ -59,12 +59,12 @@ public class XPathUnmarshaller extends AbstractUnmarshaller {
 						lstObject.add(targetObject);
 					}
 				} else {
-					throw new UnmarshalException("Unmarshal Fail: Parse XML Error");
+					throw new UnmarshalException("NodeConfig is null and Parse XML Error");
 				}
 			}
 			return lstObject;
 		} else {
-			throw new UnmarshalException("Unmarshal Fail: Parse XML Error");
+			throw new UnmarshalException("NodeConfig is null and Parse XML Error");
 		}
 
 	}

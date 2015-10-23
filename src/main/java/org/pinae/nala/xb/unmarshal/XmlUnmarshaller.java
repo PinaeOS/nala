@@ -30,7 +30,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 		if (xml != null) {
 			config = xmlParser.parser(xml);
 		} else {
-			throw new UnmarshalException("Unmarshal Fail: XML is NULL");
+			throw new UnmarshalException("XML InputStreamReader is null");
 		}
 	}
 
@@ -45,7 +45,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 		if (xml != null) {
 			config = xmlParser.parser(new InputStreamReader(xml));
 		} else {
-			throw new UnmarshalException("Unmarshal Fail: XML is NULL");
+			throw new UnmarshalException("XML InputStream is null");
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 				throw new UnmarshalException(e);
 			}
 		} else {
-			throw new UnmarshalException("Unmarshal Fail: XML is NULL");
+			throw new UnmarshalException("XML InputStream is null");
 		}
 	}
 
@@ -73,7 +73,7 @@ public class XmlUnmarshaller extends AbstractUnmarshaller {
 		if (config != null) {
 			return super.creteObject(config);
 		} else {
-			throw new UnmarshalException("Unmarshal Fail: Parse XML Error");
+			throw new UnmarshalException("NodeConfig is null and Parse XML Error");
 		}
 	}
 

@@ -3,7 +3,6 @@ package org.pinae.nala.xb;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -55,6 +54,11 @@ public class Xml {
 	 * @throws UnmarshalException 解组异常
 	 */
 	public static Object toObject(String xml, String encoding, Class<?> cls) throws UnmarshalException {
+		
+		if (xml == null || xml.trim().equals("")) {
+			throw new UnmarshalException("Empty XML Sstring");
+		}
+		
 		Object object = null;
 		
 		Unmarshaller bind = null;
@@ -175,6 +179,14 @@ public class Xml {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Object toObject(File file, String encoding, Class<Map> cls) throws UnmarshalException, NoSuchPathException {
+		
+		if (file == null || !file.exists()) {
+			throw new NoSuchPathException("Could not find file");
+		} 
+		if (file.isDirectory()) {
+			throw new NoSuchPathException(String.format("%s is Directory", file.getAbsolutePath()));
+		}
+		
 		Object object = null;
 		
 		Unmarshaller bind = new XmlUnmarshaller(new ResourceReader().getFileStream(file, encoding));

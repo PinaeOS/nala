@@ -74,7 +74,7 @@ public class DefaultObjectCreator {
 					String fieldName = nodeConfig.getName();
 					field = rootClass.getDeclaredField(fieldName);
 					if (field == null) {
-						throw new UnmarshalException(new NoSuchFieldException());
+						throw new UnmarshalException(String.format("Couldn't find field %s in %s", fieldName, rootClass.getName()));
 					}
 				} catch (SecurityException e) {
 					throw new UnmarshalException(e);

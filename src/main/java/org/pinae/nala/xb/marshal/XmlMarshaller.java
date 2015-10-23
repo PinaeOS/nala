@@ -89,6 +89,8 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	public StringBuffer marshal() throws MarshalException {
 		if (this.config == null && this.rootObject != null) {
 			this.config = parseObject(rootObject);
+		} else {
+			throw new MarshalException("Object is null");
 		}
 
 		StringBuffer xmlBuffer = new StringBuffer();
@@ -112,6 +114,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 		if (documentEnd != null && !documentEnd.equals(""))
 			xmlBuffer.append(documentEnd + endOfLine);
+		
 		return xmlBuffer;
 	}
 
