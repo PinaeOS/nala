@@ -32,24 +32,32 @@ public class XmlParser {
 	 */
 	@SuppressWarnings("rawtypes")
 	private NodeConfig parserNode(Element element) {
-		NodeConfig config = new NodeConfig();
-		config.setName(XmlElementUtils.mapXMLToObject(element.getName()));
-		config.setNamespace(element.getNamespacePrefix(), element.getNamespaceURI());
-		List childrenNode = element.getChildren();
-		if (childrenNode != null && childrenNode.size() > 0) {
-			List<NodeConfig> nodeItems = new ArrayList<NodeConfig>();
-			for (Iterator iter = childrenNode.iterator(); iter.hasNext();) {
-				nodeItems.add(parserNode((Element) iter.next()));
+		NodeConfig nodeConfig = new NodeConfig();
+
+		nodeConfig.setName(XmlElementUtils.mapXMLToObject(element.getName()));
+		nodeConfig.setNamespace(element.getNamespacePrefix(), element.getNamespaceURI());
+
+		List childrenNodes = element.getChildren();
+		if (childrenNodes != null && childrenNodes.size() > 0) {
+			List<NodeConfig> subNodeConfigList = new ArrayList<NodeConfig>();
+			
+			for (Object childrenNode : childrenNodes) {
+				if (childrenNode instanceof Element) {
+					NodeConfig subNodeConfig = parserNode((Element)childrenNode);
+					subNodeConfigList.add(subNodeConfig);
+				}
 			}
-			config.setChildrenNodes(nodeItems);
+			
+			nodeConfig.setChildrenNodes(subNodeConfigList);
 		}
 
 		String value = element.getText();
 		if (value != null && !value.trim().equals("")) {
-			config.setValue(value.trim());
+			nodeConfig.setValue(value.trim());
 		}
-		config.setAttribute(parserAttribute(element));
-		return config;
+		nodeConfig.setAttribute(parserAttribute(element));
+		
+		return nodeConfig;
 	}
 
 	/*
@@ -57,19 +65,23 @@ public class XmlParser {
 	 */
 	@SuppressWarnings("rawtypes")
 	private List<AttributeConfig> parserAttribute(Element element) {
+		
 		List attributes = element.getAttributes();
-		List<AttributeConfig> attributeItems = null;
+		List<AttributeConfig> attributeConfigList = null;
+		
 		if (attributes != null && attributes.size() > 0) {
-			attributeItems = new ArrayList<AttributeConfig>();
+			attributeConfigList = new ArrayList<AttributeConfig>();
+			
 			for (Iterator iter = attributes.iterator(); iter.hasNext();) {
 				AttributeConfig attributeConfig = new AttributeConfig();
 				Attribute attribute = (Attribute) iter.next();
 				attributeConfig.setName(XmlElementUtils.mapXMLToObject(attribute.getName()));
 				attributeConfig.setValue(attribute.getValue());
-				attributeItems.add(attributeConfig);
+				attributeConfigList.add(attributeConfig);
 			}
 		}
-		return attributeItems;
+		
+		return attributeConfigList;
 	}
 
 	/**
@@ -82,9 +94,11 @@ public class XmlParser {
 	 * @throws UnmarshalException 解组异常
 	 */
 	public NodeConfig parser(InputStreamReader xml) throws UnmarshalException {
+
 		NodeConfig config = new NodeConfig();
 		SAXBuilder builder = new SAXBuilder(false);
 		Document doc = null;
+
 		try {
 			doc = builder.build(xml);
 			config = parserNode(doc.getRootElement());
@@ -102,7 +116,7 @@ public class XmlParser {
 	 * 根据XPath对XML流进行解析
 	 * 
 	 * @param xml 需要解析的XML
-	 * @param xpath XPath路径
+	 * @param xpath XPath路径, 例如root/parent/child
 	 * 
 	 * @return 将输入XML解析的NodeConfig (XPath路径支持)
 	 * 
@@ -110,19 +124,24 @@ public class XmlParser {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List<NodeConfig> parserByXpath(InputStreamReader xml, String xpath) throws UnmarshalException {
-		List<NodeConfig> lstNodeConfig = new ArrayList<NodeConfig>();
+		
+		List<NodeConfig> nodeConfigList = new ArrayList<NodeConfig>();
 		SAXBuilder builder = new SAXBuilder(false);
 		Document doc = null;
+		
 		try {
 			doc = builder.build(xml);
 			Element root = doc.getRootElement();
+			
 			if (xpath != null && !xpath.equals("")) {
-				List node = XPath.selectNodes(root, xpath);
-				for (Iterator iterNode = node.iterator(); iterNode.hasNext();) {
-					lstNodeConfig.add(parserNode((Element) iterNode.next()));
+				List selectNodes = XPath.selectNodes(root, xpath);
+				for (Iterator iterNode = selectNodes.iterator(); iterNode.hasNext();) {
+					NodeConfig nodeConfig = parserNode((Element) iterNode.next());
+					nodeConfigList.add(nodeConfig);
 				}
 			}
-			return lstNodeConfig;
+			
+			return nodeConfigList;
 		} catch (JDOMException e) {
 			throw new UnmarshalException(e);
 		} catch (IOException e) {
