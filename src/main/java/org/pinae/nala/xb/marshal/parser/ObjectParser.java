@@ -20,6 +20,7 @@ import org.pinae.nala.xb.xml.XmlText;
  * <li>含有注释信息的对象</li>
  * <li><code>List</code></li>
  * <li><code>Map</code></li>
+ * </ul>
  * 
  * @author Huiyugeng
  * 

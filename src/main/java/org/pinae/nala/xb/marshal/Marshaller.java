@@ -27,9 +27,6 @@ public interface Marshaller {
 	/**
 	 * 设置根节点标签名称
 	 * 
-	 * <code><root>XML-Text</root><code>
-	 * 其中的root为根节点标签名称
-	 * 
 	 * @param nodeTag 根节点标签名称
 	 */
 	public void setNodeTag(String nodeTag);

@@ -10,8 +10,6 @@ import org.pinae.nala.xb.node.Namespace;
  * <p>当对象继承<code>XmlObject</code>时
  * 可以提供XML命名空间和节点值的支持 </p>
  * 
- * <p>节点值是指 <code> <key>value</key> </code>中的value</p>
- * 
  * @author Huiyugeng
  *
  */
