@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class TypeConver {
-	private static Logger log = Logger.getLogger(TypeConver.class);
+	private static Logger logger = Logger.getLogger(TypeConver.class);
 	
 	/*
 	 * 构建基本数据类型
@@ -114,7 +114,7 @@ public class TypeConver {
 			try {
 				return dateFormat.parseObject(value);
 			} catch (ParseException e) {
-				log.error(String.format("Parse Date Exception: exception=%s", e.getMessage()));
+				logger.error(String.format("Parse Date Exception: exception=%s", e.getMessage()));
 				return null;
 			}
 		} else if (type.equals("java.math.BigDecimal")){
