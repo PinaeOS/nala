@@ -14,7 +14,7 @@ import org.pinae.nala.xb.xml.XmlText;
  *
  */
 public class ObjectValueCreator {
-	
+
 	/**
 	 * 构建对象
 	 * 
@@ -23,13 +23,15 @@ public class ObjectValueCreator {
 	 * 
 	 * @return 构建的对象值
 	 */
-	public Object getValue(String fieldType, NodeConfig nodeConfig){
+	public Object getValue(String fieldType, NodeConfig nodeConfig) {
 		Object value = null;
-		if(fieldType.equals(Constant.XML_CLASS)){ 
+		if (fieldType.equals(Constant.XML_CLASS)) {
 			value = new XmlText(createXML(nodeConfig));
-		}else{
-			if(TypeConver.isBasicType(fieldType)){
-				value = TypeConver.converValue(fieldType, nodeConfig.getValue().toString());
+		} else {
+			if (TypeConver.isBasicType(fieldType)) {
+				if (nodeConfig != null && nodeConfig.getValue() != null) {
+					value = TypeConver.converValue(fieldType, nodeConfig.getValue().toString());
+				}
 			}
 		}
 		return value;
@@ -38,12 +40,13 @@ public class ObjectValueCreator {
 	/*
 	 * 根据构造体在对象中填入XML
 	 */
-	private String createXML(NodeConfig node){
-		class XMLCreator extends XmlMarshaller{
-			public XMLCreator(NodeConfig node){
+	private String createXML(NodeConfig node) {
+		class XMLCreator extends XmlMarshaller {
+			public XMLCreator(NodeConfig node) {
 				super(node);
-			}	
-			public String print(){
+			}
+
+			public String print() {
 				try {
 					return super.marshal().toString();
 				} catch (MarshalException e) {

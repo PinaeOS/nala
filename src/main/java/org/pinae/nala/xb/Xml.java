@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
@@ -23,8 +22,6 @@ import org.pinae.nala.xb.util.ResourceReader;
  *
  */
 public class Xml {
-	
-	private static Logger log = Logger.getLogger(Xml.class);
 
 	/**
 	 * 将XML字符串绑定为Map对象

@@ -18,8 +18,8 @@ import org.pinae.nala.xb.xml.XmlText;
 import org.pinae.nala.xb.xml.XmlElementUtils;
 
 /**
- * <code>XMLMarshaller</code>提供实现<code>Marshaller</code>接口中的方法
- * 主要用于将中间格式<code>NodeConfig</code>转换为XML文本
+ * <code>XMLMarshaller</code>提供实现<code>Marshaller</code>接口中的方法 主要用于将中间格式
+ * <code>NodeConfig</code>转换为XML文本
  * 
  * @author Huiyugeng
  * 
@@ -87,9 +87,11 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	 */
 	@SuppressWarnings("rawtypes")
 	public StringBuffer marshal() throws MarshalException {
+
 		if (this.config == null && this.rootObject != null) {
 			this.config = parseObject(rootObject);
-		} else {
+		}
+		if (this.config == null) {
 			throw new MarshalException("Object is null");
 		}
 
@@ -114,7 +116,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 		if (documentEnd != null && !documentEnd.equals(""))
 			xmlBuffer.append(documentEnd + endOfLine);
-		
+
 		return xmlBuffer;
 	}
 

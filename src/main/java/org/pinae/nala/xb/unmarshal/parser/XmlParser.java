@@ -25,7 +25,7 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  *
  */
 public class XmlParser {
-	protected static final Logger log = Logger.getLogger("XMLParser");
+	protected static final Logger logger = Logger.getLogger("XMLParser");
 
 	/*
 	 * 解析XML节点
