@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<people xmlns="http://www.w3.org/2001/XMLSchema-instance" xmlns:n="http://www.w3.org">
+	<person id="1">
+		<n:name id="0">
+			<firstname>汤姆</firstname>
+			<lastname>jone</lastname>
+		</n:name>
+		<age>23</age>
+		<sex>0</sex>
+		<telephone id="2">
+			13391562775
+			<mobile net="gsm">13240493917</mobile>
+			<home>0757-882193521</home>
+			<office>010-5877965</office>
+		</telephone>
+		<birthday>yyyy-MM-dd/2013-12-13</birthday>
+		<cost>1700000000</cost>
+	</person>
+	<person class="Business">
+		<n:name id="3">
+			<firstname>Jim</firstname>
+			<lastname>Wang</lastname>
+		</n:name>
+		<age>12</age>
+		<sex>1</sex>
+		<telephone id="7">
+			<mobile>13391562775</mobile>
+			<home>0757-82988679</home>
+			<office>010-5885888</office>
+		</telephone>
+		<birthday>yyyy-MM-dd/2013-12-13</birthday>
+		<website>http://www.joyo.com</website>
+		<website>http://www.taobao.com</website>
+		<website>http://www.ebay.com.cn</website>
+	</person>
+</people>

@@ -1,14 +1,16 @@
 package org.pinae.nala.xb.marshaller;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
@@ -23,13 +25,15 @@ import org.pinae.nala.xb.util.ResourceWriter;
  * @author Huiyugeng
  *
  */
-public class MixedMarshallerTest extends TestCase {
+public class MixedMarshallerTest {
 	
-	private static final Logger log = Logger.getLogger(MixedMarshallerTest.class);
+	private static final Logger logger = Logger.getLogger(MixedMarshallerTest.class);
+	
 	@SuppressWarnings("rawtypes")
 	private Map people = new HashMap();
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Before
 	public void setUp(){
 		List mapGroup = new ArrayList();
 		mapGroup.add(org.pinae.nala.xb.data.map.PersonOne.getObject());
@@ -55,6 +59,7 @@ public class MixedMarshallerTest extends TestCase {
 	/**
 	 * 测试从对象生成XML文件(编组)
 	 */
+	@Test
 	public void testMarshal() {
 		Marshaller marshaller = new XmlMarshaller(people);
 
@@ -65,7 +70,7 @@ public class MixedMarshallerTest extends TestCase {
 		
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			log.debug(marshaller.marshal().toString());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {

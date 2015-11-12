@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='gb2312'?>
+<people xmlns:tns="http://www.pinae.com" xmlns:tns2="http://www.pinae.org">
+	<tns:person>
+		<id>1</id>
+		<pc><Model>Acer 4750G</Model></pc>
+		<age>23</age>
+		<birthday>Thu Nov 12 13:24:56 CST 2015</birthday>
+		<name>
+			<lastname>Jim</lastname>
+			<firstname>Tom</firstname>
+		</name>
+		<other><![CDATA[<XML>Tearcher</XML>]]></other>
+		<telephone>
+			<office>010-8556697</office>
+			<mobile>
+				<net>gsm</net>
+			</mobile>
+			<home>0757-82988679</home>
+		</telephone>
+		<sex>1</sex>
+		<website>http://www.google.com</website>
+		<website>http://www.baidu.com</website>
+		<website>http://www.163.com</website>
+		<website>http://www.21cn.com</website>
+	</tns:person>
+	<person>
+		<id>2</id>
+		<age>22</age>
+		<class>Business</class>
+		<birthday>Thu Nov 12 13:24:56 CST 2015</birthday>
+		<name>
+			<lastname>Li</lastname>
+			<firstname>Ken</firstname>
+		</name>
+		<telephone>
+			<office>010-66778899</office>
+			<mobile>1391562775</mobile>
+			<home>0757-88990011</home>
+		</telephone>
+		<sex>
+			<key>no</key>
+		</sex>
+		<website>http://www.qq.com</website>
+		<website>http://www.venustech.com.cn</website>
+	</person>
+	<person>
+		<id>3</id>
+		<age>26</age>
+		<birthday>Thu Nov 12 13:24:56 CST 2015</birthday>
+		<name>
+			<lastname>Wang</lastname>
+			<firstname>Babo</firstname>
+		</name>
+		<telephone>
+			<office>020-1234567</office>
+			<mobile>124049917</mobile>
+			<home>020-2345678</home>
+		</telephone>
+		<sex>0</sex>
+		<website>http://www.csdn.net</website>
+		<website>http://www.ibm.com</website>
+		<website>http://www.sun.com</website>
+	</person>
+</people>

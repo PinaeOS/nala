@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container name="default" version="1.0">
+	<group name="default">
+		<task name="HelloTask" job="HelloJob" trigger="HelloTrigger"/>
+	</group>
+	<job type="ref" name="HelloJob" author="" description="">
+		<config name="class" value="test.org.pinae.rafiki.job"/>
+		<config name="method" value="sayHello"/>
+		<config name="parameters" value="Hello World|World"/>
+	</job>
+	<trigger name="HelloTrigger" type="cron">
+		<config name="cron" value="0 * * * * * 2011"/>
+		<config name="repeat" value="true"/>
+		<config name="interval" value="1000"/>
+		<config name="count" value="2000"/>
+		<config name="start" value=""/>
+		<config name="end" value=""/>
+		<config name="startDelay" value=""/>
+		<config name="endDelay" value=""/>
+	</trigger>
+</container>

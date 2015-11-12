@@ -1,10 +1,12 @@
 package org.pinae.nala.xb.marshaller;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.bean.People;
 import org.pinae.nala.xb.data.bean.PeopleTwo;
@@ -24,10 +26,13 @@ import org.pinae.nala.xb.util.ResourceWriter;
  * @author Huiyugeng
  *
  */
-public class XmlMarshallerTest extends TestCase {
-	private static final Logger log = Logger.getLogger(XmlMarshallerTest.class);
+public class XmlMarshallerTest {
+	
+	private static final Logger logger = Logger.getLogger(XmlMarshallerTest.class);
+	
 	private People people = new People();
 	
+	@Before
 	public void setUp(){
 		people.setPerson((Person)PersonOne.getObject());
 		people.setPerson((Person)PersonTwo.getObject());
@@ -37,6 +42,7 @@ public class XmlMarshallerTest extends TestCase {
 	/**
 	 * 测试从对象生成XML文件(编组)
 	 */
+	@Test
 	public void testMarshal() {
 		Marshaller marshaller = new XmlMarshaller(people);
 
@@ -46,7 +52,7 @@ public class XmlMarshallerTest extends TestCase {
 		
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			log.debug(marshaller.marshal().toString());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {
@@ -60,13 +66,14 @@ public class XmlMarshallerTest extends TestCase {
 	/**
 	 * 测试从对象（XML对象）生成XML文件（编组）
 	 */
+	@Test
 	public void testMarshallerXMLInXmlObject(){
 		Marshaller marshaller = new XmlMarshaller(new PeopleTwo());
 
 		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			log.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {

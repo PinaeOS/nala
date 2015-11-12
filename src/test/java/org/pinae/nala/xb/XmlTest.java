@@ -1,5 +1,8 @@
 package org.pinae.nala.xb;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -16,12 +19,10 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.util.ResourceReader;
 
-import junit.framework.TestCase;
+public class XmlTest {
 
-public class XmlTest extends TestCase{
-	
-	private static final Logger log = Logger.getLogger(XmlTest.class);
-	
+	private static final Logger logger = Logger.getLogger(XmlTest.class);
+
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testFileToMap() {
@@ -33,9 +34,9 @@ public class XmlTest extends TestCase{
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testToMap() {
@@ -48,29 +49,29 @@ public class XmlTest extends TestCase{
 		} catch (UnmarshalException e) {
 			fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testFileToObject() {
 		try {
-			Map map = (Map)Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);
+			Map map = (Map) Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (UnmarshalException e) {
 			fail(e.getMessage());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testToObject() {
 		try {
 			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
-			Map map = (Map)Xml.toObject(xml.toString(), "utf8", Map.class);
+			Map map = (Map) Xml.toObject(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
 			fail(e.getMessage());
@@ -78,22 +79,21 @@ public class XmlTest extends TestCase{
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testToXML() {
 		People people = new People();
-		
-		people.setPerson((Person)PersonOne.getObject());
-		people.setPerson((Person)PersonTwo.getObject());
-		people.setPerson((Person)PersonThree.getObject());
-		
+
+		people.setPerson((Person) PersonOne.getObject());
+		people.setPerson((Person) PersonTwo.getObject());
+		people.setPerson((Person) PersonThree.getObject());
+
 		try {
 			String xml = Xml.toXML(people, "utf8", true);
-			log.debug(xml);
+			logger.debug(xml);
 		} catch (MarshalException e) {
 			fail(e.getMessage());
 		}
-		
-		
+
 	}
 }

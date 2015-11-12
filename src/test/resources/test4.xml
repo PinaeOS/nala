@@ -1,0 +1,22 @@
+<people>
+	<person>
+		<name>Huiyugeng</name>
+		<age>31</age>
+		<sex>male</sex>
+	</person>
+	<person>
+		<name>Experanza</name>
+		<age>28</age>
+		<sex>female</sex>
+	</person>
+	<person>
+		<name>Tiantian</name>
+		<age>6</age>
+		<sex>male</sex>
+	</person>
+	<person>
+		<name>Tongtong</name>
+		<age>4</age>
+		<sex>female</sex>
+	</person>
+</people>

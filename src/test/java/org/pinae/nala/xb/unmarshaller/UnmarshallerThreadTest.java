@@ -18,7 +18,7 @@ import org.pinae.nala.xb.util.ResourceReader;
  */
 public class UnmarshallerThreadTest implements Runnable {
 	
-	private static final Logger log = Logger.getLogger(UnmarshallerThreadTest.class);
+	private static final Logger logger = Logger.getLogger(UnmarshallerThreadTest.class);
 	private String thread_id;
 	
 	/**
@@ -41,22 +41,22 @@ public class UnmarshallerThreadTest implements Runnable {
 			try {
 				bind = new XmlUnmarshaller(new ResourceReader().getFileStream(TestConstant.TEST_XMLFILE1));
 			} catch (NoSuchPathException e) {
-				log.debug(e.getMessage());
+				logger.debug(e.getMessage());
 			} catch (UnmarshalException e) {
-				log.debug(e.getMessage());
+				logger.debug(e.getMessage());
 			}
 			bind.setRootClass(People.class);
 			People people = new People();
 			try {
 				people = (People) bind.unmarshal();
 			} catch (UnmarshalException e) {
-				log.debug(e.getMessage());
+				logger.debug(e.getMessage());
 			}
-			log.debug(thread_id + ":" + people.getPerson().size());
+			logger.debug(thread_id + ":" + people.getPerson().size());
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				log.debug(e.getMessage());
+				logger.debug(e.getMessage());
 			}
 		}
 	}

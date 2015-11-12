@@ -1,8 +1,12 @@
 package org.pinae.nala.xb.unmarshaller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
@@ -10,20 +14,19 @@ import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
 
-import junit.framework.TestCase;
-
 /**
  * MapUnmarshaller单元测试
  * 
  * @author Huiyugeng
  * 
  */
-public class MapUnmarshallerTest extends TestCase {
+public class MapUnmarshallerTest {
 
 	/**
 	 * 将XML绑定为Map
 	 */
 	@SuppressWarnings("rawtypes")
+	@Test
 	public void testBindMap1(){
 		Unmarshaller bind = null;
 		try {
@@ -47,6 +50,7 @@ public class MapUnmarshallerTest extends TestCase {
 	 * 将XML绑定为Map
 	 */
 	@SuppressWarnings("rawtypes")
+	@Test
 	public void testBindMap2(){
 		Unmarshaller bind = null;
 		try {
@@ -71,6 +75,7 @@ public class MapUnmarshallerTest extends TestCase {
 	 * 将XML绑定为Map(中文实例)
 	 */
 	@SuppressWarnings("rawtypes")
+	@Test
 	public void testBindMap3(){
 		Unmarshaller bind = null;
 		try {
@@ -95,6 +100,7 @@ public class MapUnmarshallerTest extends TestCase {
 	 * 将XML绑定为Map(CDATA)
 	 */
 	@SuppressWarnings("rawtypes")
+	@Test
 	public void testBindMap4(){
 		Unmarshaller bind = null;
 		try {
