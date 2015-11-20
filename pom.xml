@@ -85,7 +85,7 @@
 	</scm>
 
 	<build>
-		<finalName>nala-1.6</finalName>
+		<finalName>nala</finalName>
 
 		<pluginManagement>
 			<plugins>
