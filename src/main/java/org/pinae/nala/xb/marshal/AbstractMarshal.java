@@ -8,6 +8,7 @@ package org.pinae.nala.xb.marshal;
  *
  */
 public abstract class AbstractMarshal {
+	protected boolean domMode = true; //使用JDOM生成XML
 	protected String endOfLine = "\n"; // 行结束符
 	protected String indent = "\t"; // 缩进
 	protected String documentStart = ""; // XML文档头
@@ -18,6 +19,24 @@ public abstract class AbstractMarshal {
 	protected boolean isLowCase = true; // 是否采用首字母小写
 	protected String namespaces = "";
 	protected boolean cdata = false; // 是否使用CDATA识别模式
+	
+	/**
+	 * 是否使用JDOM生成XML
+	 * 
+	 * @return 是否使用JDOM生成XML
+	 */
+	public boolean isDomMode() {
+		return domMode;
+	}
+
+	/**
+	 * 设置是否使用JDOM生成XML
+	 * 
+	 * @param domMode 生成模式 true JDOM生成XML false 拼接字符串生成XML
+	 */
+	public void setDomMode(boolean domMode) {
+		this.domMode = domMode;
+	}
 
 	/**
 	 * 设置默认节点描述

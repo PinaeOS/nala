@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jdom.CDATA;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.marshal.parser.DefaultObjectParser;
@@ -14,8 +19,8 @@ import org.pinae.nala.xb.node.Namespace;
 import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.xml.CdataText;
-import org.pinae.nala.xb.xml.XmlText;
 import org.pinae.nala.xb.xml.XmlElementUtils;
+import org.pinae.nala.xb.xml.XmlText;
 
 /**
  * <code>XMLMarshaller</code>提供实现<code>Marshaller</code>接口中的方法 主要用于将中间格式
@@ -50,6 +55,27 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	}
 
 	/**
+	 * 按照Java对象的内容输出XML格式的描述
+	 * 
+	 * @return 输出的XML数据
+	 */
+	public StringBuffer marshal() throws MarshalException {
+
+		if (this.config == null && this.rootObject != null) {
+			this.config = parseObject(rootObject);
+		}
+		if (this.config == null) {
+			throw new MarshalException("Object is null");
+		}
+		
+		if (domMode) {
+			return marshalByJDom();
+		} else {
+			return marshalByString();
+		}
+	}
+
+	/**
 	 * 解析对象成为中间格式<code>NodeConfig</code>
 	 * 
 	 * @param rootObject 需要解析的对象
@@ -80,25 +106,61 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		return new ObjectParser().parse(tag, rootObject);
 	}
 
-	/**
-	 * 按照Java对象的内容输出XML格式的描述
-	 * 
-	 * @return 输出的XML数据
-	 */
+	private StringBuffer marshalByJDom() {
+		
+		XMLOutputter xmlOutput = null;
+		if (prettyPrint) {
+			Format format = Format.getCompactFormat();  
+	        format.setIndent(indent);
+	        xmlOutput = new XMLOutputter(format);
+		} else {
+			xmlOutput = new XMLOutputter();
+		}
+		
+		Document doc = new Document(buildXMLNodeByElement(this.config, 0));
+		return new StringBuffer(xmlOutput.outputString(doc));
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Element buildXMLNodeByElement(NodeConfig config, int deep) {
+		Element element = new Element(config.getName());
+		
+		List<Namespace> namespaces = config.getNamespace();
+		for (Namespace namespace : namespaces) {
+			element.addNamespaceDeclaration(org.jdom.Namespace.getNamespace(namespace.getPrefix(), namespace.getUri()));
+		}
+		
+		List<AttributeConfig> attributeList = config.getAttribute();
+		for (AttributeConfig attribute : attributeList) {
+			element.setAttribute(attribute.getName(), attribute.getValue());
+		}
+		
+		List<NodeConfig> childrenNodeList = config.getChildrenNodes();
+		if (childrenNodeList.size() > 0) {
+			for (NodeConfig childNode : childrenNodeList) {
+				Element childElement = buildXMLNodeByElement(childNode, deep + 1);
+				element.addContent(childElement);
+			}
+		} else {
+			Object value = config.getValue();
+			if (value instanceof CdataText) {
+				element.addContent(new CDATA(((CdataText) value).getData()));
+			} else if (value instanceof XmlText) {
+				element.setText(((XmlText) value).getXml());
+			} else {
+				element.setText(value.toString());
+			}
+		}
+		return element;
+	}
+
 	@SuppressWarnings("rawtypes")
-	public StringBuffer marshal() throws MarshalException {
-
-		if (this.config == null && this.rootObject != null) {
-			this.config = parseObject(rootObject);
-		}
-		if (this.config == null) {
-			throw new MarshalException("Object is null");
-		}
-
+	private StringBuffer marshalByString() {
 		StringBuffer xmlBuffer = new StringBuffer();
 
-		if (documentStart != null && !documentStart.equals(""))
+		if (documentStart != null && !documentStart.equals("")) {
 			xmlBuffer.append(documentStart + endOfLine);
+		}
 
 		Map mapNamespaces = DefaultObjectParser.getNamespaces();
 		for (Iterator iterPrefix = mapNamespaces.keySet().iterator(); iterPrefix.hasNext();) {
@@ -112,10 +174,11 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 				}
 			}
 		}
-		xmlBuffer.append(getNodeXML(this.config, 0));
+		xmlBuffer.append(buildXMLNodeByString(this.config, 0));
 
-		if (documentEnd != null && !documentEnd.equals(""))
+		if (documentEnd != null && !documentEnd.equals("")) {
 			xmlBuffer.append(documentEnd + endOfLine);
+		}
 
 		return xmlBuffer;
 	}
@@ -124,7 +187,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	 * 根据结构体, 构建XML内容
 	 */
 	@SuppressWarnings("rawtypes")
-	private StringBuffer getNodeXML(NodeConfig config, int deep) {
+	private StringBuffer buildXMLNodeByString(NodeConfig config, int deep) {
 		StringBuffer tempBuffer = new StringBuffer();
 		String tagName = config.getName();
 
@@ -169,7 +232,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 						NodeConfig node = new NodeConfig();
 						node.setName(attribute.getName());
 						node.setValue(attribute.getValue());
-						nodeBuffer.append(getNodeXML(node, deep + 1));
+						nodeBuffer.append(buildXMLNodeByString(node, deep + 1));
 					}
 				}
 			}
@@ -183,10 +246,10 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 				StringBuffer nodeXML = null;
 				if (node.getName().equals(tagName)) {
-					nodeXML = getNodeXML(node, deep);
+					nodeXML = buildXMLNodeByString(node, deep);
 					isDeep = false;
 				} else {
-					nodeXML = getNodeXML(node, deep + 1);
+					nodeXML = buildXMLNodeByString(node, deep + 1);
 				}
 				nodeBuffer.append(nodeXML);
 			}
