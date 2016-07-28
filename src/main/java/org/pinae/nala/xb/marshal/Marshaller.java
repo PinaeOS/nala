@@ -23,6 +23,27 @@ public interface Marshaller {
 	 * @throws MarshalException XML编组异常
 	 */
 	public StringBuffer marshal() throws MarshalException;
+	
+	/**
+	 * 设置是否使用JDOM生成XML
+	 * 
+	 * @param domMode 生成模式 true JDOM生成XML false 拼接字符串生成XML
+	 */
+	public void enableDomMode(boolean domMode);
+	
+	/**
+	 * XML编码版本
+	 * 
+	 * @return XML编码版本
+	 */
+	public void setVersion(String version);
+	
+	/**
+	 * 设置XML默认编码
+	 * 
+	 * @return XML默认编码
+	 */
+	public void setEncoding(String encoding);
 
 	/**
 	 * 设置根节点标签名称

@@ -40,8 +40,7 @@ public class NodeConfig {
 	 * 
 	 * @return 节点命名空间配置
 	 */
-	@SuppressWarnings("rawtypes")
-	public List getNamespace() {
+	public List<Namespace> getNamespace() {
 		return namespace;
 	}
 	
@@ -55,15 +54,16 @@ public class NodeConfig {
 		Namespace namespace = new Namespace(prefix, uri);
 		this.namespace.add(namespace);
 	}
+	
 	/**
 	 * 返回该节点的子节点队列
 	 * 
 	 * @return 子节点队列
 	 */
-	@SuppressWarnings("rawtypes")
-	public List getChildrenNodes() {
+	public List<NodeConfig> getChildrenNodes() {
 		return childrenNodes;
 	}
+	
 	/**
 	 * 设置该节点的子节点队列
 	 * 
@@ -72,15 +72,51 @@ public class NodeConfig {
 	public void setChildrenNodes(List<NodeConfig> childrenNodes) {
 		this.childrenNodes = childrenNodes;
 	}
+	
+	/**
+	 * 获得指定位置的子节点
+	 * 
+	 * @param index 子节点位置
+	 * 
+	 * @return 子节点
+	 */
+	public NodeConfig getChildNode(int index) {
+		if (childrenNodes != null && childrenNodes.size() > 0) {
+			return childrenNodes.get(index);
+		}
+		return null;
+	}
+	
+	/**
+	 * 根据子节点名称获得子节点
+	 * 
+	 * @param name 子节点名称
+	 * 
+	 * @return 子节点
+	 */
+	public NodeConfig getChildNodeByName(String name) {
+		if (name == null) {
+			throw new NullPointerException("Node name is null");
+		}
+		if (childrenNodes != null && childrenNodes.size() > 0) {
+			for (NodeConfig childNode : childrenNodes) {
+				if (childNode.getName().equals(name)) {
+					return childNode;
+				}
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * 返回该节点的属性队列
 	 * 
 	 * @return 属性队列
 	 */
-	@SuppressWarnings("rawtypes")
-	public List getAttribute() {
+	public List<AttributeConfig> getAttribute() {
 		return attribute;
 	}
+	
 	/**
 	 * 设置该节点的属性队列
 	 * 
@@ -89,6 +125,7 @@ public class NodeConfig {
 	public void setAttribute(List<AttributeConfig> attribute) {
 		this.attribute = attribute;
 	}
+	
 	/**
 	 * 返回XML的节点值
 	 * 
@@ -97,6 +134,7 @@ public class NodeConfig {
 	public Object getValue() {
 		return value;
 	}
+	
 	/**
 	 * 设置XML的节点值
 	 * 
@@ -105,6 +143,7 @@ public class NodeConfig {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	
 	/**
 	 * 返回XML的节点名称
 	 * 
@@ -113,6 +152,7 @@ public class NodeConfig {
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * 返回XML的节点名称
 	 * 

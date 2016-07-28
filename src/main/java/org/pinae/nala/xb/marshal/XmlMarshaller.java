@@ -30,19 +30,19 @@ import org.pinae.nala.xb.xml.XmlText;
  * 
  */
 public class XmlMarshaller extends AbstractMarshal implements Marshaller {
-
-	private Object rootObject;
+	/* 需要解析的XML对象 */
+	private Object targetObj;
 
 	private NodeConfig config;
 
 	/**
 	 * 构造函数
 	 * 
-	 * @param rootObject 需要解析的Java对象
+	 * @param targetObj 需要解析的Java对象
 	 * 
 	 */
-	public XmlMarshaller(Object rootObject) {
-		this.rootObject = rootObject;
+	public XmlMarshaller(Object targetObj) {
+		this.targetObj = targetObj;
 	}
 
 	/**
@@ -61,13 +61,14 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	 */
 	public StringBuffer marshal() throws MarshalException {
 
-		if (this.config == null && this.rootObject != null) {
-			this.config = parseObject(rootObject);
+		if (this.config == null && this.targetObj != null) {
+			this.config = parseObject(targetObj);
 		}
 		if (this.config == null) {
 			throw new MarshalException("Object is null");
 		}
-		
+		// TODO Test code
+		domMode = true;
 		if (domMode) {
 			return marshalByJDom();
 		} else {
@@ -90,7 +91,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 		if (StringUtils.isEmpty(tag)) {
 			if (rootObject instanceof Map) {
-				tag = (String) ((Map) rootObject).get("nodeTag");
+				tag = (String) ((Map) rootObject).get(Constant.NODE_TAG);
 				tag = tag == null ? Constant.ROOT_TAG : tag;
 			} else if (rootObject instanceof List) {
 				tag = "list";
@@ -107,51 +108,81 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	}
 
 	private StringBuffer marshalByJDom() {
-		
-		XMLOutputter xmlOutput = null;
+
+		Format format = Format.getCompactFormat();
 		if (prettyPrint) {
-			Format format = Format.getCompactFormat();  
-	        format.setIndent(indent);
-	        xmlOutput = new XMLOutputter(format);
-		} else {
-			xmlOutput = new XMLOutputter();
+			format.setIndent(indent);
 		}
-		
-		Document doc = new Document(buildXMLNodeByElement(this.config, 0));
-		return new StringBuffer(xmlOutput.outputString(doc));
+		format.setEncoding(encoding);
+
+		StringBuffer xmlBuffer = new StringBuffer();
+
+		if (documentStart != null && !documentStart.equals("")) {
+			xmlBuffer.append(documentStart + endOfLine);
+		}
+
+		Document doc = new Document(buildXMLNodeByElement(null, this.config, 0));
+		xmlBuffer.append(new XMLOutputter(format).outputString(doc));
+
+		if (documentEnd != null && !documentEnd.equals("")) {
+			xmlBuffer.append(documentEnd + endOfLine);
+		}
+
+		return xmlBuffer;
 	}
-	
-	@SuppressWarnings("unchecked")
-	private Element buildXMLNodeByElement(NodeConfig config, int deep) {
-		Element element = new Element(config.getName());
-		
+
+	private Element buildXMLNodeByElement(Element parent, NodeConfig config, int deep) {
+		String tagName = config.getName();
+		Element element = new Element(tagName);
+
 		List<Namespace> namespaces = config.getNamespace();
 		for (Namespace namespace : namespaces) {
 			element.addNamespaceDeclaration(org.jdom.Namespace.getNamespace(namespace.getPrefix(), namespace.getUri()));
 		}
-		
+
 		List<AttributeConfig> attributeList = config.getAttribute();
-		for (AttributeConfig attribute : attributeList) {
-			element.setAttribute(attribute.getName(), attribute.getValue());
+		if (attributeList != null) {
+			for (AttributeConfig attribute : attributeList) {
+				if (nodeMode) {
+					Element childElement = new Element(attribute.getName());
+					childElement.setText(attribute.getValue());
+					element.addContent(childElement);
+				} else {
+					element.setAttribute(attribute.getName(), attribute.getValue());
+				}
+			}
 		}
 		
+		/* 是否处理本层节点, 当本层节点与下一次层节点名称相同时, 则不对本层节点进行处理 */
+		boolean layerFlag = true;
+		
 		List<NodeConfig> childrenNodeList = config.getChildrenNodes();
-		if (childrenNodeList.size() > 0) {
+		if (childrenNodeList != null && childrenNodeList.size() > 0) {
 			for (NodeConfig childNode : childrenNodeList) {
-				Element childElement = buildXMLNodeByElement(childNode, deep + 1);
-				element.addContent(childElement);
+				if (parent != null && childNode.getName().equals(tagName)) {
+					layerFlag = false;
+					Element childElement = buildXMLNodeByElement(parent, childNode, deep);
+					parent.addContent(childElement);
+				} else {
+					Element childElement = buildXMLNodeByElement(element, childNode, deep + 1);
+					if (childElement != null) {
+						element.addContent(childElement);
+					}
+				}
 			}
 		} else {
 			Object value = config.getValue();
-			if (value instanceof CdataText) {
-				element.addContent(new CDATA(((CdataText) value).getData()));
-			} else if (value instanceof XmlText) {
-				element.setText(((XmlText) value).getXml());
-			} else {
-				element.setText(value.toString());
+			if (value != null) {
+				if (value instanceof CdataText) {
+					element.addContent(new CDATA(((CdataText) value).getData()));
+				} else if (value instanceof XmlText) {
+					element.setText(((XmlText) value).getXml());
+				} else {
+					element.setText(value.toString());
+				}
 			}
 		}
-		return element;
+		return layerFlag ? element : null;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -161,6 +192,8 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		if (documentStart != null && !documentStart.equals("")) {
 			xmlBuffer.append(documentStart + endOfLine);
 		}
+
+		xmlBuffer.append(String.format("<?xml version='%s' encoding='%s'?>", version, encoding));
 
 		Map mapNamespaces = DefaultObjectParser.getNamespaces();
 		for (Iterator iterPrefix = mapNamespaces.keySet().iterator(); iterPrefix.hasNext();) {
@@ -186,17 +219,17 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	/*
 	 * 根据结构体, 构建XML内容
 	 */
-	@SuppressWarnings("rawtypes")
 	private StringBuffer buildXMLNodeByString(NodeConfig config, int deep) {
-		StringBuffer tempBuffer = new StringBuffer();
+		StringBuffer xmlBuffer = new StringBuffer();
 		String tagName = config.getName();
 
 		if (isLowCase == true) {
-			tagName = StringUtils.uncapitalize(config.getName());
+			tagName = StringUtils.lowerCase(config.getName());
 		}
 
-		if (config.getNamespace() != null && config.getNamespace().size() > 0) {
-			Namespace namespace = (Namespace) config.getNamespace().get(0);
+		List<Namespace> namespaces = config.getNamespace();
+		if (namespaces != null && namespaces.size() > 0) {
+			Namespace namespace = namespaces.get(0);
 			if (!namespace.getPrefix().equals("")) {
 				tagName = namespace.getPrefix() + ":" + tagName;
 			}
@@ -215,16 +248,17 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 				tagValue = String.format("<![CDATA[%s]]>", tagValue.toString());
 			}
 		}
+		
 		StringBuffer attributeBuffer = new StringBuffer();
 		StringBuffer nodeBuffer = new StringBuffer();
 
-		if (config.getAttribute() != null && config.getAttribute().size() > 0) {
-			for (Iterator iterAttribute = config.getAttribute().iterator(); iterAttribute.hasNext();) {
-				AttributeConfig attribute = (AttributeConfig) iterAttribute.next();
+		List<AttributeConfig> attributeList = config.getAttribute();
+		if (attributeList != null && attributeList.size() > 0) {
+			for (AttributeConfig attribute : attributeList) {
 				if (attribute.getValue() != null) {
 					if (nodeMode == false) {
 						if (isLowCase == true) {
-							attributeBuffer.append(String.format("%s=\"%s\" ", StringUtils.uncapitalize(attribute.getName()), attribute.getValue()));
+							attributeBuffer.append(String.format("%s=\"%s\" ", StringUtils.lowerCase(attribute.getName()), attribute.getValue()));
 						} else {
 							attributeBuffer.append(String.format("%s=\"%s\" ", attribute.getName(), attribute.getValue()));
 						}
@@ -240,16 +274,15 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 		boolean isDeep = true;
 
-		if (config.getChildrenNodes() != null && config.getChildrenNodes().size() > 0) {
-			for (Iterator iterNode = config.getChildrenNodes().iterator(); iterNode.hasNext();) {
-				NodeConfig node = (NodeConfig) iterNode.next();
-
+		List<NodeConfig> childrenNodeList = config.getChildrenNodes();
+		if (childrenNodeList != null && childrenNodeList.size() > 0) {
+			for (NodeConfig childNode : childrenNodeList) {
 				StringBuffer nodeXML = null;
-				if (node.getName().equals(tagName)) {
-					nodeXML = buildXMLNodeByString(node, deep);
+				if (childNode.getName().equals(tagName)) {
+					nodeXML = buildXMLNodeByString(childNode, deep);
 					isDeep = false;
 				} else {
-					nodeXML = buildXMLNodeByString(node, deep + 1);
+					nodeXML = buildXMLNodeByString(childNode, deep + 1);
 				}
 				nodeBuffer.append(nodeXML);
 			}
@@ -267,44 +300,43 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		}
 		if (!tagName.equals(Constant.XML_TAG)) {
 			if (deep == 0) {
-				tempBuffer.append(tab + "<" + tagName + namespaces);
+				xmlBuffer.append(tab + "<" + tagName + namespaces);
 			} else {
-				tempBuffer.append(tab + "<" + tagName);
+				xmlBuffer.append(tab + "<" + tagName);
 			}
 		}
 
 		if (attributeBuffer != null && attributeBuffer.length() > 0) {
-			tempBuffer.append(" " + attributeBuffer.toString().trim());
-
+			xmlBuffer.append(" " + attributeBuffer.toString().trim());
 		}
 
 		if (!tagName.equals(Constant.XML_TAG)) {
 			if (nodeBuffer.length() > 0) {
-				tempBuffer.append(">");
+				xmlBuffer.append(">");
 			} else {
 				if (tagValue != null) {
-					tempBuffer.append(">");
+					xmlBuffer.append(">");
 				} else {
-					tempBuffer.append("/>" + endOfLine);
+					xmlBuffer.append("/>" + endOfLine);
 				}
 			}
 		}
 
 		if (nodeBuffer.length() > 0) {
-			tempBuffer.append(endOfLine + nodeBuffer);
-			tempBuffer.append(tab + "</" + tagName + ">" + endOfLine);
+			xmlBuffer.append(endOfLine + nodeBuffer);
+			xmlBuffer.append(tab + "</" + tagName + ">" + endOfLine);
 		} else {
 			if (tagValue != null) {
 				if (!tagName.equals(Constant.XML_TAG)) {
-					tempBuffer.append(tagValue.toString());
-					tempBuffer.append("</" + tagName + ">" + endOfLine);
+					xmlBuffer.append(tagValue.toString());
+					xmlBuffer.append("</" + tagName + ">" + endOfLine);
 				} else {
-					tempBuffer.append(tab + tagValue + endOfLine);
+					xmlBuffer.append(tab + tagValue + endOfLine);
 				}
 			}
 		}
 
-		return tempBuffer;
+		return xmlBuffer;
 	}
 
 }

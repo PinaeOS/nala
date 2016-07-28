@@ -46,7 +46,7 @@ public class XmlMarshallerTest {
 	public void testMarshal() {
 		Marshaller marshaller = new XmlMarshaller(people);
 
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- Object to XML -->");
 		marshaller.enableNodeMode(true);
 		marshaller.enableLowCase(true);
 		
@@ -70,7 +70,7 @@ public class XmlMarshallerTest {
 	public void testMarshallerXMLInXmlObject(){
 		Marshaller marshaller = new XmlMarshaller(new PeopleTwo());
 
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- XML Object to XML -->");
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
 			logger.debug(marshaller.marshal());

@@ -36,7 +36,7 @@ public class ListXmlMarshallerTest {
 
 		Marshaller marshaller = new XmlMarshaller(people);
 		marshaller.setNodeTag("people");
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- List to XML -->");
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
@@ -62,7 +62,7 @@ public class ListXmlMarshallerTest {
 
 		Marshaller marshaller = new XmlMarshaller(people);
 		marshaller.setNodeTag("people");
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- List to XML -->");
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
@@ -82,10 +82,10 @@ public class ListXmlMarshallerTest {
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void testMarshal3() {
-		List people = new ArrayList();
+		List list = new ArrayList();
 
-		Marshaller marshaller = new XmlMarshaller(people);
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		Marshaller marshaller = new XmlMarshaller(list);
+		marshaller.setDocumentStart("<!-- List to XML -->");
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
@@ -106,13 +106,13 @@ public class ListXmlMarshallerTest {
 	public void testMarshal4() {
 		List<String> list = new ArrayList<String>();
 
-		list.add("Item1");
-		list.add("Item2");
-		list.add("Item3");
+		list.add("item1");
+		list.add("item2");
+		list.add("item3");
 
 		Marshaller marshaller = new XmlMarshaller(list);
 		marshaller.setNodeTag("list");
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- List to XML -->");
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);

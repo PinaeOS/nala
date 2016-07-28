@@ -39,7 +39,7 @@ public class AnnotationXmlMarshallerTest {
 
 		Marshaller marshaller = new XmlMarshaller(people);
 
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- Annotation Object to XML -->");
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
 			logger.debug(marshaller.marshal());

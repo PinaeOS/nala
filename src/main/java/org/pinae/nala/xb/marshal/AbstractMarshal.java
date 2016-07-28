@@ -8,40 +8,64 @@ package org.pinae.nala.xb.marshal;
  *
  */
 public abstract class AbstractMarshal {
-	protected boolean domMode = true; //使用JDOM生成XML
-	protected String endOfLine = "\n"; // 行结束符
-	protected String indent = "\t"; // 缩进
-	protected String documentStart = ""; // XML文档头
-	protected String documentEnd = ""; // XML文档尾
-	protected boolean prettyPrint = true; // 是否启用缩进格式
-	protected boolean nodeMode = false; // XML注入是否启用节点模式, 如果启用节点模式, 则将属性写为节点
-	protected String nodeTag = ""; // XML默认节点描述
-	protected boolean isLowCase = true; // 是否采用首字母小写
+	/* true:使用JDOM生成XML, false:使用字符串拼接方式 */
+	protected boolean domMode = true;
+	/* XML编码版本, 默认值 1.0 */
+	protected String version = "1.0";
+	/* XML默认编码, 默认值 UTF-8 */
+	protected String encoding = "UTF-8";
+	/* 行结束符, 默认为\n */
+	protected String endOfLine = "\n";
+	/* 缩进符, 默认为 \t */
+	protected String indent = "\t";
+	/* XML文档头, 在JDOM模式失效 */
+	protected String documentStart = "";
+	/* XML文档尾, 在JDOM模式失效 */
+	protected String documentEnd = "";
+	/* 是否启用缩进格式 */
+	protected boolean prettyPrint = true;
+	/* XML注入是否启用节点模式, 如果启用节点模式, 则将属性写为节点 */
+	protected boolean nodeMode = false;
+	/* XML默认根节点名称  */
+	protected String nodeTag = "";
+	/* 是否采用字母小写 */
+	protected boolean isLowCase = true;
+	/* 命名空间 */
 	protected String namespaces = "";
-	protected boolean cdata = false; // 是否使用CDATA识别模式
-	
-	/**
-	 * 是否使用JDOM生成XML
-	 * 
-	 * @return 是否使用JDOM生成XML
-	 */
-	public boolean isDomMode() {
-		return domMode;
-	}
+	/* 是否使用CDATA识别模式 */
+	protected boolean cdata = false; 
 
 	/**
 	 * 设置是否使用JDOM生成XML
 	 * 
 	 * @param domMode 生成模式 true JDOM生成XML false 拼接字符串生成XML
 	 */
-	public void setDomMode(boolean domMode) {
+	public void enableDomMode(boolean domMode) {
 		this.domMode = domMode;
+	}
+	
+	/**
+	 * XML编码版本, 默认值 1.0
+	 * 
+	 * @return XML编码版本
+	 */
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	
+	/**
+	 * 设置XML默认编码 (UTF-8/GB2312/GBK)
+	 * 
+	 * @return XML默认编码
+	 */
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 	/**
-	 * 设置默认节点描述
+	 * 设置默认节点名称
 	 * 
-	 * @param nodeTag 默认节点描述
+	 * @param nodeTag 默认节点名称
 	 */
 	public void setNodeTag(String nodeTag) {
 		this.nodeTag = nodeTag;
@@ -66,9 +90,9 @@ public abstract class AbstractMarshal {
 	}
 
 	/**
-	 * 是否启用首字母小写
+	 * 是否启用字母小写
 	 * 
-	 * @param isLowCase 启用首字母小写 true 启用 false 关闭
+	 * @param isLowCase 启用字母小写 true 启用 false 关闭
 	 */
 	public void enableLowCase(boolean isLowCase) {
 		this.isLowCase = isLowCase;

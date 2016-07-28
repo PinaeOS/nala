@@ -63,7 +63,7 @@ public class MixedMarshallerTest {
 	public void testMarshal() {
 		Marshaller marshaller = new XmlMarshaller(people);
 
-		marshaller.setDocumentStart("<?xml version='1.0' encoding='gb2312'?>");
+		marshaller.setDocumentStart("<!-- Mixed Object to XML -->");
 		marshaller.enableNodeMode(true);
 		marshaller.enableLowCase(true);
 		marshaller.enableCDATA(true);

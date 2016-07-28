@@ -103,8 +103,7 @@ public class ObjectParser {
 	 * 根据字段类型获取对象值并转化为字符串
 	 * 
 	 * @param fieldType 字段类型
-	 * 
-	 * @param value 对象值
+	 * @param fieldValue 对象值
 	 * 
 	 * @return 对象后的字符串
 	 */

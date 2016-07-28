@@ -8,6 +8,7 @@ import java.util.Set;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.node.AttributeConfig;
 import org.pinae.nala.xb.node.NodeConfig;
+import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.TypeConver;
 
 /**
@@ -47,10 +48,10 @@ public class MapParser extends ObjectParser {
 					value = "";
 				}
 				String valueType = value.getClass().getName();
-				if (key.equals("nodeTag")) {
+				if (key.equals(Constant.NODE_TAG)) {
 					continue;
 				}
-				if (!key.equals("nodeValue")) {
+				if (!key.equals(Constant.NODE_VALUE)) {
 					if (TypeConver.isBasicType(valueType)) {
 						AttributeConfig attributeConfig = new AttributeConfig();
 						attributeConfig.setName(key);

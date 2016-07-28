@@ -67,4 +67,15 @@ public final class Constant {
 	 * XML节点(绑定值XmlText)节点名称
 	 */
 	public static final String XML_TAG = "xml";
+	
+	/**
+	 * 节点名称 (用于Map解析)
+	 */
+	public static final String NODE_TAG = "nodeTag";
+	
+	/**
+	 * 节点值 (用于Map解析)
+	 */
+	public static final String NODE_VALUE = "nodeValue";
+	
 }
