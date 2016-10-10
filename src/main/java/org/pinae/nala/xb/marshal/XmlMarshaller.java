@@ -1,6 +1,5 @@
 package org.pinae.nala.xb.marshal;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.MarshalException;
-import org.pinae.nala.xb.marshal.parser.DefaultObjectParser;
 import org.pinae.nala.xb.marshal.parser.ObjectParser;
 import org.pinae.nala.xb.node.AttributeConfig;
 import org.pinae.nala.xb.node.Namespace;
@@ -34,6 +32,8 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	private Object targetObj;
 
 	private NodeConfig config;
+	
+	private ObjectParser parser = new ObjectParser();
 
 	/**
 	 * 构造函数
@@ -60,15 +60,37 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 	 * @return 输出的XML数据
 	 */
 	public StringBuffer marshal() throws MarshalException {
-
+		
 		if (this.config == null && this.targetObj != null) {
-			this.config = parseObject(targetObj);
+			
+			// 初始化解析器
+			this.parser.init();
+			
+			Class<?> rootClass = targetObj.getClass();
+			String tag = nodeTag;
+
+			if (StringUtils.isEmpty(tag)) {
+				if (targetObj instanceof Map) {
+					tag = (String) ((Map<?, ?>) targetObj).get(Constant.NODE_TAG);
+					tag = tag == null ? Constant.ROOT_TAG : tag;
+				} else if (targetObj instanceof List) {
+					tag = "list";
+				} else if (rootClass.isAnnotationPresent(Root.class)) {
+					Root root = (Root) rootClass.getAnnotation(Root.class);
+					tag = root.name();
+				}
+			}
+
+			if (StringUtils.isEmpty(tag)) {
+				tag = Constant.ROOT_TAG;
+			}
+			this.config = this.parser.parse(tag, targetObj);
 		}
+		
 		if (this.config == null) {
 			throw new MarshalException("Object is null");
 		}
-		// TODO Test code
-		domMode = true;
+
 		if (domMode) {
 			return marshalByJDom();
 		} else {
@@ -76,36 +98,6 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		}
 	}
 
-	/**
-	 * 解析对象成为中间格式<code>NodeConfig</code>
-	 * 
-	 * @param rootObject 需要解析的对象
-	 * 
-	 * @return 解析的中间格式
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private NodeConfig parseObject(Object rootObject) throws MarshalException {
-		Class rootClass = rootObject.getClass();
-
-		String tag = nodeTag;
-
-		if (StringUtils.isEmpty(tag)) {
-			if (rootObject instanceof Map) {
-				tag = (String) ((Map) rootObject).get(Constant.NODE_TAG);
-				tag = tag == null ? Constant.ROOT_TAG : tag;
-			} else if (rootObject instanceof List) {
-				tag = "list";
-			} else if (rootClass.isAnnotationPresent(Root.class)) {
-				Root root = (Root) rootClass.getAnnotation(Root.class);
-				tag = root.name();
-			}
-		}
-
-		if (StringUtils.isEmpty(tag)) {
-			tag = Constant.ROOT_TAG;
-		}
-		return new ObjectParser().parse(tag, rootObject);
-	}
 
 	private StringBuffer marshalByJDom() {
 
@@ -116,10 +108,6 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		format.setEncoding(encoding);
 
 		StringBuffer xmlBuffer = new StringBuffer();
-
-		if (documentStart != null && !documentStart.equals("")) {
-			xmlBuffer.append(documentStart + endOfLine);
-		}
 
 		Document doc = new Document(buildXMLNodeByElement(null, this.config, 0));
 		xmlBuffer.append(new XMLOutputter(format).outputString(doc));
@@ -137,7 +125,11 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 
 		List<Namespace> namespaces = config.getNamespace();
 		for (Namespace namespace : namespaces) {
-			element.addNamespaceDeclaration(org.jdom.Namespace.getNamespace(namespace.getPrefix(), namespace.getUri()));
+			String prefix = namespace.getPrefix();
+			String uri = namespace.getUri();
+			if (StringUtils.isNotBlank(prefix) && StringUtils.isNotBlank(uri)) {
+				element.addNamespaceDeclaration(org.jdom.Namespace.getNamespace(prefix, uri));
+			}
 		}
 
 		List<AttributeConfig> attributeList = config.getAttribute();
@@ -185,25 +177,24 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		return layerFlag ? element : null;
 	}
 
-	@SuppressWarnings("rawtypes")
 	private StringBuffer marshalByString() {
 		StringBuffer xmlBuffer = new StringBuffer();
 
 		if (documentStart != null && !documentStart.equals("")) {
 			xmlBuffer.append(documentStart + endOfLine);
+		} else {
+			xmlBuffer.append(String.format("<?xml version='%s' encoding='%s'?>", version, encoding));
 		}
 
-		xmlBuffer.append(String.format("<?xml version='%s' encoding='%s'?>", version, encoding));
-
-		Map mapNamespaces = DefaultObjectParser.getNamespaces();
-		for (Iterator iterPrefix = mapNamespaces.keySet().iterator(); iterPrefix.hasNext();) {
-			String prefix = (String) iterPrefix.next();
+		Map<String, String> namespaceMap = this.parser.getNamespaces();
+		super.namespaces = "";
+		for (String prefix : namespaceMap.keySet()) {
 			if (prefix != null) {
-				String uri = (String) mapNamespaces.get(prefix);
+				String uri = namespaceMap.get(prefix);
 				if (prefix.equals("")) {
-					namespaces += String.format(" xmlns=\"%s\"", uri);
+					super.namespaces += String.format(" xmlns=\"%s\"", uri);
 				} else {
-					namespaces += String.format(" xmlns:%s=\"%s\"", prefix, uri);
+					super.namespaces += String.format(" xmlns:%s=\"%s\"", prefix, uri);
 				}
 			}
 		}
@@ -300,7 +291,7 @@ public class XmlMarshaller extends AbstractMarshal implements Marshaller {
 		}
 		if (!tagName.equals(Constant.XML_TAG)) {
 			if (deep == 0) {
-				xmlBuffer.append(tab + "<" + tagName + namespaces);
+				xmlBuffer.append(tab + "<" + tagName + super.namespaces);
 			} else {
 				xmlBuffer.append(tab + "<" + tagName);
 			}

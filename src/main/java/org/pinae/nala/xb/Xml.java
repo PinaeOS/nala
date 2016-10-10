@@ -128,8 +128,6 @@ public class Xml {
 	public static String toXML(Object object, String encoding, Properties properties) throws MarshalException {
 		Marshaller marshaller = new XmlMarshaller(object);
 		
-		marshaller.setDocumentStart(String.format("<?xml version='1.0' encoding='%s'?>", encoding));
-		
 		marshaller.enableLowCase(properties.contains("lowcase") ? Boolean.parseBoolean(properties.get("lowcase").toString()) : true);
 		marshaller.enablePrettyPrint(properties.contains("pretty") ? Boolean.parseBoolean(properties.get("pretty").toString()) : true);
 		marshaller.enableCDATA(properties.contains("cdata") ? Boolean.parseBoolean(properties.get("cdata").toString()) : true);

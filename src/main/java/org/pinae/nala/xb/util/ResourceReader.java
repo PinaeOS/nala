@@ -66,6 +66,25 @@ public class ResourceReader {
 	/**
 	 * 将文件读出为输出流
 	 * 
+	 * @param file 需要读取的文件
+	 * 
+	 * @return 文件内容输出流
+	 * 
+	 * @throws NoSuchPathException 无法找到对应的文件或者路径
+	 * 
+	 */
+	public InputStreamReader getFileStream(File file)
+			throws NoSuchPathException{
+		try {
+			return new InputStreamReader(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new NoSuchPathException(e);
+		}
+	}
+	
+	/**
+	 * 将文件读出为输出流
+	 * 
 	 * @param filename 需要读取的文件名称
 	 * @param encoding 文件编码
 	 * 

@@ -1,11 +1,13 @@
 package org.pinae.nala.xb.marshal.parser;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.pinae.nala.xb.annotation.Root;
 import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.node.AttributeConfig;
+import org.pinae.nala.xb.node.Namespace;
 import org.pinae.nala.xb.node.NodeConfig;
 import org.pinae.nala.xb.util.TypeConver;
 import org.pinae.nala.xb.xml.CdataText;
@@ -26,6 +28,22 @@ import org.pinae.nala.xb.xml.XmlText;
  * 
  */
 public class ObjectParser {
+
+	private static Map<String, String> namespaces;
+	
+	public void init () {
+		namespaces = new HashMap<String, String>();
+	}
+
+	/**
+	 * 获得Object中记录的命名空间信息
+	 * 
+	 * @return 将命名空间列表
+	 */
+	public Map<String, String> getNamespaces() {
+		return namespaces;
+	}
+
 	/**
 	 * 将对象解析为<code>NodeConfig</code>格式
 	 * 
@@ -51,11 +69,19 @@ public class ObjectParser {
 		} else if (rootObject instanceof CdataText) {
 			return new NodeConfig(nodeName, rootObject);
 		} else {
+			NodeConfig objConfig = null;
 			if (rootClass.isAnnotationPresent(Root.class)) {
-				return new AnnotationObjectParser().parse(nodeName, rootObject);
+				objConfig = new AnnotationObjectParser().parse(nodeName, rootObject);
 			} else {
-				return new DefaultObjectParser().parse(rootObject);
+				objConfig = new DefaultObjectParser().parse(rootObject);
 			}
+			List<Namespace> namespaces = objConfig.getNamespace();
+			for (Namespace namespace : namespaces) {
+				if (namespace != null && namespace.getPrefix() != null) {
+					this.namespaces.put(namespace.getPrefix(), namespace.getUri());
+				}
+			}
+			return objConfig;
 		}
 	}
 
@@ -103,6 +129,7 @@ public class ObjectParser {
 	 * 根据字段类型获取对象值并转化为字符串
 	 * 
 	 * @param fieldType 字段类型
+	 * 
 	 * @param fieldValue 对象值
 	 * 
 	 * @return 对象后的字符串

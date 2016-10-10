@@ -3,9 +3,7 @@ package org.pinae.nala.xb.marshal.parser;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.pinae.nala.xb.XmlObject;
 import org.pinae.nala.xb.exception.MarshalException;
@@ -23,18 +21,7 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  *
  */
 public class DefaultObjectParser extends ObjectParser {
-	private static Map<String, String> mapNamespaces = new HashMap<String, String>();
-
-	/**
-	 * 获得Object中记录的命名空间信息
-	 * 
-	 * @return 将命名空间列表
-	 */
-	@SuppressWarnings("rawtypes")
-	public static Map getNamespaces() {
-		return mapNamespaces;
-	}
-
+	
 	/**
 	 * 将Object进行解析为NodeConfig格式
 	 * 
@@ -117,7 +104,6 @@ public class DefaultObjectParser extends ObjectParser {
 					for (int i = 0; i < namespaces.size(); i++) {
 						Namespace namespace = (Namespace) namespaces.get(i);
 						node.setNamespace(namespace.getPrefix(), namespace.getUri());
-						mapNamespaces.put(namespace.getPrefix(), namespace.getUri());
 					}
 				}
 

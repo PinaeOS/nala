@@ -20,8 +20,8 @@ public class ExceptionTest {
 		try {
 			Unmarshaller bind = new XmlUnmarshaller(new ByteArrayInputStream(xml.getBytes()));
 			bind.setRootClass(Map.class);
-			Map map = (Map<?, ?>)bind.unmarshal();
-			fail("Can't cathc exception");
+			bind.unmarshal();
+			fail("Can't cache exception");
 		} catch (UnmarshalException e) {
 			assertTrue(e.getMessage() != null);
 		}
