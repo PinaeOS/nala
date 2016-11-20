@@ -47,7 +47,7 @@ public abstract class AbstractMarshal {
 	/**
 	 * XML编码版本, 默认值 1.0
 	 * 
-	 * @return XML编码版本
+	 * @param version XML编码版本
 	 */
 	public void setVersion(String version) {
 		this.version = version;
@@ -56,7 +56,7 @@ public abstract class AbstractMarshal {
 	/**
 	 * 设置XML默认编码 (UTF-8/GB2312/GBK)
 	 * 
-	 * @return XML默认编码
+	 * @param encoding XML默认编码
 	 */
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;

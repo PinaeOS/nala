@@ -34,14 +34,14 @@ public interface Marshaller {
 	/**
 	 * XML编码版本
 	 * 
-	 * @return XML编码版本
+	 * @param version XML编码版本
 	 */
 	public void setVersion(String version);
 	
 	/**
 	 * 设置XML默认编码
 	 * 
-	 * @return XML默认编码
+	 * @param encoding 默认编码
 	 */
 	public void setEncoding(String encoding);
 
