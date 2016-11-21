@@ -7,16 +7,16 @@ Nala is a xml binding library for Java
 
 ## Installation ##
 
-Direct Download (2015/7/10)
+Direct Download (2016/11/21)
 
-The lastest stable is nala-1.6.tar.gz (release notes)
+The lastest stable is nala-1.7.tar.gz (release notes)
 
 Maven
 
 	<dependency>
 	    <groupId>org.pinae</groupId>
 	    <artifactId>nala</artifactId>
-	    <version>1.6</version>
+	    <version>1.7</version>
 	</dependency>
 
 
