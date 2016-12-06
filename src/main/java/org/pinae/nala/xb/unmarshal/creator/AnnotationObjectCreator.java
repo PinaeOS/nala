@@ -2,6 +2,8 @@ package org.pinae.nala.xb.unmarshal.creator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +49,7 @@ public class AnnotationObjectCreator extends DefaultObjectCreator{
 	public Object getObject(NodeConfig rootNode, Class rootClass, Object rootObject) 
 			throws UnmarshalException, SecurityException{
 		
-		Field[] fields = rootClass.getDeclaredFields();
+		Field[] fields = getClassFields(rootClass);
 		Map<String, Field> elementMap = new HashMap<String, Field>();
 		Map<String, Field> attributeMap = new HashMap<String, Field>();
 		Field elementValue = null;
@@ -166,6 +168,21 @@ public class AnnotationObjectCreator extends DefaultObjectCreator{
 		}
 		
 		return targetObject;
+	}
+	
+	private Field[] getClassFields(Class<?> clazz) {
+		List<Field> fieldList = new ArrayList<Field>();
+		
+		Field[] clsFields = clazz.getDeclaredFields();
+		fieldList.addAll(Arrays.asList(clsFields));
+		
+		Class<?> superClass = clazz.getSuperclass();
+		if (!superClass.getName().equals("java.lang.Object")) {
+			Field[] scFields = getClassFields(superClass);
+			fieldList.addAll(Arrays.asList(scFields));
+		}
+		
+		return fieldList.toArray(new Field[fieldList.size()]);
 	}
 	
 	/*
