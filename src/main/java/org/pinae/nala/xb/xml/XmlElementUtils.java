@@ -8,7 +8,8 @@ package org.pinae.nala.xb.xml;
  */
 public class XmlElementUtils {
 	/*
-	 * 构建关键字映射, 例如XML描述class映射到Java属性为kwClass
+	 * 为防止XML标签/属性与Java关键字冲突, 构建XML标签与Java关键字之间的映射, 
+	 * 例如XML描述class映射到Java属性为kwClass
 	 */
 	private static String[][] keyWordMapping = {
 			{"class","kwClass"},

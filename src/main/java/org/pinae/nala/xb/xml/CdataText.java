@@ -7,7 +7,8 @@ package org.pinae.nala.xb.xml;
  *
  */
 public class CdataText {
-	private String data; //XML值
+	/* CDATA文本 */
+	private String data;
 	/**
 	 * 构造函数
 	 * 

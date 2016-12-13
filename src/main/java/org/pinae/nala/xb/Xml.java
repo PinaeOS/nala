@@ -53,7 +53,7 @@ public class Xml {
 	public static Object toObject(String xml, String encoding, Class<?> cls) throws UnmarshalException {
 		
 		if (xml == null || xml.trim().equals("")) {
-			throw new UnmarshalException("Empty XML Sstring");
+			throw new UnmarshalException("XML String is Empty");
 		}
 		
 		Object object = null;

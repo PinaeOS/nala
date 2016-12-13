@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 
 /**
- * 基础类型转换
+ * Java基本类型转换
  * 
  * @author Huiyugeng
  *

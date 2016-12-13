@@ -10,7 +10,8 @@ package org.pinae.nala.xb.xml;
  *
  */
 public class XmlText {
-	private String xml; //XML值
+	/* XML文本 */
+	private String xml;
 	/**
 	 * 构造函数
 	 * 
