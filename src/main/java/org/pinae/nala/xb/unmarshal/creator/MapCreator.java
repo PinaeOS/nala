@@ -15,7 +15,7 @@ import org.pinae.nala.xb.node.NodeConfig;
  *
  */
 public class MapCreator {
-	
+
 	/**
 	 * 根据结构体生成Map
 	 * 
@@ -25,69 +25,72 @@ public class MapCreator {
 	 * 
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Map getMap(NodeConfig nodeConfig){
+	public Map getMap(NodeConfig nodeConfig) {
 		Map map = new HashMap();
 		List<AttributeConfig> attributes = nodeConfig.getAttribute();
 		map.putAll(getAttribute(attributes));
-		
+
 		List<NodeConfig> childrenNodes = nodeConfig.getChildrenNodes();
-		if(childrenNodes!=null && childrenNodes.size()>0){
-			for(NodeConfig childNode : childrenNodes){
+		if (childrenNodes != null && childrenNodes.size() > 0) {
+			for (NodeConfig childNode : childrenNodes) {
 				String name = childNode.getName();
 				Object value = childNode.getValue();
 
-				if(childNode.hasChildren()){
+				if (childNode.hasChildren()) {
 					Map childNodeMap = getMap(childNode);
 					map.put(name, addToList(map.get(name), childNodeMap));
-				}else{
-					if(childNode.hasAttributes()){
+				} else {
+					if (childNode.hasAttributes()) {
 						Map attributeMap = new HashMap();
 						attributeMap = getAttribute(childNode.getAttribute());
-						if(attributeMap.size() > 0){
-							if (value != null && value instanceof String){
+						if (attributeMap.size() > 0) {
+							if (value != null && value instanceof String) {
 								attributeMap.put("nodeValue", value);
 							}
 							value = attributeMap;
 						}
 					}
 				}
-				
-				if(value!=null){
+
+				if (value != null) {
 					map.put(name, addToList(map.get(name), value));
 				}
 			}
 		}
+		if (nodeConfig.getName() != null && nodeConfig.getValue() != null) {
+			map.put(nodeConfig.getName(), nodeConfig.getValue());
+		}
 		return map;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Map getAttribute(List<AttributeConfig> attributes){
+	private Map getAttribute(List<AttributeConfig> attributes) {
 		Map map = new HashMap();
-		if(attributes!=null && attributes.size()>0){
-			for(AttributeConfig attribute : attributes){
+		if (attributes != null && attributes.size() > 0) {
+			for (AttributeConfig attribute : attributes) {
 				String name = attribute.getName();
 				String value = attribute.getValue();
-				if(value!=null && !value.equals("")){
+				if (value != null && !value.equals("")) {
 					map.put(name, value);
 				}
 			}
 		}
 		return map;
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Object addToList(Object previousValue, Object newValue){
-		if (previousValue != null){
+	private Object addToList(Object previousValue, Object newValue) {
+		if (previousValue != null) {
 			List list = new ArrayList();
-			if (previousValue instanceof List){
-				list = (List)previousValue;
+			if (previousValue instanceof List) {
+				list = (List) previousValue;
 				list.add(newValue);
-			}else{
+			} else {
 				list.add(previousValue);
 				list.add(newValue);
 			}
 			return list;
-		}else{
+		} else {
 			return newValue;
 		}
 	}
