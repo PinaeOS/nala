@@ -54,6 +54,21 @@ public class XmlTest {
 
 	@SuppressWarnings("rawtypes")
 	@Test
+	public void testToMap2() {
+		try {
+			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE6);
+			Map map = Xml.toMap(xml.toString(), "utf8");
+			assertEquals(map.size(), 1);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		} catch (UnmarshalException e) {
+			fail(e.getMessage());
+		}
+
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Test
 	public void testFileToObject() {
 		try {
 			Map map = (Map) Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);

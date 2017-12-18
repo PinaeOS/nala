@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="GBK"?>
 <orgList>
-<org><id>1</id><name>外部组织</name><desc></desc><status>1</status></org>
-<org><id>30100001</id><name>中国移动(深圳)有限公司</name><desc></desc><status>1</status></org>
-<org><id>30100009</id><name>国际清算部</name><desc></desc><status>1</status></org>
-<org><id>30100010</id><name>市场开拓室</name><desc></desc><status>1</status></org>
-<org><id>30100011</id><name>市场规划室</name><desc></desc><status>1</status></org>
-<org><id>30100012</id><name>清算产品室</name><desc></desc><status>1</status></org>
-<org><id>30100013</id><name>系统管理部</name><desc></desc><status>1</status></org>
-<org><id>30100015</id><name>运维开发一室</name><desc></desc><status>1</status></org>
-<org><id>30100016</id><name>质控综合室</name><desc></desc><status>1</status></org>
-<org><id>30100017</id><name>信息安全室</name><desc></desc><status>1</status></org>
-<org><id>30100018</id><name>平台支撑室</name><desc></desc><status>1</status></org>
-<org><id>30100020</id><name>运维开发二室</name><desc></desc><status>1</status></org>
-<org><id>30100021</id><name>监控支持组</name><desc></desc><status>1</status></org>
-<org><id>30100035</id><name>清算业务部</name><desc></desc><status>1</status></org>
-<org><id>30100036</id><name>国际业务室</name><desc></desc><status>1</status></org>
-<org><id>30100037</id><name>清算业务一室</name><desc></desc><status>1</status></org>
-<org><id>30100038</id><name>业务保障室</name><desc></desc><status>1</status></org>
-<org><id>30100100</id><name>厂商</name><desc></desc><status>1</status></org>
-<org><id>30100101</id><name>HP</name><desc></desc><status>1</status></org>
-<org><id>30100102</id><name>ORACLE</name><desc></desc><status>1</status></org>
-<org><id>30100103</id><name>Symantec</name><desc></desc><status>1</status></org>
-<org><id>30100104</id><name>亿阳</name><desc></desc><status>1</status></org>
-<org><id>30100105</id><name>博盛</name><desc></desc><status>1</status></org>
-<org><id>30100106</id><name>启明</name><desc></desc><status>1</status></org>
-<org><id>3102780</id><name>风险管控室</name><desc></desc><status>1</status></org>
-<org><id>3102781</id><name>综合业务管理室</name><desc></desc><status>1</status></org>
-<org><id>31435120</id><name>创科</name><desc></desc><status>1</status></org>
-<org><id>31510698</id><name>交易业务支撑部</name><desc></desc><status>1</status></org>
-<org><id>31510699</id><name>运维开发室</name><desc></desc><status>1</status></org>
-<org><id>31520786</id><name>运行保障室</name><desc></desc><status>1</status></org>
-<org><id>31664053</id><name>质控测试室</name><desc></desc><status>1</status></org>
-<org><id>31789204</id><name>华为</name><desc></desc><status>1</status></org>
-<org><id>31805406</id><name>结算业务室</name><desc></desc><status>1</status></org>
-<org><id>31959373</id><name>监控二室</name><desc></desc><status>1</status></org>
-<org><id>31959393</id><name>监控二室</name><desc></desc><status>1</status></org>
-<org><id>31959486</id><name>新大陆</name><desc></desc><status>1</status></org>
-<org><id>31959576</id><name>华胜天成</name><desc></desc><status>1</status></org>
-<org><id>31977905</id><name>亚信联创</name><desc></desc><status>1</status></org>
-<org><id>32464430</id><name>法本信息技术有限公司</name><desc></desc><status>1</status></org>
-<org><id>32523346</id><name>文思</name><desc></desc><status></status></org>
-<org><id>3276087</id><name>联想中望</name><desc></desc><status>1</status></org>
-<org><id>32811727</id><name>深圳软科信通科技有限公司</name><desc></desc><status></status></org>
-<org><id>3282284</id><name>构架设计室</name><desc></desc><status>1</status></org>
-<org><id>3282285</id><name>信息系统维护支撑室</name><desc></desc><status>1</status></org>
-<org><id>3282286</id><name>清算业务二室</name><desc></desc><status>1</status></org>
-<org><id>3282287</id><name>清算业务三室</name><desc></desc><status>1</status></org>
-<org><id>3464810</id><name>支撑网监控中心</name><desc></desc><status>1</status></org>
-<org><id>3468411</id><name>支撑网测评中心</name><desc></desc><status>1</status></org>
-<org><id>3486347</id><name>测试一室</name><desc></desc><status>1</status></org>
-<org><id>3486348</id><name>测试二室</name><desc></desc><status>1</status></org>
-<org><id>3486349</id><name>测试三室</name><desc></desc><status>1</status></org>
-<org><id>3486350</id><name>支撑网技术服务室</name><desc></desc><status>1</status></org>
-<org><id>3486351</id><name>测试平台开发室</name><desc></desc><status>1</status></org>
-<org><id>3486352</id><name>质量管理室</name><desc></desc><status>1</status></org>
-<org><id>3486354</id><name>综合管理室</name><desc></desc><status>1</status></org>
-<org><id>3486355</id><name>架构测评组</name><desc></desc><status>1</status></org>
-<org><id>3486357</id><name>集中监控室</name><desc></desc><status>1</status></org>
-<org><id>3486358</id><name>运维分析室</name><desc></desc><status>1</status></org>
-<org><id>3486359</id><name>综合支撑室</name><desc></desc><status>1</status></org>
+	<org>
+		<id>1</id>
+		<name>外部组织</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>2</id>
+		<name>国际清算部</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>3</id>
+		<name>市场开拓室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>4</id>
+		<name>市场规划室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>5</id>
+		<name>质量管理室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>6</id>
+		<name>综合管理室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>7</id>
+		<name>架构测评组</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>8</id>
+		<name>集中监控室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>9</id>
+		<name>运维分析室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
+	<org>
+		<id>10</id>
+		<name>综合支撑室</name>
+		<desc></desc>
+		<status>1</status>
+	</org>
 </orgList>

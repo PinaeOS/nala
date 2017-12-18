@@ -9,6 +9,7 @@ public class TestConstant {
 	public final static String TEST_XMLFILE3 = TEST_PATH + "test3.xml";
 	public final static String TEST_XMLFILE4 = TEST_PATH + "test4.xml";
 	public final static String TEST_XMLFILE5 = TEST_PATH + "test5.xml";
+	public final static String TEST_XMLFILE6 = TEST_PATH + "test6.xml";
 	
 	public final static String TEST_XPATH = TEST_PATH + "test_xpath.xml";
 	public final static String TEST_CDATA = TEST_PATH + "test_cdata.xml";
