@@ -86,7 +86,7 @@ public class XmlUnmarshallerTest {
 			fail(e.getMessage());
 		}
 
-		assertEquals(orgList.getOrgSize(), 59);
+		assertEquals(orgList.getOrgSize(), 10);
 	}
 	
 	/**
