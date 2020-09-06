@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
@@ -20,6 +19,8 @@ import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.Constant;
 import org.pinae.nala.xb.util.ResourceWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * MapMarshaller单元测试
@@ -28,7 +29,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
  */
 public class MapXmlMarshallerTest {
 	
-	private static final Logger logger = Logger.getLogger(MapXmlMarshallerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(MapXmlMarshallerTest.class);
 	
 	@SuppressWarnings("rawtypes")
 	private Map people = new HashMap();
@@ -55,7 +56,7 @@ public class MapXmlMarshallerTest {
 		marshaller.enableNodeMode(true);
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {

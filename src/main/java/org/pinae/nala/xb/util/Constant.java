@@ -14,6 +14,11 @@ import org.pinae.nala.xb.xml.XmlText;
 public final class Constant {
 	
 	/**
+	 * Object的类型名称
+	 */
+	public static final String OBJECT_CLASS = Object.class.getName();
+	
+	/**
 	 * List的类型名称
 	 */
 	public static final String LIST_CLASS = List.class.getName();
@@ -21,12 +26,12 @@ public final class Constant {
 	/**
 	 * Map的类型名称
 	 */
-	public static final String MAP_CLASS = Map.class.getName(); //
+	public static final String MAP_CLASS = Map.class.getName();
 	
 	/**
 	 * XML文本的类型名称
 	 */
-	public static final String XML_CLASS = XmlText.class.getName();//
+	public static final String XML_CLASS = XmlText.class.getName();
 	
 	/**
 	 * get方法前缀

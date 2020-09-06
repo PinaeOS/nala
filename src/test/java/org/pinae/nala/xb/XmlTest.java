@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.nala.xb.data.bean.People;
 import org.pinae.nala.xb.data.bean.Person;
@@ -18,10 +17,12 @@ import org.pinae.nala.xb.exception.MarshalException;
 import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.util.ResourceReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XmlTest {
 
-	private static final Logger logger = Logger.getLogger(XmlTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(XmlTest.class);
 
 	@SuppressWarnings("rawtypes")
 	@Test
@@ -52,12 +53,11 @@ public class XmlTest {
 
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void testToMap2() {
 		try {
 			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE6);
-			Map map = Xml.toMap(xml.toString(), "utf8");
+			Map<String, Object> map = Xml.toMap(xml.toString(), "utf8");
 			assertEquals(map.size(), 1);
 		} catch (IOException e) {
 			fail(e.getMessage());
@@ -67,11 +67,10 @@ public class XmlTest {
 
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void testFileToObject() {
 		try {
-			Map map = (Map) Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);
+			Map<String, Object> map =  Xml.toObject(new File(TestConstant.TEST_XMLFILE3), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (UnmarshalException e) {
 			fail(e.getMessage());
@@ -81,12 +80,11 @@ public class XmlTest {
 
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Test
 	public void testToObject() {
 		try {
 			StringBuffer xml = new ResourceReader().readFile(TestConstant.TEST_XMLFILE3);
-			Map map = (Map) Xml.toObject(xml.toString(), "utf8", Map.class);
+			Map<String, Object> map = Xml.toObject(xml.toString(), "utf8", Map.class);
 			assertEquals(map.size(), 5);
 		} catch (IOException e) {
 			fail(e.getMessage());

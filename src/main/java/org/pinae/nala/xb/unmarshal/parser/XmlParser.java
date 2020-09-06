@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -24,8 +23,7 @@ import org.pinae.nala.xb.xml.XmlElementUtils;
  * @author Huiyugeng
  *
  */
-public class XmlParser {
-	protected static final Logger logger = Logger.getLogger("XMLParser");
+public final class XmlParser {
 
 	/*
 	 * 解析XML节点

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
@@ -17,6 +16,8 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.ResourceWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -27,7 +28,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
  */
 public class MixedMarshallerTest {
 	
-	private static final Logger logger = Logger.getLogger(MixedMarshallerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(MixedMarshallerTest.class);
 	
 	@SuppressWarnings("rawtypes")
 	private Map people = new HashMap();

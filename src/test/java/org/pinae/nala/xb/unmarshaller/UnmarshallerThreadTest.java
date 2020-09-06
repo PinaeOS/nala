@@ -1,6 +1,5 @@
 package org.pinae.nala.xb.unmarshaller;
 
-import org.apache.log4j.Logger;
 import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.data.bean.People;
 import org.pinae.nala.xb.exception.NoSuchPathException;
@@ -8,6 +7,8 @@ import org.pinae.nala.xb.exception.UnmarshalException;
 import org.pinae.nala.xb.unmarshal.Unmarshaller;
 import org.pinae.nala.xb.unmarshal.XmlUnmarshaller;
 import org.pinae.nala.xb.util.ResourceReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -18,7 +19,7 @@ import org.pinae.nala.xb.util.ResourceReader;
  */
 public class UnmarshallerThreadTest implements Runnable {
 	
-	private static final Logger logger = Logger.getLogger(UnmarshallerThreadTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(UnmarshallerThreadTest.class);
 	private String thread_id;
 	
 	/**

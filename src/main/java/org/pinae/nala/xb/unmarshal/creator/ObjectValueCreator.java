@@ -27,6 +27,8 @@ public class ObjectValueCreator {
 		Object value = null;
 		if (fieldType.equals(Constant.XML_CLASS)) {
 			value = new XmlText(createXML(nodeConfig));
+		} else if (fieldType.equals(Constant.MAP_CLASS)) {
+			value = new MapCreator().getMap(nodeConfig);
 		} else {
 			if (TypeConver.isBasicType(fieldType)) {
 				if (nodeConfig != null && nodeConfig.getValue() != null) {

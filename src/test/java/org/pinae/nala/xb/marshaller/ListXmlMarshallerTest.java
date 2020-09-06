@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
 import org.pinae.nala.xb.exception.MarshalException;
@@ -14,6 +13,8 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.ResourceWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ListMarshaller单元测试
@@ -22,7 +23,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
  */
 public class ListXmlMarshallerTest {
 
-	private static final Logger logger = Logger.getLogger(ListXmlMarshallerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(ListXmlMarshallerTest.class);
 
 	/**
 	 * 测试从List对象生成XML文件(编组)
@@ -40,7 +41,7 @@ public class ListXmlMarshallerTest {
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {
@@ -66,7 +67,7 @@ public class ListXmlMarshallerTest {
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {
@@ -89,7 +90,7 @@ public class ListXmlMarshallerTest {
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {
@@ -116,7 +117,7 @@ public class ListXmlMarshallerTest {
 
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {

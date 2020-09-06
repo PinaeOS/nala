@@ -177,9 +177,19 @@ public class AnnotationObjectCreator extends DefaultObjectCreator{
 		fieldList.addAll(Arrays.asList(clsFields));
 		
 		Class<?> superClass = clazz.getSuperclass();
-		if (!superClass.getName().equals("java.lang.Object")) {
-			Field[] scFields = getClassFields(superClass);
-			fieldList.addAll(Arrays.asList(scFields));
+		if (superClass != null) {
+			if (!superClass.getName().equals(Constant.OBJECT_CLASS)) {
+				Field[] superClassFields = getClassFields(superClass);
+				fieldList.addAll(Arrays.asList(superClassFields));
+			}
+		}
+		
+		Class<?>[] interfaceClasses = clazz.getInterfaces();
+		if (interfaceClasses != null) {
+			for (Class<?> interfaceClass : interfaceClasses) {
+				Field[] interfaceFields = getClassFields(interfaceClass);
+				fieldList.addAll(Arrays.asList(interfaceFields));
+			}
 		}
 		
 		return fieldList.toArray(new Field[fieldList.size()]);

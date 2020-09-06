@@ -25,6 +25,8 @@ public class Xml {
 
 	/**
 	 * 将XML字符串绑定为Map对象
+	 * @param <K> Map对象键类型
+	 * @param <V> Map对象值类型
 	 * 
 	 * @param xml XML字符串
 	 * @param encoding XML字符串编码, 例如UTF-8, GBK
@@ -33,14 +35,16 @@ public class Xml {
 	 * 
 	 * @throws UnmarshalException 解组异常
 	 */
-	public static Map<?, ?> toMap(String xml, String encoding) throws UnmarshalException {
-		Map<?, ?> map = (Map<?, ?>)toObject(xml, encoding, Map.class);
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> toMap(String xml, String encoding) throws UnmarshalException {
+		Map<K, V> map = (Map<K, V>)toObject(xml, encoding, Map.class);
 		return map;
 	}
 	
 	
 	/**
 	 * 将XML文件绑定为对象
+	 * @param <T> 需要绑定对象的类型
 	 * 
 	 * @param xml XML字符串
 	 * @param encoding XML文件编码, 例如UTF-8, GBK
@@ -50,7 +54,8 @@ public class Xml {
 	 * 
 	 * @throws UnmarshalException 解组异常
 	 */
-	public static Object toObject(String xml, String encoding, Class<?> cls) throws UnmarshalException {
+	@SuppressWarnings("unchecked")
+	public static <T> T toObject(String xml, String encoding, Class<T> cls) throws UnmarshalException {
 		
 		if (xml == null || xml.trim().equals("")) {
 			throw new UnmarshalException("XML String is Empty");
@@ -71,7 +76,7 @@ public class Xml {
 			object = bind.unmarshal();
 		}
 		
-		return object;
+		return (T)object;
 	}
 	
 	/**
@@ -147,6 +152,8 @@ public class Xml {
 	
 	/**
 	 * 将XML文件绑定为<code>Map</code>对象
+	 * @param <K> Map对象键类型
+	 * @param <V> Map对象值类型
 	 * 
 	 * @param file XML文件
 	 * @param encoding XML文件编码, 例如UTF-8, GBK
@@ -156,12 +163,14 @@ public class Xml {
 	 * @throws NoSuchPathException 路径异常
 	 * @throws UnmarshalException 解组异常
 	 */
-	public static Map<?, ?> toMap(File file, String encoding) throws UnmarshalException, NoSuchPathException {
-		return (Map<?, ?>) toObject(file, encoding, Map.class);
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> toMap(File file, String encoding) throws UnmarshalException, NoSuchPathException {
+		return (Map<K, V>) toObject(file, encoding, Map.class);
 	}
 	
 	/**
 	 * 将XML文件绑定为对象
+	 * @param <T> 需要绑定对象的类型
 	 * 
 	 * @param file XML文件
 	 * @param encoding XML文件编码, 例如UTF-8, GBK
@@ -172,8 +181,8 @@ public class Xml {
 	 * @throws NoSuchPathException 路径异常
 	 * @throws UnmarshalException 解组异常
 	 */
-	@SuppressWarnings("rawtypes")
-	public static Object toObject(File file, String encoding, Class<Map> cls) throws UnmarshalException, NoSuchPathException {
+	@SuppressWarnings({ "unchecked" })
+	public static <T> T toObject(File file, String encoding, Class<T> cls) throws UnmarshalException, NoSuchPathException {
 		
 		if (file == null || !file.exists()) {
 			throw new NoSuchPathException("Could not find file");
@@ -189,6 +198,6 @@ public class Xml {
 		object = bind.unmarshal();
 
 
-		return object;
+		return (T)object;
 	}
 }

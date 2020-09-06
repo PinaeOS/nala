@@ -4,7 +4,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.pinae.nala.xb.TestConstant;
@@ -15,6 +14,8 @@ import org.pinae.nala.xb.exception.NoSuchPathException;
 import org.pinae.nala.xb.marshal.Marshaller;
 import org.pinae.nala.xb.marshal.XmlMarshaller;
 import org.pinae.nala.xb.util.ResourceWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * AnnotationMarshaller单元测试
@@ -22,7 +23,7 @@ import org.pinae.nala.xb.util.ResourceWriter;
  * @author Huiyugeng
  */
 public class AnnotationXmlMarshallerTest {
-	private static final Logger logger = Logger.getLogger(AnnotationXmlMarshallerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(AnnotationXmlMarshallerTest.class);
 	
 	private People people = new People();
 	
@@ -42,7 +43,7 @@ public class AnnotationXmlMarshallerTest {
 		marshaller.setDocumentStart("<!-- Annotation Object to XML -->");
 		try {
 			new ResourceWriter().writeToFile(marshaller.marshal(), TestConstant.OUTPUT_XMLFILE);
-			logger.debug(marshaller.marshal());
+			logger.debug(marshaller.marshal().toString());
 		} catch (NoSuchPathException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {

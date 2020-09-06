@@ -5,8 +5,6 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.apache.log4j.Logger;
-
 
 /**
  * Java基本类型转换
@@ -15,8 +13,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class TypeConver {
-	private static Logger logger = Logger.getLogger(TypeConver.class);
-	
+
 	/*
 	 * 构建基本数据类型
 	 */
@@ -114,7 +111,6 @@ public class TypeConver {
 			try {
 				return dateFormat.parseObject(value);
 			} catch (ParseException e) {
-				logger.error(String.format("Parse Date Exception: exception=%s", e.getMessage()));
 				return null;
 			}
 		} else if (type.equals("java.math.BigDecimal")){
